@@ -6,29 +6,6 @@
   <title>Kuleyzen - Doğal Zeytinyağı</title>
   
 <style>
-  body {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
-  }
-
-  h1, h2, h3 {
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  section {
-    padding: 2em 1em;
-  }
-
-  p {
-    margin-bottom: 1.5em;
-  }
-
   .main-nav {
     list-style: none;
     margin: 0;
@@ -116,23 +93,8 @@
     .menu-toggle {
       display: block;
     }
-
-    h1, h2, h3 {
-      font-size: 1.8rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
   }
 </style>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <!-- Übersetzer -->
   <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
@@ -166,152 +128,56 @@
 </nav>
 
 <main>
-<section class="main-text">
-<h1>Ürünlerimizin Üretimi</h1>
-<p>Ürünlerimizin doğallığı ve kalitesi, üretim sürecimizin her aşamasındaki titizlikten kaynaklanır. Zeytinyağımız ve nar ekşimiz nasıl üretiliyor? Aşağıdan detayları öğrenebilirsiniz.</p>
-<div class="product-grid">
-<div class="product-box">
-<h2>🫒 Zeytinyağı</h2>
-<p>Zeytinlerimiz nasıl yetişiyor, nasıl toplanıyor ve sıkılıyor?</p>
-<a class="button" href="zeytin-hakkinda-bilgi.html">Detaylı Bilgi</a>
-</div>
-<div class="product-box">
-<h2>🍷 Nar Ekşisi</h2>
-<p>Gerçek nar ekşisi nasıl olmalı? Üretimimizin detayları burada.</p>
-<a class="button" href="nar-hakkinda-bilgi.html">Detaylı Bilgi</a>
-</div>
-</div>
-</section>
-</main>
-
-<style>
-  body {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
-  }
-
-  h1, h2, h3 {
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  section {
-    padding: 2em 1em;
-  }
-
-  p {
-    margin-bottom: 1.5em;
-  }
-
-  .main-nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  <section class="main-text">
+  <h1>Ürünlerimizin Üretimi</h1>
+  <p>Ürünlerimizin doğallığı ve kalitesi, üretim sürecimizin her aşamasındaki titizlikten kaynaklanır. Zeytinyağımız ve nar ekşimiz nasıl üretiliyor? Aşağıdan detayları öğrenebilirsiniz.</p>
+  <div class="product-grid">
+  <div class="product-box">
+  <h2>🫒 Zeytinyağı</h2>
+  <p>Zeytinlerimiz nasıl yetişiyor, nasıl toplanıyor ve sıkılıyor?</p>
+  <a class="button" href="zeytin-hakkinda-bilgi.html">Detaylı Bilgi</a>
+  </div>
+  <div class="product-box">
+  <h2>🍷 Nar Ekşisi</h2>
+  <p>Gerçek nar ekşisi nasıl olmalı? Üretimimizin detayları burada.</p>
+  <a class="button" href="nar-hakkinda-bilgi.html">Detaylı Bilgi</a>
+  </div>
+  </div>
+  </section>
+  </main>
+  <style>
+  .product-grid {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    background-color: #607744;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
   }
-
-  .main-nav > li {
-    position: relative;
+  .product-box {
+    background-color: #f5f5f5;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 280px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    text-align: center;
   }
-
-  .main-nav > li > a {
-    display: block;
-    padding: 1em 1.5em;
+  .product-box h2 {
+    margin-top: 0;
+    color: #4a5e3b;
+  }
+  .product-box p {
+    font-size: 0.95rem;
+  }
+  .product-box .button {
+    margin-top: 1rem;
+    display: inline-block;
+    background-color: #4a5e3b;
     color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .main-nav > li > a:hover {
-    background-color: #4e6137;
-  }
-
-  .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #607744;
-    z-index: 9999;
-    min-width: 180px;
-  }
-
-  .has-submenu:hover .submenu {
-    display: block;
-  }
-
-  .submenu li a {
-    display: block;
-    padding: 0.75em 1.5em;
-    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
     text-decoration: none;
   }
-
-  .submenu li a:hover {
-    background-color: #4e6137;
-  }
-
-  .menu-toggle {
-    display: none;
-    background: #607744;
-    color: white;
-    padding: 1em;
-    font-size: 1.4em;
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    text-align: right;
-  }
-
-  @media (max-width: 768px) {
-    .main-nav {
-      flex-direction: column;
-      align-items: flex-start;
-      display: none;
-    }
-
-    .main-nav.show {
-      display: flex;
-    }
-
-    .submenu {
-      position: static;
-      display: none;
-      padding-left: 2em;
-    }
-
-    .has-submenu:hover .submenu {
-      display: block;
-    }
-
-    .menu-toggle {
-      display: block;
-    }
-
-    h1, h2, h3 {
-      font-size: 1.8rem;
-    }
-
-    p {
-      font-size: 1.1rem;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-  }
-</style>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  </style>
 
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
