@@ -159,7 +159,7 @@ body {
 </head>
 <body>
 
-<div class="menu-toggle" onclick="document.querySelector('.main-nav').classList.toggle('open')">☰ Menü</div>
+  <div class="menu-toggle">☰ Menü</div>
 
 <nav>
   <ul class="main-nav">
@@ -299,6 +299,16 @@ body {
     });
   });
 </script>
-
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".main-nav");
+    if (toggle && nav) {
+      toggle.addEventListener("click", function () {
+        nav.classList.toggle("show");
+      });
+    }
+  });
+</script>
 </body>
 </html>
