@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+<!-- Seitentitel, Meta-Angaben und eingebettetes CSS -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuleyzen - Doğal Zeytinyağı</title>
-  
+<!-- Eingebettetes CSS für Layout und Design -->  
 <style>
  body {
     font-family: sans-serif;
@@ -133,9 +134,9 @@ main {
   </script>
 </head>
 <body>
-
+<!-- Hamburger-Menü für Mobilgeräte -->
   <div class="menu-toggle">☰ Menü</div>
-
+<!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
     <li><a href="index.html">Anasayfa</a></li>
@@ -153,6 +154,7 @@ main {
        <li><a href="iletisim.html">İletişim</a></li>
   </ul>
 </nav>
+<!-- Hauptinhalt: Beschreibung der Nar Ekşisi Produktion -->
 <main>
 <h1>Nar Ekşimiz Hakkında</h1>
 <p>Nar ekşisi, yüzyıllardır sofralarımıza eşlik eden bir lezzet, bir sağlık kaynağı ve aynı zamanda bir emek ürünüdür. Kuleyzen olarak, bu ürünü yalnızca üretmiyoruz – biz onun arkasında duruyoruz. Gerçek bir nar ekşisinin ne olduğunu bilmek, onu tanımakla başlar.</p>
@@ -161,8 +163,11 @@ main {
 <p>Bu uzun süreçte başka hiçbir şey eklenmez: <strong>şeker yok, koruyucu yok, katkı maddesi yok.</strong> Bizim için bu bir prensip meselesi. Çünkü bu ürünü yalnızca satmak için değil, <strong>kendi soframızda da gönül rahatlığıyla kullanmak için</strong> üretiyoruz. İşte bu yüzden “gerçek nar ekşisi” diyebiliyoruz.</p>
 <p>Yoğun kıvamı, hafif isli kokusu ve dengeli ekşi-tatlı profiliyle Kuleyzen nar ekşisi, her damlasında doğallığı ve emeği hissettirir. Salatalarda, kısırda, et marinasyonlarında ya da sadece bir dilim ekmek üzerinde… Sofranıza lezzet değil, bir gelenek katmak istiyorsanız – doğru yerdesiniz.</p>
 </main>
+
+<!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
+  <p>Son güncelleme: <span id="last-updated">yükleniyor...</span></p>
 </footer>
 
 
@@ -170,7 +175,7 @@ main {
 <!-- GoatCounter Analytics -->
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-
+<!-- JavaScript für Hamburger-Menü (mobil) -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const toggle = document.querySelector(".menu-toggle");
@@ -182,16 +187,15 @@ main {
     }
   });
 </script>
+<!-- JavaScript letztes update github -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const toggle = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".main-nav");
-    if (toggle && nav) {
-      toggle.addEventListener("click", function () {
-        nav.classList.toggle("show");
-      });
-    }
-  });
+  fetch("https://api.github.com/repos/DEINNAME/DEINREPO/commits/main")
+    .then(res => res.json())
+    .then(data => {
+      const date = new Date(data.commit.author.date);
+      const formatted = date.toLocaleDateString("tr-TR");
+      document.getElementById("last-updated").textContent = formatted;
+    });
 </script>
 </body>
 </html>

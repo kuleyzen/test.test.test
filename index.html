@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+  <!-- Seitentitel, Meta-Informationen und eingebettetes CSS -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuleyzen - Doğal Zeytinyağı</title>
@@ -134,8 +135,10 @@ main {
 </head>
 <body>
 
+  <!-- Hamburger-Menü für mobile Ansicht -->
   <div class="menu-toggle">☰ Menü</div>
 
+<!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
     <li><a href="index.html">Anasayfa</a></li>
@@ -154,8 +157,10 @@ main {
   </ul>
 </nav>
 
+<!-- Sprachumschalter (Google Translate) -->
 <div id="google_translate_element" style="text-align: right; padding: 10px;"></div>
 
+<!-- Hero-Bereich mit Begrüßung und Hintergrundbild -->
 <header>
   <div class="hero" style="background-image: url('hero.jpg'); background-size: cover; background-position: center center; color: white; padding: 80px 20px; text-align: center;">
     <h1 style="font-size: 3em; margin-bottom: 0.5em;">Kuleyzen'e Hoş Geldiniz</h1>
@@ -164,21 +169,26 @@ main {
   </div>
 </header>
 
+<!-- Hauptinhalt mit Willkommenstext -->
 <main style="padding: 2em;">
   <h2>Hoş Geldiniz</h2>
   <p>Kuleyzen'e hoş geldiniz. Doğal, organik ve Hatay'ın bereketli topraklarından gelen saf zeytinyağlarımızı keşfedin.</p>
 </main>
 
+<!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
+  <p>Son güncelleme: <span id="last-updated">yükleniyor...</span></p>
 </footer>
 
 
 
 <!-- GoatCounter Analytics -->
+<!-- GoatCounter Analytics Tracking -->
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 
+<!--JavaScript zur Steuerung des Hamburger-Menüs-->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const toggle = document.querySelector(".menu-toggle");
@@ -190,16 +200,15 @@ main {
     }
   });
 </script>
+<!-- JavaScript letztes update github -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const toggle = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".main-nav");
-    if (toggle && nav) {
-      toggle.addEventListener("click", function () {
-        nav.classList.toggle("show");
-      });
-    }
-  });
+  fetch("https://api.github.com/repos/DEINNAME/DEINREPO/commits/main")
+    .then(res => res.json())
+    .then(data => {
+      const date = new Date(data.commit.author.date);
+      const formatted = date.toLocaleDateString("tr-TR");
+      document.getElementById("last-updated").textContent = formatted;
+    });
 </script>
 </body>
 </html>

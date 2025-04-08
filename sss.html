@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+<!-- Seitentitel, Meta-Tags und eingebettetes CSS -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuleyzen - Doğal Zeytinyağı</title>
-  
+<!-- Eingebettetes CSS für Seitenlayout, Menü und Akkordeon -->  
 <style>
   .accordion-button {
   background-color: #f1f1f1;
@@ -158,9 +159,9 @@ body {
   </script>
 </head>
 <body>
-
+<!-- Hamburger-Menü für Mobilgeräte -->
   <div class="menu-toggle">☰ Menü</div>
-
+  <!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
     <li><a href="index.html">Anasayfa</a></li>
@@ -178,10 +179,11 @@ body {
     <li><a href="iletisim.html">İletişim</a></li>
   </ul>
 </nav>
+ <!-- Hauptinhalt: FAQ-Bereich -->
 <main>
   <h1>Merak Ettikleriniz</h1>
   <p>Aşağıda Kuleyzen Çiftliği ürünleri, üretim süreci, organik tarım anlayışımız ve sipariş süreciyle ilgili sıkça sorulan soruların yanıtlarını bulabilirsiniz.</p>
-
+<!-- Akkordeon-Komponente mit Fragen und Antworten -->
   <div class="accordion">
 
     <!-- Soru 1 -->
@@ -270,16 +272,17 @@ body {
 
   </div>
 </main>
-
+<!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
+  <p>Son güncelleme: <span id="last-updated">yükleniyor...</span></p>
 </footer>
 
 
 
 <!-- GoatCounter Analytics -->
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-
+<!-- JavaScript: Akkordeon-Logik -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const buttons = document.querySelectorAll(".accordion-button");
@@ -293,6 +296,7 @@ body {
     });
   });
 </script>
+<!-- JavaScript: Hamburger-Menü für Mobilgeräte -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const toggle = document.querySelector(".menu-toggle");
@@ -303,6 +307,16 @@ body {
       });
     }
   });
+</script>
+<!-- JavaScript letztes update github -->
+<script>
+  fetch("https://api.github.com/repos/DEINNAME/DEINREPO/commits/main")
+    .then(res => res.json())
+    .then(data => {
+      const date = new Date(data.commit.author.date);
+      const formatted = date.toLocaleDateString("tr-TR");
+      document.getElementById("last-updated").textContent = formatted;
+    });
 </script>
 </body>
 </html>
