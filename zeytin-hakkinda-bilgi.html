@@ -20,7 +20,7 @@
     padding: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     background-color: #607744;
   }
 
@@ -79,18 +79,18 @@
 
 /* 🌐 Immer sichtbare Navigation mit Scroll auf Mobile */
 nav ul {
-  display: flex;
-  flex-wrap: nowrap;
-  gap: 1em;
-  list-style: none;
-  margin: 0;
-  padding: 1em 1em;
-  justify-content: center;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
-  overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none; /* Firefox */
+    display: flex;
+    flex-wrap: nowrap; /* Keine Umbrüche in die nächste Zeile */
+    gap: 1em;
+    list-style: none;
+    margin: 0;
+    padding: 1em 1em;
+    justify-content: flex-start; /* Links ausgerichtet für Scrollbarkeit */
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    overflow-x: auto; /* Ermöglicht horizontales Scrollen */
+    white-space: nowrap; /* Verhindert Umbruch der Navigationselemente */
+    -webkit-overflow-scrolling: touch; /* Sanftes Scrollen für mobile Geräte */
 }
 
 /* Scrollbar ausblenden bei Chrome */
@@ -116,6 +116,81 @@ nav ul li a:hover,
 nav ul li a.active {
   background-color: #eef1ea;
 } 
+/* Submenüs in der Bottom Navigation */
+.bottom-nav .submenu {
+      display: none;
+      position: absolute;
+      bottom: 60px; /* Platzierung des Submenüs über den Buttons */
+      background-color: #607744;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .bottom-nav .submenu a {
+      display: block;
+      padding: 8px 10px;
+      color: white;
+      text-decoration: none;
+    }
+
+    .bottom-nav .submenu a:hover {
+      background-color: #4e6137;
+    }
+
+    .bottom-nav a:hover + .submenu {
+      display: block; /* Submenü wird angezeigt, wenn der Hauptbutton gehovt wird */
+    }
+/* Media Query für mobile Geräte */
+@media (max-width: 768px) {
+    /* Sicherstellen, dass die Navigation auch auf mobilen Geräten horizontal bleibt */
+    nav ul {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto; /* Ermöglicht horizontales Scrollen */
+        justify-content: flex-start; /* Navigationselemente linksbündig */
+    }
+
+    nav ul li {
+        flex: 0 0 auto; /* Verhindert das Umsteigen auf eine zweite Zeile */
+    }
+}
+/* Nintendo-Style Bottom Navigation für mobile Geräte */
+.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #607744;
+      display: none; /* Standardmäßig versteckt */
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+      z-index: 999;
+    }
+
+    .bottom-nav a {
+      display: inline-block;
+      background-color: #4e6137;
+      color: white;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 1.2em;
+      text-align: center;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .bottom-nav a:hover {
+      background-color: #eef1ea;
+      transform: scale(1.1); /* Kleine Vergrößerung beim Hover */
+    }
+
+    /* Media Query für mobile Geräte */
+    @media (max-width: 768px) {
+      .bottom-nav {
+        display: flex;
+      }
+    }
 </style>
 
   <!-- Übersetzer -->
@@ -180,6 +255,20 @@ nav ul li a.active {
 <p>Yumuşak içimli, düşük yakıcılı ve hafif meyvemsi bir profil sunar.</p>
 </section>
 </section></main>
+ <!-- Nintendo-Style Bottom Navigation -->
+ <div class="bottom-nav">
+  <a href="index.html">Ana Sayfa</a>
+  <a href="urunler.html">Ürünler</a>
+  <a href="hakkimizda.html">Hakkımızda</a>
+  <a href="sss.html">SSS</a>
+  
+  <!-- Submenüs -->
+  <div class="submenu">
+    <a href="organik-tarim.html">Organik Tarım</a>
+    <a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a>
+    <a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
+  </div>
+</div>
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
 </footer>
