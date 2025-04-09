@@ -49,16 +49,6 @@ main {
     background-color: #4e6137;
   }
 
-  .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #607744;
-    z-index: 9999;
-    min-width: 180px;
-  }
-
   .has-submenu:hover .submenu {
     display: block;
   }
@@ -415,7 +405,7 @@ nav ul li a.active {
       <!-- ▶️ Aufklappbares Submenü für 'Üretim Süreci' -->
       <li class="has-sub">
         <!-- Button zum Aufklappen -->
-        <button class="submenu-toggle">Üretim Süreci ▼</button>
+        <a href="#" class="submenu-toggle">Üretim Süreci ▼</a>
 
         <!-- Verstecktes Untermenü (wird per JavaScript angezeigt) -->
         <ul class="submenu">
