@@ -414,7 +414,23 @@ nav ul li a.active {
   position: relative;
 }
 
-
+/* Das Submenü selbst – zunächst unsichtbar */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #607744;
+  z-index: 9999;
+  min-width: 180px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+/* Hover-Effekt für Hauptmenüpunkt mit Submenü */
+.has-submenu:hover .submenu {
+  display: block;
+}
 /* Die Links im Submenü */
 .submenu a {
   font-weight: normal;
