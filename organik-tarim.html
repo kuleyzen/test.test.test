@@ -94,32 +94,46 @@ main {
     width: 100%;
     text-align: right;
   }
+/* 🌐 Immer sichtbare Navigation mit Scroll auf Mobile */
+nav ul {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1em;
+  list-style: none;
+  margin: 0;
+  padding: 1em 1em;
+  justify-content: center;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+}
 
-  @media (max-width: 768px) {
-    .main-nav {
-      flex-direction: column;
-      align-items: flex-start;
-      display: none;
-    }
+/* Scrollbar ausblenden bei Chrome */
+nav ul::-webkit-scrollbar {
+  display: none;
+}
 
-    .main-nav.show {
-      display: flex;
-    }
+nav ul li {
+  flex: 0 0 auto;
+}
 
-    .submenu {
-      position: static;
-      display: none;
-      padding-left: 2em;
-    }
+nav ul li a {
+  text-decoration: none;
+  color: #607744;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 0.5em 1em;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
 
-    .has-submenu:hover .submenu {
-      display: block;
-    }
-
-    .menu-toggle {
-      display: block;
-    }
-  }
+nav ul li a:hover,
+nav ul li a.active {
+  background-color: #eef1ea;
+}
+ 
 </style>
 
   <!-- Übersetzer -->
@@ -133,9 +147,7 @@ main {
     }
   </script>
 </head>
-<body>
- <!-- Hamburger-Menü für Mobilgeräte -->
-  <div class="menu-toggle">☰ Menü</div>
+
 <!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
@@ -193,14 +205,13 @@ main {
     <p>Biz bu ağaca sadece verim kaynağı olarak değil, bir dost gibi yaklaşıyoruz. Hasat zamanı geldiğinde bağırmadan, kırmadan, sarsmadan, onunla konuşarak ve teşekkür ederek topluyoruz. Bu yüzden zeytinyağımızda sadece meyvenin değil, emeğin ve saygının da tadı vardır.</p>
   
     <h2>Neden Organik?</h2>
-<p>Çünkü:</p>
-<ul style="margin-left: 20px;">
-  <li>doğaya zarar vermeden üretmek mümkündür.</li>
-  <li>toprağın ömrü bizim ömrümüzden uzundur.</li>
-  <li>gerçek zeytinyağı, katkıya ihtiyaç duymaz.</li>
-  <li>biz çocuklarımıza sadece ürün değil, bir yaşam biçimi bırakmak istiyoruz.</li>
-</ul>
-  
+    <p>Çünkü:</p>
+    <ul style="margin-left: 20px;">
+      <li>doğaya zarar vermeden üretmek mümkündür.</li>
+      <li>toprağın ömrü bizim ömrümüzden uzundur.</li>
+      <li>gerçek zeytinyağı, katkıya ihtiyaç duymaz.</li>
+      <li>biz çocuklarımıza sadece ürün değil, bir yaşam biçimi bırakmak istiyoruz.</li>
+    </ul>
     <p>Organik tarım, bizim için sadece bir yöntem değil; bir duruş, bir yoldur. Toprağa saygı duyan, emeğe değer veren herkes bu yolun doğal parçasıdır.</p>
   </main>
 <!-- Fußzeile mit Copyright -->  
