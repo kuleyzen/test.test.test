@@ -167,37 +167,121 @@ nav ul li a.active {
       background-color: #eef1ea;
       transform: scale(1.1); /* Kleine Vergrößerung beim Hover */
     }
-/* Submenüs in der Bottom Navigation */
-.bottom-nav .submenu {
-      display: none;
-      position: absolute;
-      bottom: 60px; /* Platzierung des Submenüs über den Buttons */
-      background-color: #607744;
-      border-radius: 8px;
-      padding: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    }
 
-    .bottom-nav .submenu a {
-      display: block;
-      padding: 8px 10px;
-      color: white;
-      text-decoration: none;
-    }
-
-    .bottom-nav .submenu a:hover {
-      background-color: #4e6137;
-    }
-
-    .bottom-nav a:hover + .submenu {
-      display: block; /* Submenü wird angezeigt, wenn der Hauptbutton gehovt wird */
-    }
     /* Media Query für mobile Geräte */
     @media (max-width: 768px) {
       .bottom-nav {
         display: flex;
       }
-    }  
+    } 
+    /* === Nintendo-Style Bottom Navigation === */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #607744;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  z-index: 999;
+}
+
+.bottom-nav a,
+.bottom-nav button {
+  background-color: #4e6137;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 1.2em;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.bottom-nav button:hover,
+.bottom-nav a:hover {
+  background-color: #eef1ea;
+  transform: scale(1.1);
+  color: #2f2f2f;
+}
+
+/* === Overlays für Suche & Menü === */
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
+}
+
+.overlay-box {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 0 10px #000;
+  position: relative;
+}
+
+/* === Suchfeld === */
+.overlay-box input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* === Schließen-Buttons (X) === */
+.overlay-box button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+/* === Mobile Menüliste === */
+.mobile-menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.mobile-menu li {
+  margin-bottom: 12px;
+}
+
+.mobile-menu a {
+  text-decoration: none;
+  color: #607744;
+  font-weight: bold;
+  display: block;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.mobile-menu a:hover {
+  background-color: #eef1ea;
+}
+
+/* === Nur auf Mobil anzeigen === */
+@media (max-width: 768px) {
+  .bottom-nav {
+    display: flex;
+  }
+}
+ 
 </style>
 
   <!-- Übersetzer -->
@@ -240,18 +324,35 @@ nav ul li a.active {
 <p>Bu uzun süreçte başka hiçbir şey eklenmez: <strong>şeker yok, koruyucu yok, katkı maddesi yok.</strong> Bizim için bu bir prensip meselesi. Çünkü bu ürünü yalnızca satmak için değil, <strong>kendi soframızda da gönül rahatlığıyla kullanmak için</strong> üretiyoruz. İşte bu yüzden “gerçek nar ekşisi” diyebiliyoruz.</p>
 <p>Yoğun kıvamı, hafif isli kokusu ve dengeli ekşi-tatlı profiliyle Kuleyzen nar ekşisi, her damlasında doğallığı ve emeği hissettirir. Salatalarda, kısırda, et marinasyonlarında ya da sadece bir dilim ekmek üzerinde… Sofranıza lezzet değil, bir gelenek katmak istiyorsanız – doğru yerdesiniz.</p>
 </main>
- <!-- Nintendo-Style Bottom Navigation -->
- <div class="bottom-nav">
-  <a href="index.html">Ana Sayfa</a>
-  <a href="urunler.html">Ürünler</a>
-  <a href="hakkimizda.html">Hakkımızda</a>
-  <a href="sss.html">SSS</a>
-  
-  <!-- Submenüs -->
-  <div class="submenu">
-    <a href="organik-tarim.html">Organik Tarım</a>
-    <a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a>
-    <a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
+<!-- Nintendo-Style Bottom Navigation -->
+<div class="bottom-nav">
+  <a href="index.html" title="Ana Sayfa">Ana Sayfa</a>
+  <button id="openMenu" title="Menü">☰</button>
+  <button id="openSearch" title="Ara">🔍</button>
+</div>
+<!-- 🔍 Such-Overlay (öffnet sich bei Klick auf Lupe) -->
+<div id="searchOverlay" class="overlay">
+  <div class="overlay-box">
+    <input type="text" id="searchInput" placeholder="Site içinde ara..." />
+    <button id="closeSearch">✖</button>
+    <div id="searchResults"></div>
+  </div>
+</div>
+<!-- ☰ Menü-Overlay (Nintendo-Stil) -->
+<div id="menuOverlay" class="overlay">
+  <div class="overlay-box">
+    <button id="closeMenu">✖</button>
+    <ul class="mobile-menu">
+      <li><a href="index.html">Anasayfa</a></li>
+      <li><a href="hakkimizda.html">Hakkımızda</a></li>
+      <li><a href="urunler.html">Ürünler</a></li>
+      <li><a href="urunlerimizin-uretimi.html">Üretim Süreci</a></li>
+      <li><a href="organik-tarim.html">Organik Tarım</a></li>
+      <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
+      <li><a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a></li>
+      <li><a href="sss.html">SSS</a></li>
+      <li><a href="iletisim.html">İletişim</a></li>
+    </ul>
   </div>
 </div>
 <!-- Fußzeile mit Copyright -->  
@@ -296,6 +397,56 @@ nav ul li a.active {
       console.error("Son güncelleme alınamadı:", err);
       document.getElementById("last-updated").textContent = "bilgi alınamadı";
     });
+</script>
+<!-- Nintendo-Style Menü & Suche Logik -->
+<script>
+  // Elemente holen
+  const openSearch = document.getElementById("openSearch");
+  const closeSearch = document.getElementById("closeSearch");
+  const searchOverlay = document.getElementById("searchOverlay");
+  const searchInput = document.getElementById("searchInput");
+  const searchResults = document.getElementById("searchResults");
+
+  const openMenu = document.getElementById("openMenu");
+  const closeMenu = document.getElementById("closeMenu");
+  const menuOverlay = document.getElementById("menuOverlay");
+
+  // Suchfeld öffnen
+  openSearch.addEventListener("click", () => {
+    searchOverlay.style.display = "flex";
+    searchInput.focus();
+  });
+
+  // Suchfeld schließen
+  closeSearch.addEventListener("click", () => {
+    searchOverlay.style.display = "none";
+    searchInput.value = "";
+    searchResults.innerHTML = "";
+  });
+
+  // Menü öffnen
+  openMenu.addEventListener("click", () => {
+    menuOverlay.style.display = "flex";
+  });
+
+  // Menü schließen
+  closeMenu.addEventListener("click", () => {
+    menuOverlay.style.display = "none";
+  });
+
+  // Live-Suche (durchsucht Text in <main>)
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    const content = document.querySelector("main").innerText;
+    const lines = content.split("\n").filter(line => line.trim() !== "");
+    const matches = lines.filter(line =>
+      line.toLowerCase().includes(query)
+    );
+
+    searchResults.innerHTML = matches.length
+      ? matches.map(line => `<p>${line}</p>`).join("")
+      : "<p>Sonuç bulunamadı.</p>";
+  });
 </script>
 </body>
 </html>
