@@ -496,6 +496,52 @@ details p {
   border-radius: 0 8px 8px 0;
   color: #444;
 }
+/* 🎮 Nintendo-Style Bottom Navigation (Mobil) */
+.bottom-grid {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #607744;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 2px;
+  padding: 10px;
+  z-index: 999;
+}
+
+.bottom-grid button {
+  background-color: #4e6137;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 5px;
+  font-size: 1.3em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.bottom-grid button span {
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+.bottom-grid button:hover {
+  background-color: #eef1ea;
+  color: #2f2f2f;
+  transform: scale(1.05);
+}
+
+/* 📵 Nur auf Mobilgeräten anzeigen */
+@media (min-width: 769px) {
+  .bottom-grid {
+    display: none;
+  }
+}
 </style>
 
   <!-- Übersetzer -->
@@ -714,6 +760,23 @@ details p {
 
 </div>
 </main>
+<!-- 🎮 Nintendo-Style Bottom Navigation (Mobil) -->
+<div class="bottom-grid" id="main-grid">
+  <button onclick="goTo('index.html')">🏠<span>Anasayfa</span></button>
+  <button onclick="goTo('hakkimizda.html')">👤<span>Hakkımızda</span></button>
+  <button onclick="goTo('urunler.html')">🛒<span>Ürünler</span></button>
+  <button onclick="showSubmenu()">⚙️<span>Üretim</span></button>
+  <button onclick="goTo('sss.html')">❓<span>Sıkça Sorulan</span></button>
+  <button onclick="goTo('iletisim.html')">📩<span>İletişim</span></button>
+</div>
+
+<div class="bottom-grid" id="sub-grid" style="display: none;">
+  <button onclick="goTo('organik-tarim.html')">🌿<span>Organik</span></button>
+  <button onclick="goTo('zeytin-hakkinda-bilgi.html')">🫒<span>Zeytin</span></button>
+  <button onclick="goTo('nar-hakkinda-bilgi.html')">🍷<span>Nar Ekşisi</span></button>
+  <button onclick="showMain()">🔙<span>Geri</span></button>
+</div>
+
 <!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
@@ -778,6 +841,22 @@ details p {
       console.error("Son güncelleme alınamadı:", err);
       document.getElementById("last-updated").textContent = "bilgi alınamadı";
     });
+</script>
+<!-- 📜 Bottom-Navigation Logik -->
+<script>
+  function goTo(url) {
+    window.location.href = url;
+  }
+
+  function showSubmenu() {
+    document.getElementById('main-grid').style.display = 'none';
+    document.getElementById('sub-grid').style.display = 'grid';
+  }
+
+  function showMain() {
+    document.getElementById('sub-grid').style.display = 'none';
+    document.getElementById('main-grid').style.display = 'grid';
+  }
 </script>
 </body>
 </html>
