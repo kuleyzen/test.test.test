@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<!-- Seitentitel, Meta-Informationen und eingebettetes CSS -->
+<!-- 💡 Basis-Meta-Tags und Seitentitel -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuleyzen - Doğal Zeytinyağı</title>
+<!-- 🎨 Eingebettetes CSS-Stylesheet -->
 <style>
+  /* 🌿 Grundlegende Layout- und Farbstile */
   body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #fafaf5;
@@ -13,11 +15,13 @@
       margin: 0;
       padding: 0;
     }
+/* 📄 Hauptbereich-Layout */    
     main {
       padding: 40px 20px;
       max-width: 1000px;
       margin: auto;
     }
+/* 🖼️ Flexbox für Sektionen mit Bild und Text */    
     .section {
       display: flex;
       flex-wrap: wrap;
@@ -33,9 +37,11 @@
     .section div {
       flex: 2 1 400px;
     }
+/* 🧱 Überschriften-Layout */    
     h2, h3 {
       margin-top: 40px;
     }
+/* 📱 Responsive Anpassung für kleine Bildschirme */    
     @media (max-width: 768px) {
       .section {
         flex-direction: column;
@@ -45,35 +51,22 @@
         max-width: 100%;
       }
     }
+/* 📷 Allgemeine Bildformatierung */    
    img {
       width: 100%;
       max-width: 600px;
       margin: 20px 0;
       border-radius: 8px;
     }
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fafaf5;
-    color: #2f2f2f;
-  }
-  main {
-    padding: 1em;
-  }  
-  main {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+  
+/* 🔝 Navigationsleiste (Desktop) */    
   .main-nav {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     background-color: #607744;
   }
 
@@ -92,22 +85,34 @@ body {
   .main-nav > li > a:hover {
     background-color: #4e6137;
   }
+/* 📂 Submenü (Desktop Hover) */
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #607744;
+    z-index: 9999;
+    min-width: 180px;
+  }
 
   .has-submenu:hover .submenu {
     display: block;
   }
+/* 🛠️ Submenü Hintergrundfarbe und Hover-Korrektur */
+.submenu li a {
+  display: block;
+  padding: 0.75em 1.5em;
+  color: white;
+  text-decoration: none;
+  background-color: #607744; /* ← das kann fehlen */
+  line-height: 1.4; /* optional: reduziert unnötige Höhe */
+}
 
-  .submenu li a {
-    display: block;
-    padding: 0.75em 1.5em;
-    color: white;
-    text-decoration: none;
-  }
-
-  .submenu li a:hover {
-    background-color: #4e6137;
-  }
-
+.submenu li a:hover {
+  background-color: #4e6137;
+}
+/* 🍔 Mobile Navigation & Menübutton */
   .menu-toggle {
     display: none;
     background: #607744;
@@ -119,376 +124,37 @@ body {
     width: 100%;
     text-align: right;
   }
-
- /* 🌐 Immer sichtbare Navigation mit Scroll auf Mobile */
- /* Menü ohne Hamburger - mobile Navigation bleibt einzeilig */
-nav ul {
-    display: flex;
-    flex-wrap: nowrap; /* Keine Umbrüche in die nächste Zeile */
-    gap: 1em;
-    list-style: none;
-    margin: 0;
-    padding: 1em 1em;
-    justify-content: flex-start; /* Links ausgerichtet für Scrollbarkeit */
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    overflow-x: auto; /* Ermöglicht horizontales Scrollen */
-    white-space: nowrap; /* Verhindert Umbruch der Navigationselemente */
-    -webkit-overflow-scrolling: touch; /* Sanftes Scrollen für mobile Geräte */
-}
-
-/* Scrollbar für Chrome, Safari und Firefox sichtbar */
-nav ul::-webkit-scrollbar {
-    height: 8px;
-}
-
-nav ul::-webkit-scrollbar-thumb {
-    background: #607744; /* Farbe des Scrollbalkens */
-    border-radius: 4px;
-}
-
-nav ul li {
-    flex: 0 0 auto; /* Stellt sicher, dass die Listenelemente nicht umgebrochen werden */
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #607744;
-    font-weight: bold;
-    font-size: 1em;
-    padding: 0.5em 1em;
-    border-radius: 8px;
-    transition: background 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #eef1ea;
-}
-
-/* Scrollbar für Chrome, Safari und Firefox sichtbar */
-nav ul::-webkit-scrollbar {
-    height: 8px;
-}
-
-nav ul::-webkit-scrollbar-thumb {
-    background: #607744; /* Farbe des Scrollbalkens */
-    border-radius: 4px;
-}
-
-nav ul li {
-    flex: 0 0 auto; /* Stellt sicher, dass die Listenelemente nicht umgebrochen werden */
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #607744;
-    font-weight: bold;
-    font-size: 1em;
-    padding: 0.5em 1em;
-    border-radius: 8px;
-    transition: background 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #eef1ea;
-}
-
-/* Scrollbar für Chrome, Safari und Firefox sichtbar */
-nav ul::-webkit-scrollbar {
-    height: 8px;
-}
-
-nav ul::-webkit-scrollbar-thumb {
-    background: #607744; /* Farbe des Scrollbalkens */
-    border-radius: 4px;
-}
-
-nav ul li {
-    flex: 0 0 auto; /* Stellt sicher, dass die Listenelemente nicht umgebrochen werden */
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #607744;
-    font-weight: bold;
-    font-size: 1em;
-    padding: 0.5em 1em;
-    border-radius: 8px;
-    transition: background 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    background-color: #eef1ea;
-}
-
-/* Scrollbar ausblenden bei Chrome */
-nav ul::-webkit-scrollbar {
-  display: none;
-}
-
-nav ul li {
-  flex: 0 0 auto;
-}
-
-nav ul li a {
-  text-decoration: none;
-  color: #607744;
-  font-weight: bold;
-  font-size: 1em;
-  padding: 0.5em 1em;
-  border-radius: 8px;
-  transition: background 0.3s;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-  background-color: #eef1ea;
-}
-/* Media Query für mobile Geräte */
-@media (max-width: 768px) {
-    /* Sicherstellen, dass die Navigation auch auf mobilen Geräten horizontal bleibt */
-    nav ul {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto; /* Ermöglicht horizontales Scrollen */
-        justify-content: flex-start; /* Navigationselemente linksbündig */
+/* 📱 Mobile Menü-Stile */
+  @media (max-width: 769px) {
+    .main-nav {
+      flex-direction: column;
+      align-items: flex-start;
+      display: none;
     }
 
-    nav ul li {
-        flex: 0 0 auto; /* Verhindert das Umsteigen auf eine zweite Zeile */
+    .main-nav.show {
+      display: flex;
     }
-}
-/* Nintendo-Style Bottom Navigation für mobile Geräte */
-.bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: #607744;
-      display: none; /* Standardmäßig versteckt */
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px;
-      z-index: 999;
+ /* 📂 Submenü im mobilen Layout */
+    .submenu {
+      position: static;
+      display: none;
+      padding-left: 2em;
     }
 
-    .bottom-nav a {
-      display: inline-block;
-      background-color: #4e6137;
-      color: white;
-      padding: 15px;
-      border-radius: 50%;
-      font-size: 1.2em;
-      text-align: center;
-      transition: background 0.3s, transform 0.3s;
+    .has-submenu:hover .submenu {
+      display: block;
     }
 
-    .bottom-nav a:hover {
-      background-color: #eef1ea;
-      transform: scale(1.1); /* Kleine Vergrößerung beim Hover */
+    .menu-toggle {
+      display: block;
     }
-    /* Media Query für mobile Geräte */
-    @media (max-width: 768px) {
-      .bottom-nav {
-        display: flex;
-      }
-    }
-    /* === Nintendo-Style Bottom Navigation === */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #607744;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-  z-index: 999;
-}
-
-.bottom-nav a,
-.bottom-nav button {
-  background-color: #4e6137;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  font-size: 1.2em;
-  text-align: center;
-  border: none;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.bottom-nav button:hover,
-.bottom-nav a:hover {
-  background-color: #eef1ea;
-  transform: scale(1.1);
-  color: #2f2f2f;
-}
-
-/* === Overlays für Suche & Menü === */
-.overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 1000;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 80px;
-}
-
-.overlay-box {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 600px;
-  box-shadow: 0 0 10px #000;
-  position: relative;
-}
-
-/* === Suchfeld === */
-.overlay-box input {
-  width: 100%;
-  padding: 12px;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-/* === Schließen-Buttons (X) === */
-.overlay-box button {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-  background: transparent;
-  border: none;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-/* === Mobile Menüliste === */
-.mobile-menu {
-  list-style: none;
-  padding: 0;
-  margin-top: 20px;
-}
-
-.mobile-menu li {
-  margin-bottom: 12px;
-}
-
-.mobile-menu a {
-  text-decoration: none;
-  color: #607744;
-  font-weight: bold;
-  display: block;
-  padding: 10px;
-  border-radius: 8px;
-  transition: background 0.3s;
-}
-
-.mobile-menu a:hover {
-  background-color: #eef1ea;
-}
-
-/* === Nur auf Mobil anzeigen === */
-@media (max-width: 768px) {
-  .bottom-nav {
-    display: flex;
   }
-}
-/* 📂 Stil für aufklappbare Submenüs im mobilen Menü */
-.has-sub {
-  position: relative;
-}
-
-/* Der Button, der das Submenü öffnet */
-.submenu-toggle {
-  background: none;
-  border: none;
-  font-size: 1em;
-  color: #607744;
-  font-weight: bold;
-  padding: 10px;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-}
-
-/* Das Submenü selbst – zunächst unsichtbar */
-.submenu {
-  display: none;
-  margin-left: 1em;
-  list-style: none;
-  padding-left: 10px;
-}
-
-/* Die Links im Submenü */
-.submenu a {
-  font-weight: normal;
-  padding: 8px;
-  display: block;
-  text-decoration: none;
-  color: #607744;
-  border-radius: 6px;
-}
-
-/* Hover-Effekt für Submenü-Links */
-.submenu a:hover {
-  background-color: #eef1ea;
-}
-/* Submenü-Button wie ein normaler Menülink aussehen lassen */
-.submenu-toggle {
-  background: none;
-  border: none;
-  font-size: 1em;
-  color: #607744;
-  font-weight: bold;
-  padding: 10px;
-  width: 100%;
-  text-align: left;
-  cursor: pointer;
-  display: block;
-  text-decoration: none;
-}
-
-/* Optional: Submenü leicht einrücken */
-.submenu {
-  display: none;
-  padding-left: 20px;
-  margin-bottom: 10px;
-}
-/* 📂 Sichtbares mobiles Submenü */
-.mobile-menu .submenu {
-  display: none;
-  background-color: #eaf0e2; /* heller Grünton */
-  border-radius: 8px;
-  margin-top: 5px;
-  margin-left: 10px;
-  padding: 10px 15px;
-  list-style: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-}
-
-/* Submenü-Links */
-.mobile-menu .submenu li a {
-  color: #4a5534;
-  text-decoration: none;
-  display: block;
-  padding: 8px 0;
-  font-weight: normal;
-}
-
-.mobile-menu .submenu li a:hover {
-  background-color: #dce6d4;
-  border-radius: 6px;
-  padding-left: 10px;
+/* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
+@media (min-width: 769px) {
+  .bottom-nav {
+    display: none;
+  }
 }
 </style>
 
@@ -504,7 +170,8 @@ nav ul li a.active {
   </script>
 </head>
 <body>
-
+<!-- Hamburger-Menü für mobile Ansicht -->
+  <div class="menu-toggle">☰ Menü</div>
 <!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
@@ -536,6 +203,7 @@ nav ul li a.active {
 
 <!-- Hauptinhalt: Geschichte von Kuleyzen -->
 <main>
+<!-- 📜 Einleitungstext: Warum Kuleyzen? -->  
     <h2>Neden Kuleyzen?</h2>
     <p>Kuleyzen yalnızca bir marka adı değil — bir yerin, bir geleneğin ve bir yaşam biçiminin adıdır. Bugün resmi olarak <strong>Kalınsan mevkii</strong> olarak anılsa da, halk arasında hâlâ eski ismiyle bilinir: <strong>Kuleyzen</strong>. Bu küçük yerleşim, Tokaclı köyünün hemen yanı başında, çoğunlukla <strong>Çelikel sülalesinin</strong> yaşadığı, zeytin ağaçlarının gölgelediği bir yerdir.</p>
     <p>İsmini, bu topraklarda hep birlikte yaşayan Hristiyan ve Müslüman halkların kurduğu dostluk bağından alır. “Kuleyzen” sözcüğü, Arapça “kul” (iyi) ve “eyzen” (iyi insan) kelimelerinin birleşiminden oluşur. Rivayete göre, Hristiyan köylüler Müslüman komşuları için bu adı kullanırmış: iyi insanlar. Biz de bu mirası sahipleniyor ve Kuleyzen’in ruhunu yaşatıyoruz — doğaya, emeğe ve komşuluğa saygı ile.</p>
@@ -589,54 +257,6 @@ nav ul li a.active {
       </div>
     </div>
   </main>
-<!-- Nintendo-Style Bottom Navigation -->
-<div class="bottom-nav">
-  <a href="iletisim.html" title="İletişim">İletişim</a>
-  <button id="openMenu" title="Menü">☰</button>
-  <button id="openSearch" title="Ara">🔍</button>
-</div>
-<!-- 🔍 Such-Overlay (öffnet sich bei Klick auf Lupe) -->
-<div id="searchOverlay" class="overlay">
-  <div class="overlay-box">
-    <input type="text" id="searchInput" placeholder="Site içinde ara..." />
-    <button id="closeSearch">✖</button>
-    <div id="searchResults"></div>
-  </div>
-</div>
-<!-- ☰ Menü-Overlay (Nintendo-Stil) --><!-- ☰ Menü-Overlay (Nintendo-Stil) mit aufklappbarem Submenü -->
-<div id="menuOverlay" class="overlay">
-  <div class="overlay-box">
-    <!-- Schließen-Button für das Overlay -->
-    <button id="closeMenu">✖</button>
-
-    <!-- Mobile Menüliste -->
-    <ul class="mobile-menu">
-      
-      <!-- Normale Menüpunkte -->
-      <li><a href="index.html">Anasayfa</a></li>
-      <li><a href="hakkimizda.html">Hakkımızda</a></li>
-      <li><a href="urunler.html">Ürünler</a></li>
-
-      <!-- ▶️ Aufklappbares Submenü für 'Üretim Süreci' -->
-      <li class="has-sub">
-        <!-- Button zum Aufklappen -->
-        <a href="#" class="submenu-toggle">Üretim Süreci ▼</a>
-
-        <!-- Verstecktes Untermenü (wird per JavaScript angezeigt) -->
-        <ul class="submenu">
-          <li><a href="urunlerimizin-uretimi.html">Genel Bakış</a></li>
-          <li><a href="organik-tarim.html">Organik Tarım</a></li>
-          <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
-          <li><a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a></li>
-        </ul>
-      </li>
-
-      <!-- Weitere Menüpunkte -->
-      <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
-      <li><a href="iletisim.html">İletişim</a></li>
-    </ul>
-  </div>
-</div>
 <!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
@@ -679,72 +299,6 @@ nav ul li a.active {
       console.error("Son güncelleme alınamadı:", err);
       document.getElementById("last-updated").textContent = "bilgi alınamadı";
     });
-</script>
-<!-- Nintendo-Style Menü & Suche Logik -->
-<script>
-  // Elemente holen
-  const openSearch = document.getElementById("openSearch");
-  const closeSearch = document.getElementById("closeSearch");
-  const searchOverlay = document.getElementById("searchOverlay");
-  const searchInput = document.getElementById("searchInput");
-  const searchResults = document.getElementById("searchResults");
-
-  const openMenu = document.getElementById("openMenu");
-  const closeMenu = document.getElementById("closeMenu");
-  const menuOverlay = document.getElementById("menuOverlay");
-
-  // Suchfeld öffnen
-  openSearch.addEventListener("click", () => {
-    searchOverlay.style.display = "flex";
-    searchInput.focus();
-  });
-
-  // Suchfeld schließen
-  closeSearch.addEventListener("click", () => {
-    searchOverlay.style.display = "none";
-    searchInput.value = "";
-    searchResults.innerHTML = "";
-  });
-
-  // Menü öffnen
-  openMenu.addEventListener("click", () => {
-    menuOverlay.style.display = "flex";
-  });
-
-  // Menü schließen
-  closeMenu.addEventListener("click", () => {
-    menuOverlay.style.display = "none";
-  });
-
-  // Live-Suche (durchsucht Text in <main>)
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
-    const content = document.querySelector("main").innerText;
-    const lines = content.split("\n").filter(line => line.trim() !== "");
-    const matches = lines.filter(line =>
-      line.toLowerCase().includes(query)
-    );
-
-    searchResults.innerHTML = matches.length
-      ? matches.map(line => `<p>${line}</p>`).join("")
-      : "<p>Sonuç bulunamadı.</p>";
-  });
-// 📂 Aufklappbares Submenü (Accordion)
-document.querySelectorAll('.submenu-toggle').forEach(button => {
-    button.addEventListener('click', () => {
-      const submenu = button.nextElementSibling;
-
-      // Wenn bereits geöffnet, dann schließen
-      if (submenu.style.display === 'block') {
-        submenu.style.display = 'none';
-        button.innerHTML = 'Üretim Süreci ▼';
-      } else {
-        submenu.style.display = 'block';
-        button.innerHTML = 'Üretim Süreci ▲';
-      }
-    });
-  });
-
 </script>
 </body>
 </html>
