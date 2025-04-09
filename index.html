@@ -205,12 +205,73 @@
     display: none;
   }
 }
+/* 📜 Hauptnavigation: mobil horizontal scrollfähig */
+@media (max-width: 768px) {
+  .main-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0.5em 0;
+    scrollbar-width: none; /* Firefox */
+    background-color: #607744;
+  }
+
+  .main-nav::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .main-nav > li {
+    display: inline-block;
+    margin: 0;
+    scroll-snap-align: start;
+  }
+
+  .main-nav > li > a {
+    white-space: nowrap;
+  }
+}
+/* 🎮 Nintendo-Style Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #607744;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  z-index: 999;
+}
+
+.bottom-nav a {
+  background-color: #4e6137;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 1.2em;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.bottom-nav a:hover {
+  background-color: #eef1ea;
+  transform: scale(1.1);
+  color: #2f2f2f;
+}
+
+/* 📵 Bottom-Menü nur auf Mobil anzeigen */
+@media (min-width: 769px) {
+  .bottom-nav {
+    display: none;
+  }
+}
 </style>  
 </head>
 <body>
 
-<!-- 🍔 Hamburger-Menü (nur für mobile Ansicht) -->
-  <div class="menu-toggle">☰ Menü</div>
 
 <!-- Hauptnavigation -->
 <nav>
@@ -227,7 +288,7 @@
       </ul>
     </li>
     <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
-       <li><a href="iletisim.html">İletişim</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
   </ul>
 </nav>
 
@@ -277,18 +338,7 @@
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 
-<!--JavaScript zur Steuerung des Hamburger-Menüs-->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const toggle = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".main-nav");
-    if (toggle && nav) {
-      toggle.addEventListener("click", function () {
-        nav.classList.toggle("show");
-      });
-    }
-  });
-</script>
+
 <!-- JavaScript letztes update github -->
 <script>
   fetch("https://api.github.com/repos/kuleyzen/test.test.test/commits/main")
