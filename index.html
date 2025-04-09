@@ -131,7 +131,7 @@
     }
 
     
-  }
+  
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
   .bottom-nav {
@@ -254,6 +254,73 @@
 body {
   padding-bottom: 80px; /* Genug Platz für .bottom-nav */
 }
+/* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #607744;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  z-index: 999;
+}
+
+.bottom-nav a,
+.bottom-nav button {
+  background-color: #4e6137;
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 1.3em;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.bottom-nav a:hover,
+.bottom-nav button:hover {
+  background-color: #eef1ea;
+  transform: scale(1.1);
+  color: #2f2f2f;
+}
+
+/* 👀 Nur auf Mobilgeräten anzeigen */
+@media (min-width: 769px) {
+  .bottom-nav,
+  .mobile-kacheln {
+    display: none;
+  }
+}
+
+/* 📦 Kachelmenü bei Klick auf Hamburger */
+.mobile-kacheln {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  background-color: #f5f5f0;
+  padding: 1em;
+  z-index: 998;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-kacheln .box {
+  display: inline-block;
+  background: #fff;
+  padding: 0.8em 1em;
+  margin: 0.3em;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #2f2f2f;
+  text-decoration: none;
+}
 </style>  
 </head>
 <body>
@@ -295,21 +362,26 @@ body {
   <h2>Hoş Geldiniz</h2>
   <p>Kuleyzen'e hoş geldiniz. Doğal, organik ve Hatay'ın bereketli topraklarından gelen saf zeytinyağlarımızı keşfedin.</p>
 </main>
-<!-- 🎮 Nintendo-Style Bottom Navigation (Mobil) -->
-<div class="bottom-grid" id="main-grid">
-  <button onclick="goTo('index.html')">🏠<span>Anasayfa</span></button>
-  <button onclick="goTo('hakkimizda.html')">👤<span>Hakkımızda</span></button>
-  <button onclick="goTo('urunler.html')">🛒<span>Ürünler</span></button>
-  <button onclick="showSubmenu()">⚙️<span>Üretim</span></button>
-  <button onclick="goTo('sss.html')">❓<span>Sıkça Sorulan</span></button>
-  <button onclick="goTo('iletisim.html')">📩<span>İletişim</span></button>
+<!-- 🎮 Vereinfachtes Bottom-Menü (mobil) -->
+<div class="bottom-nav">
+  <a href="iletisim.html" title="İletişim">📩</a>
+  <button onclick="toggleMenu()">☰</button>
+  <a href="sss.html" title="Sıkça Sorulan Sorular">🔍</a>
 </div>
 
-<div class="bottom-grid" id="sub-grid" style="display: none;">
-  <button onclick="goTo('organik-tarim.html')">🌿<span>Organik</span></button>
-  <button onclick="goTo('zeytin-hakkinda-bilgi.html')">🫒<span>Zeytin</span></button>
-  <button onclick="goTo('nar-hakkinda-bilgi.html')">🍷<span>Nar Ekşisi</span></button>
-  <button onclick="showMain()">🔙<span>Geri</span></button>
+<!-- 📦 Mobile Kachelmenü -->
+<div class="mobile-kacheln" id="mobileKacheln">
+  <a class="box" href="index.html">Anasayfa</a>
+  <a class="box" href="hakkimizda.html">Hakkımızda</a>
+  <a class="box" href="urunler.html">Ürünler</a>
+  <a class="box" href="urunlerimizin-uretimi.html" onclick="toggleSubKacheln(event)">Üretim Süreci</a>
+  <!-- 👇 Untermenü: wird per JS eingeblendet -->
+  <div id="subKacheln" style="display:none; margin-top: 0.5em;">
+    <a class="box" href="organik-tarim.html">Organik Tarım</a>
+    <a class="box" href="zeytin-hakkinda-bilgi.html">Zeytin</a>
+    <a class="box" href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
+  </div>
+  <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
 </div>
 <!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
@@ -351,14 +423,21 @@ body {
     window.location.href = url;
   }
 
-  function showSubmenu() {
-    document.getElementById('main-grid').style.display = 'none';
-    document.getElementById('sub-grid').style.display = 'grid';
+  function toggleMenu() {
+    const menu = document.getElementById("mobileKacheln");
+    const submenu = document.getElementById("subKacheln");
+    if (menu.style.display === "block") {
+      menu.style.display = "none";
+      submenu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
   }
 
-  function showMain() {
-    document.getElementById('sub-grid').style.display = 'none';
-    document.getElementById('main-grid').style.display = 'grid';
+  function toggleSubKacheln(event) {
+    event.preventDefault();
+    const sub = document.getElementById("subKacheln");
+    sub.style.display = sub.style.display === "block" ? "none" : "block";
   }
 </script>
 </body>
