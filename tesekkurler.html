@@ -112,18 +112,7 @@
 .submenu li a:hover {
   background-color: #4e6137;
 }
-/* 🍔 Mobile Navigation & Menübutton */
-  .menu-toggle {
-    display: none;
-    background: #607744;
-    color: white;
-    padding: 1em;
-    font-size: 1.4em;
-    cursor: pointer;
-    border: none;
-    width: 100%;
-    text-align: right;
-  }
+
 /* 📱 Mobile Menü-Stile */
   @media (max-width: 769px) {
     .main-nav {
@@ -219,11 +208,14 @@
   .main-nav > li {
     display: inline-block;
     margin: 0;
+    flex: 0 0 auto;  /* 👈 Ergänzt */
     scroll-snap-align: start;
   }
 
   .main-nav > li > a {
     white-space: nowrap;
+    display: inline-block;  /* 👈 Ergänzt */
+    padding: 1em 1.2em;
   }
 }
 /* 🎮 Nintendo-Style Bottom Navigation */
