@@ -41,7 +41,7 @@ details[open] summary {
 }
 
 details[open] summary::after {
-  content: "–";
+  content: "▲";
   color: #607744;
 }
 
@@ -131,12 +131,25 @@ details {
   overflow: visible;
 }
 
+/* 📂 FAQ-Pfeile optisch korrekt darstellen */
 details summary {
-  font-weight: bold;
-  cursor: pointer;
-  font-size: 1.05em;
-  list-style: none;
+  position: relative;
+  padding-right: 2em; /* Platz für das Symbol rechts */
+  white-space: normal; /* Zeilenumbruch erlauben */
+  word-wrap: break-word;
 }
+
+/* Symbol: ▼ für geschlossenes, ▲ für geöffnetes Element */
+details summary::after {
+  content: "▼";
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1em;
+  color: #607744;
+}
+
 
 details[open] {
   background-color: #e8efe1;
@@ -148,10 +161,16 @@ details[open] summary {
   color: #607744;
 }
 
+ /* 📄 Der Antworttext im FAQ */
 details p {
-  overflow: visible;
+  padding: 1em;
+  margin: 0;
   display: block;
-  max-height: none; 
+  overflow: visible;
+  max-height: none;
+  font-size: 1em;
+  line-height: 1.5em;
+  color: #444;
 }
 
 #faq-search:focus {
