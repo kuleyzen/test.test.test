@@ -413,6 +413,46 @@ nav ul li a.active {
     display: flex;
   }
 }
+/* 📂 Stil für aufklappbare Submenüs im mobilen Menü */
+.has-sub {
+  position: relative;
+}
+
+/* Der Button, der das Submenü öffnet */
+.submenu-toggle {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: #607744;
+  font-weight: bold;
+  padding: 10px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Das Submenü selbst – zunächst unsichtbar */
+.submenu {
+  display: none;
+  margin-left: 1em;
+  list-style: none;
+  padding-left: 10px;
+}
+
+/* Die Links im Submenü */
+.submenu a {
+  font-weight: normal;
+  padding: 8px;
+  display: block;
+  text-decoration: none;
+  color: #607744;
+  border-radius: 6px;
+}
+
+/* Hover-Effekt für Submenü-Links */
+.submenu a:hover {
+  background-color: #eef1ea;
+}
 
 </style>
 
@@ -527,18 +567,35 @@ nav ul li a.active {
     <div id="searchResults"></div>
   </div>
 </div>
-<!-- ☰ Menü-Overlay (Nintendo-Stil) -->
+<!-- ☰ Menü-Overlay (Nintendo-Stil) --><!-- ☰ Menü-Overlay (Nintendo-Stil) mit aufklappbarem Submenü -->
 <div id="menuOverlay" class="overlay">
   <div class="overlay-box">
+    <!-- Schließen-Button für das Overlay -->
     <button id="closeMenu">✖</button>
+
+    <!-- Mobile Menüliste -->
     <ul class="mobile-menu">
+      
+      <!-- Normale Menüpunkte -->
       <li><a href="index.html">Anasayfa</a></li>
       <li><a href="hakkimizda.html">Hakkımızda</a></li>
       <li><a href="urunler.html">Ürünler</a></li>
-      <li><a href="urunlerimizin-uretimi.html">Üretim Süreci</a></li>
-      <li><a href="organik-tarim.html">Organik Tarım</a></li>
-      <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
-      <li><a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a></li>
+
+      <!-- ▶️ Aufklappbares Submenü für 'Üretim Süreci' -->
+      <li class="has-sub">
+        <!-- Button zum Aufklappen -->
+        <button class="submenu-toggle">Üretim Süreci ▼</button>
+
+        <!-- Verstecktes Untermenü (wird per JavaScript angezeigt) -->
+        <ul class="submenu">
+          <li><a href="urunlerimizin-uretimi.html">Genel Bakış</a></li>
+          <li><a href="organik-tarim.html">Organik Tarım</a></li>
+          <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
+          <li><a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a></li>
+        </ul>
+      </li>
+
+      <!-- Weitere Menüpunkte -->
       <li><a href="sss.html">SSS</a></li>
       <li><a href="iletisim.html">İletişim</a></li>
     </ul>
@@ -636,6 +693,22 @@ nav ul li a.active {
       ? matches.map(line => `<p>${line}</p>`).join("")
       : "<p>Sonuç bulunamadı.</p>";
   });
+// 📂 Aufklappbares Submenü (Accordion)
+document.querySelectorAll('.submenu-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+      const submenu = button.nextElementSibling;
+
+      // Wenn bereits geöffnet, dann schließen
+      if (submenu.style.display === 'block') {
+        submenu.style.display = 'none';
+        button.innerHTML = 'Üretim Süreci ▼';
+      } else {
+        submenu.style.display = 'block';
+        button.innerHTML = 'Üretim Süreci ▲';
+      }
+    });
+  });
+
 </script>
 </body>
 </html>
