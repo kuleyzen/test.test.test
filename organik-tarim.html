@@ -154,16 +154,17 @@
 }
 
  /* 📂 Submenü im mobilen Layout */
- .submenu {
-      position: static;
-      display: none;
-      padding-left: 2em;
-    }
+ @media (max-width: 768px) {
+  .submenu {
+    position: static;
+    display: none;
+    padding-left: 2em;
+  }
 
-    .has-submenu:hover .submenu {
-      display: block;
-    }
-
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+}
 
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
