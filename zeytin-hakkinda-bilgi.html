@@ -1,112 +1,139 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+<!-- Seitentitel, Meta-Angaben und eingebettetes CSS -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kuleyzen - Doğal Zeytinyağı</title>
-  
+<!-- Eingebettetes CSS für Layout und Design -->   
 <style>
-/* 🌿 Grundlegende Layout- und Farbstile */
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #fafaf5;
-  color: #2f2f2f;
-  margin: 0;
-  padding: 0;
-  padding-bottom: 80px; /* 🦶 Platz für Bottom-Menü */
-}
-
-/* 📄 Hauptbereich-Layout */
-main {
-  padding: 40px 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-/* 🖼️ Sektionen mit Bild & Text */
-.section {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  margin-bottom: 60px;
-}
-.section img {
-  flex: 1 1 300px;
-  max-width: 300px;
-  margin-right: 30px;
-  border-radius: 8px;
-}
-.section div {
-  flex: 2 1 400px;
-}
-
-/* 📷 Allgemeine Bildformatierung */
-img {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px 0;
-  border-radius: 8px;
-}
-
-/* 🧱 Überschriften */
-h2, h3 {
-  margin-top: 40px;
-}
-
-/* 📱 Responsive Bild-Layout */
-@media (max-width: 768px) {
-  .section {
-    flex-direction: column;
+  /* 🌿 Grundlegende Layout- und Farbstile */
+  body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fafaf5;
+      color: #2f2f2f;
+      margin: 0;
+      padding: 0;
+    }
+/* 📄 Hauptbereich-Layout */    
+    main {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+/* 🖼️ Flexbox für Sektionen mit Bild und Text */    
+    .section {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: 60px;
+    }
+    .section img {
+      flex: 1 1 300px;
+      max-width: 300px;
+      margin-right: 30px;
+      border-radius: 8px;
+    }
+    .section div {
+      flex: 2 1 400px;
+    }
+/* 🧱 Überschriften-Layout */    
+    h2, h3 {
+      margin-top: 40px;
+    }
+/* 📱 Responsive Anpassung für kleine Bildschirme */    
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+      }
+      .section img {
+        margin: 0 0 20px 0;
+        max-width: 100%;
+      }
+    }
+/* 📷 Allgemeine Bildformatierung */    
+   img {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+  
+/* 🔝 Navigationsleiste (Desktop) */    
+  .main-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #607744;
   }
-  .section img {
-    margin: 0 0 20px 0;
-    max-width: 100%;
-  }
-}
 
-/* 🔝 Navigation (Desktop) */
-.main-nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  white-space: nowrap;              
-  scrollbar-width: none;  
-  background-color: #607744;
-}
-.main-nav::-webkit-scrollbar {
-  display: none; 
-}
-.main-nav > li {
-  position: relative;
-}
-.main-nav > li > a {
+  .main-nav > li {
+    position: relative;
+  }
+
+  .main-nav > li > a {
+    display: block;
+    padding: 1em 1.5em;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .main-nav > li > a:hover {
+    background-color: #4e6137;
+  }
+/* 📂 Submenü (Desktop Hover) */
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #607744;
+    z-index: 9999;
+    min-width: 180px;
+  }
+
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+/* 🛠️ Submenü Hintergrundfarbe und Hover-Korrektur */
+.submenu li a {
   display: block;
-  padding: 1em 1.5em;
+  padding: 0.75em 1.5em;
   color: white;
   text-decoration: none;
-  font-weight: bold;
+  background-color: #607744; /* ← das kann fehlen */
+  line-height: 1.4; /* optional: reduziert unnötige Höhe */
 }
-.main-nav > li > a:hover {
+
+.submenu li a:hover {
   background-color: #4e6137;
 }
-/* 🔘 Submenü-Pfeil-Button (Mobil & Desktop) */
-.submenu-toggle {
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1em;
-  padding: 1em 0.5em;
-  cursor: pointer;
+/* 📱 Mobil: Submenü bei Tap */
+@media (max-width: 768px) {
+  .submenu {
+    display: none;
+    padding-left: 2em;
+    position: static; /* erlaubt "fließende" Mobil-Layout-Anzeige */
+  }
+
+  .has-submenu.open .submenu {
+    display: block;
+  }
 }
-/* 📂 Submenü (nur Desktop) */
+/* 🖱️ Submenü Hover-Effekt (nur Desktop, verhindert Zeilenverbreiterung) */
 @media (min-width: 769px) {
   .has-submenu {
     position: relative;
+  }
+  .main-nav > li {
+    position: relative;
+  }
+  .main-nav > li > a {
+    line-height: 1.2;
   }
 
   .submenu {
@@ -119,7 +146,7 @@ h2, h3 {
     z-index: 999;
   }
 
-  .has-submenu:hover .submenu {
+  .has-submenu:hover > .submenu {
     display: block;
   }
 
@@ -127,8 +154,8 @@ h2, h3 {
     display: block;
     padding: 0.75em 1.5em;
     color: white;
-    text-decoration: none;
     background-color: #607744;
+    text-decoration: none;
     line-height: 1.4;
   }
 
@@ -136,65 +163,90 @@ h2, h3 {
     background-color: #4e6137;
   }
 }
-
-/* 📂 Submenü: Einheitliches Styling für Desktop und Mobil */
-.submenu {
-  display: none;
-  background-color: #607744;
-  min-width: 180px;
-  z-index: 9999;
-}
-
-.submenu li a {
-  padding: 0.75em 1.5em;
-  display: block;
-  color: white;
-  text-decoration: none;
-  line-height: 1.4;
-}
-
-.submenu li a:hover {
-  background-color: #4e6137;
-}
-
-/* 🖱️ Desktop-Version: Submenü bei Hover */
+       
+  
+/* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
-  .has-submenu {
-    position: relative;
-  }
-
-  .submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .has-submenu:hover .submenu {
-    display: block;
+  .bottom-nav {
+    display: none;
   }
 }
+    /* 🎮 Nintendo-Style Bottom Navigation (Mobil) */
+    .bottom-grid {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #607744;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 2px;
+  padding: 10px;
+  z-index: 999;
+}
 
-/* 📱 Mobil-Version: Submenü bei Tap/Fokus */
+.bottom-grid button {
+  background-color: #4e6137;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 5px;
+  font-size: 1.3em;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.bottom-grid button span {
+  font-size: 0.8em;
+  margin-top: 5px;
+}
+
+.bottom-grid button:hover {
+  background-color: #eef1ea;
+  color: #2f2f2f;
+  transform: scale(1.05);
+}
+
+/* 📵 Nur auf Mobilgeräten anzeigen */
+@media (min-width: 769px) {
+  .bottom-grid {
+    display: none;
+  }
+}
+/* 📜 Hauptnavigation: mobil horizontal scrollfähig */
 @media (max-width: 768px) {
-  .has-submenu {
-    position: relative;
+  .main-nav {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0.5em 0;
+    scrollbar-width: none; /* Firefox */
+    background-color: #607744;
   }
 
-  .submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  .main-nav::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
   }
 
-  .has-submenu:focus-within .submenu,
-  .has-submenu:hover .submenu {
-    display: block;
+  .main-nav > li {
+    display: inline-block;
+    margin: 0;
+    flex: 0 0 auto;  /* 👈 Ergänzt */
+    scroll-snap-align: start;
+  }
+
+  .main-nav > li > a {
+    white-space: nowrap;
+    display: inline-block;  /* 👈 Ergänzt */
+    padding: 1em 1.2em;
   }
 }
-
-/* 🎮 Bottom-Navigation (mobil): Nur 3 Felder */
+/* 🎮 Nintendo-Style Bottom Navigation */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -207,6 +259,48 @@ h2, h3 {
   padding: 10px;
   z-index: 999;
 }
+
+.bottom-nav a {
+  background-color: #4e6137;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  font-size: 1.2em;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.bottom-nav a:hover {
+  background-color: #eef1ea;
+  transform: scale(1.1);
+  color: #2f2f2f;
+}
+
+/* 📵 Bottom-Menü nur auf Mobil anzeigen */
+@media (min-width: 769px) {
+  .bottom-nav {
+    display: none;
+  }
+}
+/* 🦶 Platz für Footer sichtbar unter Bottom-Menü */
+body {
+  padding-bottom: 80px; /* Genug Platz für .bottom-nav */
+}
+/* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #607744;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  z-index: 999;
+}
+
 .bottom-nav a,
 .bottom-nav button {
   background-color: #4e6137;
@@ -219,6 +313,7 @@ h2, h3 {
   text-decoration: none;
   transition: background 0.3s, transform 0.3s;
 }
+
 .bottom-nav a:hover,
 .bottom-nav button:hover {
   background-color: #eef1ea;
@@ -226,46 +321,44 @@ h2, h3 {
   color: #2f2f2f;
 }
 
-/* ⛔ Nur auf Mobilgeräten anzeigen */
+/* 👀 Nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
-  .bottom-nav {
+  .bottom-nav,
+  .mobile-kacheln {
     display: none;
   }
 }
-/* 📱 Horizontal scrollbares Hauptmenü auf Mobilgeräten */
-@media (max-width: 768px) {
-  .main-nav {
-    overflow-x: auto;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-  }
 
-  .main-nav::-webkit-scrollbar {
-    display: none; /* Safari, Chrome */
-  }
+/* 📦 Kachelmenü bei Klick auf Hamburger */
+.mobile-kacheln {
+  display: none;
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  background-color: #f5f5f0;
+  padding: 1em;
+  z-index: 998;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
 
-  .main-nav > li {
-    flex: 0 0 auto;
-  }
-
-  .main-nav > li > a {
-    white-space: nowrap;
-  }
-
-  /* Submenüs auf Mobil NICHT anzeigen */
-  .submenu {
-    display: none !important;
-  }
+.mobile-kacheln .box {
+  display: inline-block;
+  background: #fff;
+  padding: 0.8em 1em;
+  margin: 0.3em;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #2f2f2f;
+  text-decoration: none;
 }
 </style>
-
-  </script>
 </head>
 <body>
 
-<div class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰ Menü</div>
-
+<!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
     <li><a href="index.html">Anasayfa</a></li>
@@ -273,7 +366,6 @@ h2, h3 {
     <li><a href="urunler.html">Ürünler</a></li>
     <li class="has-submenu">
       <a href="urunlerimizin-uretimi.html">Üretim Süreci</a>
-      <button class="submenu-toggle" aria-label="Alt menüyü aç">▾</button>
       <ul class="submenu">
         <li><a href="organik-tarim.html">Organik Tarım</a></li>
         <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
@@ -284,8 +376,9 @@ h2, h3 {
     <li><a href="iletisim.html">İletişim</a></li>
   </ul>
 </nav>
+<!-- Hauptinhalt: Beschreibung der Nar Ekşisi Produktion -->
 <main>
-<h1> ürünlerimizin üretimi </h1>
+<h1> Zeytin </h1>
 <section>
 <h2>İyi Bir Zeytinyağı Nasıl Olmalı?</h2>
 <p>Gerçek bir zeytinyağını anlamak, sadece şişeye bakmakla olmaz. Kaliteli bir zeytinyağı; kokusuyla, tadıyla, üretim şekliyle ve saklama koşullarıyla kendini belli eder. Kuleyzen zeytinyağı, Hatay’ın bereketli topraklarında yetişen yerli zeytin çeşitlerinden üretilir. Hem geleneksel yöntemleri, hem de özenle uygulanan modern teknikleri bir araya getiririz. Ama bir zeytinyağını iyi yapan sadece üretim değil, onun taşıdığı doğallık, tazelik ve karakterdir.</p>
@@ -315,49 +408,80 @@ h2, h3 {
 <h2>Halhali Zeytini</h2>
 <p>Yumuşak içimli, düşük yakıcılı ve hafif meyvemsi bir profil sunar.</p>
 </section>
-</section></main>
+</section>
+</main>
+<!-- 🎮 Vereinfachtes Bottom-Menü (mobil) -->
+<div class="bottom-nav">
+  <a href="iletisim.html" title="İletişim">📩</a>
+  <button onclick="toggleMenu()">☰</button>
+  <a href="sss.html" title="Sıkça Sorulan Sorular">🔍</a>
+</div>
+
+<!-- 📦 Mobile Kachelmenü -->
+<div class="mobile-kacheln" id="mobileKacheln">
+  <a class="box" href="index.html">Anasayfa</a>
+  <a class="box" href="hakkimizda.html">Hakkımızda</a>
+  <a class="box" href="urunler.html">Ürünler</a>
+  <a class="box" href="urunlerimizin-uretimi.html" onclick="toggleSubKacheln(event)">Üretim Süreci</a>
+  <!-- 👇 Untermenü: wird per JS eingeblendet -->
+  <div id="subKacheln" style="display:none; margin-top: 0.5em;">
+    <a class="box" href="organik-tarim.html">Organik Tarım</a>
+    <a class="box" href="zeytin-hakkinda-bilgi.html">Zeytin</a>
+    <a class="box" href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
+  </div>
+  <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
+</div>
+<!-- Fußzeile mit Copyright --> 
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
 </footer>
 
-<!-- Menü-Script -->
-<script>
-  function toggleMenu() {
-    var nav = document.querySelector('nav');
-    nav.classList.toggle('active');
-  }
-</script>
-
 <!-- GoatCounter Analytics -->
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
-
+<!-- JavaScript letztes update github -->
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const toggle = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".main-nav");
-    if (toggle && nav) {
-      toggle.addEventListener("click", function () {
-        nav.classList.toggle("show");
+  fetch("https://api.github.com/repos/kuleyzen/test.test.test/commits/main")
+    .then(res => {
+      if (!res.ok) throw new Error("Veri alınamadı");
+      return res.json();
+    })
+    .then(data => {
+      const date = new Date(data.commit.author.date);
+      const formatted = date.toLocaleString("tr-TR", {
+        dateStyle: "short",
+        timeStyle: "short"
       });
-    }
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.submenu-toggle').forEach(function (btn) {
-      btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const parentLi = this.closest('.has-submenu');
-        parentLi.classList.toggle('open');
-
-        // Andere schließen
-        document.querySelectorAll('.has-submenu').forEach(function (li) {
-          if (li !== parentLi) li.classList.remove('open');
-        });
-      });
+      document.getElementById("last-updated").textContent = formatted;
+    })
+    .catch(err => {
+      console.error("Son güncelleme alınamadı:", err);
+      document.getElementById("last-updated").textContent = "bilgi alınamadı";
     });
-  });
+</script>
+
+<!-- 📜 Bottom-Navigation Logik -->
+<script>
+  function goTo(url) {
+    window.location.href = url;
+  }
+
+  function toggleMenu() {
+    const menu = document.getElementById("mobileKacheln");
+    const submenu = document.getElementById("subKacheln");
+    if (menu.style.display === "block") {
+      menu.style.display = "none";
+      submenu.style.display = "none";
+    } else {
+      menu.style.display = "block";
+    }
+  }
+
+  function toggleSubKacheln(event) {
+    event.preventDefault();
+    const sub = document.getElementById("subKacheln");
+    sub.style.display = sub.style.display === "block" ? "none" : "block";
+  }
 </script>
 </body>
 </html>
