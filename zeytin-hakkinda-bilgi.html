@@ -153,18 +153,16 @@
   }
 }
 
-/* 📂 Submenü im mobilen Layout */
-@media (max-width: 768px) {
-  .submenu {
+ /* 📂 Submenü im mobilen Layout */
+ .submenu {
       position: static;
       display: none;
-      width: 100%;
+      padding-left: 2em;
     }
 
-    .has-submenu.open .submenu {
-      display: block; /* Submenü anzeigen, wenn die 'open'-Klasse hinzugefügt wird */
-  }
-  }
+    .has-submenu:hover .submenu {
+      display: block;
+    }
    
   
 
@@ -484,45 +482,6 @@ body {
     const sub = document.getElementById("subKacheln");
     sub.style.display = sub.style.display === "block" ? "none" : "block";
   }
-</script>
-<!-- JavaScript hovermenü mobil -->
-<script>
-document.querySelectorAll('.has-submenu').forEach(item => {
-    let clickCount = 0; // Zähler für Klicks
-
-    item.addEventListener('click', function(e) {
-        e.preventDefault();  // Verhindert das Standard-Verhalten (Navigation)
-
-        const submenu = this.querySelector('.submenu');
-        const isMobile = window.innerWidth <= 768; // Überprüft, ob es sich um ein mobiles Gerät handelt
-
-        // Wenn es sich um ein mobiles Gerät handelt:
-        if (isMobile) {
-            clickCount++;  // Klickzähler erhöhen
-
-            if (clickCount === 1) {
-                this.classList.add('open');  // Fügt die 'open'-Klasse hinzu
-            }
-
-            // Beim zweiten Klick navigieren wir zur Seite
-            if (clickCount === 2) {
-                window.location.href = this.querySelector('a').href;  // Weiterleitung zur Seite
-                clickCount = 0; // Klickzähler zurücksetzen
-            }
-        } else {
-            // Auf dem Desktop das Submenü beim Hover anzeigen
-            submenu.style.display = 'block'; // Zeigt das Submenü
-        }
-    });
-
-    // Schließen des Submenüs, wenn auf einen anderen Menüpunkt geklickt wird
-    document.addEventListener('click', function(e) {
-        if (!item.contains(e.target)) {
-            item.querySelector('.submenu').style.display = 'none'; // Versteckt das Submenü
-            item.classList.remove('open');
-        }
-    });
-});
 </script>
 </body>
 </html>
