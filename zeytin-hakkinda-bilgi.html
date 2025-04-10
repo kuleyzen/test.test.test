@@ -113,7 +113,7 @@
   background-color: #4e6137;
 }
 /* 🖱️ Submenü Hover-Effekt (nur Desktop, verhindert Zeilenverbreiterung) */
-
+@media (min-width: 769px) {
   .has-submenu {
     position: relative;
   }
@@ -150,23 +150,8 @@
   .submenu li a:hover {
     background-color: #4e6137;
   }
-
-/* 📂 Submenü (mobil Hover) */
-@media (max-width: 768px){
-.submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #607744;
-    z-index: 9999;
-    min-width: 180px;
-  }
 }
-  .has-submenu:hover .submenu {
-    display: block;
-  }     
-  
+
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
   .bottom-nav {
