@@ -163,7 +163,40 @@
     background-color: #4e6137;
   }
 }
-       
+/* 📱 Mobil: Submenü als Kästchen anzeigen */
+@media (max-width: 768px) {
+  .submenu {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 100%;
+    width: 220px;
+    background-color: #607744;
+    padding: 0.5em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+
+  .has-submenu.open .submenu {
+    display: block;
+  }
+
+  .submenu li {
+    list-style: none;
+  }
+
+  .submenu li a {
+    padding: 0.5em 1em;
+    display: block;
+    color: white;
+    text-decoration: none;
+  }
+
+  .submenu li a:hover {
+    background-color: #4e6137;
+  }
+}       
   
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
