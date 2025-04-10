@@ -161,11 +161,12 @@
       width: 100%;
     }
 
-    .has-submenu:hover .submenu {
+    .has-submenu:open .submenu {
       display: block;
     }
   }
-    
+   
+  
 
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
@@ -461,6 +462,15 @@ body {
       document.getElementById("last-updated").textContent = "bilgi alınamadı";
     });
 </script>
+<script>
+  document.querySelectorAll('.has-submenu').forEach(item => {
+      item.addEventListener('click', function(e) {
+          e.preventDefault();  // Verhindert das Standard-Verhalten (Navigation)
+          const submenu = this.querySelector('.submenu');
+          submenu.classList.toggle('open');  // Submenü ein-/ausblenden
+      });
+  });
+  </script>
 
 <!-- 📜 Bottom-Navigation Logik -->
 <script>
