@@ -217,6 +217,32 @@ h2, h3 {
     display: none;
   }
 }
+/* 📱 Horizontal scrollbares Hauptmenü auf Mobilgeräten */
+@media (max-width: 768px) {
+  .main-nav {
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .main-nav::-webkit-scrollbar {
+    display: none; /* Safari, Chrome */
+  }
+
+  .main-nav > li {
+    flex: 0 0 auto;
+  }
+
+  .main-nav > li > a {
+    white-space: nowrap;
+  }
+
+  /* Submenüs auf Mobil NICHT anzeigen */
+  .submenu {
+    display: none !important;
+  }
+}
 </style>
 
   </script>
