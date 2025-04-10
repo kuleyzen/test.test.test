@@ -122,37 +122,60 @@ h2, h3 {
   }
 }
 
-/* 📱 Submenü auf Mobil als kleines Popup unter Menüpunkt */
-@media (max-width: 768px) {
+/* 📂 Submenü: Einheitliches Styling für Desktop und Mobil */
+.submenu {
+  display: none;
+  background-color: #607744;
+  min-width: 180px;
+  z-index: 9999;
+}
+
+.submenu li a {
+  padding: 0.75em 1.5em;
+  display: block;
+  color: white;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.submenu li a:hover {
+  background-color: #4e6137;
+}
+
+/* 🖱️ Desktop-Version: Submenü bei Hover */
+@media (min-width: 769px) {
+  .has-submenu {
+    position: relative;
+  }
+
   .submenu {
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: #607744;
-    display: none;
-    min-width: 180px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
+  .has-submenu:hover .submenu {
+    display: block;
+  }
+}
+
+/* 📱 Mobil-Version: Submenü bei Tap/Fokus */
+@media (max-width: 768px) {
   .has-submenu {
     position: relative;
+  }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   }
 
   .has-submenu:focus-within .submenu,
   .has-submenu:hover .submenu {
     display: block;
-  }
-
-  .submenu li a {
-    padding: 0.75em 1.5em;
-    display: block;
-    color: white;
-    text-decoration: none;
-  }
-
-  .submenu li a:hover {
-    background-color: #4e6137;
   }
 }
 
