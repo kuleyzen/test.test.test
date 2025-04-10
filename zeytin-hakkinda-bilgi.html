@@ -154,17 +154,20 @@
 }
 
  /* 📂 Submenü im mobilen Layout */
- .submenu {
+ @media (max-width: 768px) {
+  .submenu {
       position: static;
       display: none;
-      padding-left: 2em;
-    }
+      max-width: 200px;  /* Breite begrenzen, damit es wie ein Kästchen aussieht */
+      width: 100%;  /* Sicherstellen, dass es immer innerhalb des Eltern-Elements bleibt */
+      background-color: #607744;
+      z-index: 9999;
+  }
 
-    .has-submenu:hover .submenu {
-      display: block;
-    }
-   
-  
+  .has-submenu.open .submenu {
+      display: block;  /* Submenü anzeigen, wenn die 'open'-Klasse hinzugefügt wird */
+  }
+}
 
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
