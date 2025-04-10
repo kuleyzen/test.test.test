@@ -113,7 +113,46 @@
   background-color: #4e6137;
 }
 
+/* 🖱️ Submenü Hover-Effekt (nur Desktop, verhindert Zeilenverbreiterung) */
+@media (min-width: 769px) {
+  .has-submenu {
+    position: relative;
+  }
+  .main-nav > li {
+    position: relative;
+  }
+  .main-nav > li > a {
+    line-height: 1.2;
+  }
 
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #607744;
+    display: none;
+    min-width: 180px;
+    z-index: 999;
+  }
+
+  .has-submenu:hover > .submenu {
+    display: block;
+  }
+
+  .submenu li a {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: white;
+    background-color: #607744;
+    text-decoration: none;
+    line-height: 1.4;
+  }
+
+  .submenu li a:hover {
+    background-color: #4e6137;
+  }
+}
+   
 
     
  /* 📂 Submenü im mobilen Layout */
@@ -423,7 +462,7 @@ body {
       <label for="message" style="font-weight: bold;">Mesajınız:</label>
       <textarea id="message" name="message" required rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;"></textarea>
 <!-- 🔲 Google reCAPTCHA Checkbox -->
-<div class="g-recaptcha" data-sitekey="6Lem6BErAAAAAD9nYnMMGjV2CIfDMd7sfbWN5nYt" style="margin: 20px 0;"></div>
+<div class="g-recaptcha" data-sitekey="6LcC_BErAAAAACuDjMDloHffF8J6KBdMTvodvF94" style="margin: 20px 0;"></div>
 <!-- Absenden-Button mit verzögerung -->    
       <button type="submit" style="width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Gönder</button>
 <!-- WhatsApp-Link -->
