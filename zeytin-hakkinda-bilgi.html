@@ -70,9 +70,16 @@ h2, h3 {
   margin: 0;
   padding: 0;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;              
+  scrollbar-width: none;  
   background-color: #607744;
+}
+.main-nav::-webkit-scrollbar {
+  display: none; 
 }
 .main-nav > li {
   position: relative;
@@ -87,7 +94,15 @@ h2, h3 {
 .main-nav > li > a:hover {
   background-color: #4e6137;
 }
-
+/* 🔘 Submenü-Pfeil-Button (Mobil & Desktop) */
+.submenu-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1em;
+  padding: 1em 0.5em;
+  cursor: pointer;
+}
 /* 📂 Submenü (nur Desktop) */
 @media (min-width: 769px) {
   .has-submenu {
@@ -258,6 +273,7 @@ h2, h3 {
     <li><a href="urunler.html">Ürünler</a></li>
     <li class="has-submenu">
       <a href="urunlerimizin-uretimi.html">Üretim Süreci</a>
+      <button class="submenu-toggle" aria-label="Alt menüyü aç">▾</button>
       <ul class="submenu">
         <li><a href="organik-tarim.html">Organik Tarım</a></li>
         <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
@@ -325,6 +341,22 @@ h2, h3 {
         nav.classList.toggle("show");
       });
     }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.submenu-toggle').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        const parentLi = this.closest('.has-submenu');
+        parentLi.classList.toggle('open');
+
+        // Andere schließen
+        document.querySelectorAll('.has-submenu').forEach(function (li) {
+          if (li !== parentLi) li.classList.remove('open');
+        });
+      });
+    });
   });
 </script>
 </body>
