@@ -6,179 +6,122 @@
   <title>Kuleyzen - Doğal Zeytinyağı</title>
   
 <style>
-  /* 🌿 Grundlegende Layout- und Farbstile */
-  body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fafaf5;
-      color: #2f2f2f;
-      margin: 0;
-      padding: 0;
-    }
-/* 📄 Hauptbereich-Layout */    
-    main {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-/* 🖼️ Flexbox für Sektionen mit Bild und Text */    
-    .section {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      margin-bottom: 60px;
-    }
-    .section img {
-      flex: 1 1 300px;
-      max-width: 300px;
-      margin-right: 30px;
-      border-radius: 8px;
-    }
-    .section div {
-      flex: 2 1 400px;
-    }
-/* 🧱 Überschriften-Layout */    
-    h2, h3 {
-      margin-top: 40px;
-    }
-/* 📱 Responsive Anpassung für kleine Bildschirme */    
-    @media (max-width: 768px) {
-      .section {
-        flex-direction: column;
-      }
-      .section img {
-        margin: 0 0 20px 0;
-        max-width: 100%;
-      }
-    }
-/* 📷 Allgemeine Bildformatierung */    
-   img {
-      width: 100%;
-      max-width: 600px;
-      margin: 20px 0;
-      border-radius: 8px;
-    }
-  
-/* 🔝 Navigationsleiste (Desktop) */    
-  .main-nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-color: #607744;
-  }
+/* 🌿 Grundlegende Layout- und Farbstile */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fafaf5;
+  color: #2f2f2f;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 80px; /* 🦶 Platz für Bottom-Menü */
+}
 
-  .main-nav > li {
+/* 📄 Hauptbereich-Layout */
+main {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* 🖼️ Sektionen mit Bild & Text */
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+.section img {
+  flex: 1 1 300px;
+  max-width: 300px;
+  margin-right: 30px;
+  border-radius: 8px;
+}
+.section div {
+  flex: 2 1 400px;
+}
+
+/* 📷 Allgemeine Bildformatierung */
+img {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+  border-radius: 8px;
+}
+
+/* 🧱 Überschriften */
+h2, h3 {
+  margin-top: 40px;
+}
+
+/* 📱 Responsive Bild-Layout */
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+  }
+  .section img {
+    margin: 0 0 20px 0;
+    max-width: 100%;
+  }
+}
+
+/* 🔝 Navigation (Desktop) */
+.main-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #607744;
+}
+.main-nav > li {
+  position: relative;
+}
+.main-nav > li > a {
+  display: block;
+  padding: 1em 1.5em;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.main-nav > li > a:hover {
+  background-color: #4e6137;
+}
+
+/* 📂 Submenü (nur Desktop) */
+@media (min-width: 769px) {
+  .has-submenu {
     position: relative;
   }
 
-  .main-nav > li > a {
-    display: block;
-    padding: 1em 1.5em;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .main-nav > li > a:hover {
-    background-color: #4e6137;
-  }
-/* 📂 Submenü (Desktop Hover) */
   .submenu {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     background-color: #607744;
-    z-index: 9999;
+    display: none;
     min-width: 180px;
+    z-index: 999;
   }
 
   .has-submenu:hover .submenu {
     display: block;
   }
-/* 🛠️ Submenü Hintergrundfarbe und Hover-Korrektur */
-.submenu li a {
-  display: block;
-  padding: 0.75em 1.5em;
-  color: white;
-  text-decoration: none;
-  background-color: #607744; /* ← das kann fehlen */
-  line-height: 1.4; /* optional: reduziert unnötige Höhe */
-}
 
-.submenu li a:hover {
-  background-color: #4e6137;
-}
-
-
-    
- /* 📂 Submenü im mobilen Layout */
-    .submenu {
-      position: static;
-      display: none;
-      padding-left: 2em;
-    }
-
-    .has-submenu:hover .submenu {
-      display: block;
-    }
-
-    
+  .submenu li a {
+    display: block;
+    padding: 0.75em 1.5em;
+    color: white;
+    text-decoration: none;
+    background-color: #607744;
+    line-height: 1.4;
   }
-/* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
-@media (min-width: 769px) {
-  .bottom-nav {
-    display: none;
-  }
-} 
-/* 🎮 Nintendo-Style Bottom Navigation (Mobil) */
-.bottom-grid {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #607744;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 2px;
-  padding: 10px;
-  z-index: 999;
-}
 
-.bottom-grid button {
-  background-color: #4e6137;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 5px;
-  font-size: 1.3em;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.bottom-grid button span {
-  font-size: 0.8em;
-  margin-top: 5px;
-}
-
-.bottom-grid button:hover {
-  background-color: #eef1ea;
-  color: #2f2f2f;
-  transform: scale(1.05);
-}
-
-/* 📵 Nur auf Mobilgeräten anzeigen */
-@media (min-width: 769px) {
-  .bottom-grid {
-    display: none;
+  .submenu li a:hover {
+    background-color: #4e6137;
   }
 }
+
 /* 📜 Hauptnavigation: mobil horizontal scrollfähig */
 @media (max-width: 768px) {
   .main-nav {
@@ -197,18 +140,18 @@
 
   .main-nav > li {
     display: inline-block;
-    margin: 0;
-    flex: 0 0 auto;  /* 👈 Ergänzt */
+    flex: 0 0 auto;
     scroll-snap-align: start;
   }
 
   .main-nav > li > a {
     white-space: nowrap;
-    display: inline-block;  /* 👈 Ergänzt */
+    display: inline-block;
     padding: 1em 1.2em;
   }
 }
-/* 🎮 Nintendo-Style Bottom Navigation */
+
+/* 🎮 Bottom-Navigation (mobil): Nur 3 Felder */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -221,68 +164,54 @@
   padding: 10px;
   z-index: 999;
 }
-
-.bottom-nav a {
+.bottom-nav a,
+.bottom-nav button {
   background-color: #4e6137;
   color: white;
-  padding: 15px;
+  padding: 12px;
   border-radius: 50%;
-  font-size: 1.2em;
+  font-size: 1.3em;
   text-align: center;
+  border: none;
   text-decoration: none;
   transition: background 0.3s, transform 0.3s;
 }
-
-.bottom-nav a:hover {
+.bottom-nav a:hover,
+.bottom-nav button:hover {
   background-color: #eef1ea;
   transform: scale(1.1);
   color: #2f2f2f;
 }
 
-/* 📵 Bottom-Menü nur auf Mobil anzeigen */
+/* ⛔ Nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
   .bottom-nav {
     display: none;
   }
 }
-/* 🦶 Platz für Footer sichtbar unter Bottom-Menü */
-body {
-  padding-bottom: 80px; /* Genug Platz für .bottom-nav */
-}
 </style>
 
-  <!-- Übersetzer -->
-  <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-  <script>
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement(
-        {pageLanguage: 'tr', includedLanguages: 'de,en,nl,fr,es,it', layout: google.translate.TranslateElement.InlineLayout.SIMPLE},
-        'google_translate_element'
-      );
-    }
   </script>
 </head>
 <body>
 
-  <div class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰ Menü</div>
-  
-  <nav>
-    <ul class="main-nav">
-      <li><a href="index.html">Anasayfa</a></li>
-      <li><a href="hakkimizda.html">Hakkımızda</a></li>
-      <li><a href="urunler.html">Ürünler</a></li>
-      <li class="has-submenu">
-        <a href="urunlerimizin-uretimi.html">Üretim Süreci</a>
-        <ul class="submenu">
-          <li><a href="organik-tarim.html">Organik Tarım</a></li>
-          <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
-          <li><a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a></li>
-        </ul>
-      </li>
-      <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
-         <li><a href="iletisim.html">İletişim</a></li>
-    </ul>
-  </nav>
+<div class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰ Menü</div>
+
+<nav>
+  <ul class="main-nav">
+    <li><a href="index.html">Anasayfa</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="urunler.html">Ürünler</a></li>
+    <li class="has-submenu">
+      <a href="urunlerimizin-uretimi.html">Üretim Süreci</a>
+      <ul class="submenu">
+        <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
+        <li><a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a></li>
+      </ul>
+    </li>
+    <li><a href="iletisim.html">İletişim</a></li>
+  </ul>
+</nav>
 <main>
 <h1> ürünlerimizin üretimi </h1>
 <section>
@@ -315,23 +244,6 @@ body {
 <p>Yumuşak içimli, düşük yakıcılı ve hafif meyvemsi bir profil sunar.</p>
 </section>
 </section></main>
-
-<!-- 🎮 Nintendo-Style Bottom Navigation (Mobil) -->
-<div class="bottom-grid" id="main-grid">
-  <button onclick="goTo('index.html')">🏠<span>Anasayfa</span></button>
-  <button onclick="goTo('hakkimizda.html')">👤<span>Hakkımızda</span></button>
-  <button onclick="goTo('urunler.html')">🛒<span>Ürünler</span></button>
-  <button onclick="showSubmenu()">⚙️<span>Üretim</span></button>
-  <button onclick="goTo('sss.html')">❓<span>Sıkça Sorulan</span></button>
-  <button onclick="goTo('iletisim.html')">📩<span>İletişim</span></button>
-</div>
-
-<div class="bottom-grid" id="sub-grid" style="display: none;">
-  <button onclick="goTo('organik-tarim.html')">🌿<span>Organik</span></button>
-  <button onclick="goTo('zeytin-hakkinda-bilgi.html')">🫒<span>Zeytin</span></button>
-  <button onclick="goTo('nar-hakkinda-bilgi.html')">🍷<span>Nar Ekşisi</span></button>
-  <button onclick="showMain()">🔙<span>Geri</span></button>
-</div>
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
 </footer>
@@ -348,22 +260,16 @@ body {
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 
 
-
-<!-- 📜 Bottom-Navigation Logik -->
 <script>
-  function goTo(url) {
-    window.location.href = url;
-  }
-
-  function showSubmenu() {
-    document.getElementById('main-grid').style.display = 'none';
-    document.getElementById('sub-grid').style.display = 'grid';
-  }
-
-  function showMain() {
-    document.getElementById('sub-grid').style.display = 'none';
-    document.getElementById('main-grid').style.display = 'grid';
-  }
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".main-nav");
+    if (toggle && nav) {
+      toggle.addEventListener("click", function () {
+        nav.classList.toggle("show");
+      });
+    }
+  });
 </script>
 </body>
 </html>
