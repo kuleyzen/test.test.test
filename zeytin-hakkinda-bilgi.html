@@ -112,6 +112,7 @@
 .submenu li a:hover {
   background-color: #4e6137;
 }
+
 /* 🖱️ Submenü Hover-Effekt (nur Desktop, verhindert Zeilenverbreiterung) */
 @media (min-width: 769px) {
   .has-submenu {
@@ -151,6 +152,19 @@
     background-color: #4e6137;
   }
 }
+
+/* 📂 Submenü im mobilen Layout */
+.submenu {
+      position: static;
+      display: none;
+      padding-left: 2em;
+    }
+
+    .has-submenu:hover .submenu {
+      display: block;
+    }
+
+    
 
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
