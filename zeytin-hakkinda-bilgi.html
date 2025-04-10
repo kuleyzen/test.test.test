@@ -154,20 +154,16 @@
 }
 
  /* 📂 Submenü im mobilen Layout */
- @media (max-width: 768px) {
-  .submenu {
+ .submenu {
       position: static;
       display: none;
-      max-width: 200px;  /* Breite begrenzen, damit es wie ein Kästchen aussieht */
-      width: 100%;  /* Sicherstellen, dass es immer innerhalb des Eltern-Elements bleibt */
-      background-color: #607744;
-      z-index: 9999;
-  }
+      padding-left: 2em;
+    }
 
-  .has-submenu.open .submenu {
-      display: block;  /* Submenü anzeigen, wenn die 'open'-Klasse hinzugefügt wird */
-  }
-}
+    .has-submenu:hover .submenu {
+      display: block;
+    }
+
 
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
@@ -435,10 +431,12 @@ body {
   </div>
   <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
 </div>
-<!-- Fußzeile mit Copyright --> 
+<!-- Fußzeile mit Copyright -->   
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
   <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
+  <p>Son güncelleme: <span id="last-updated">yükleniyor...</span></p>
 </footer>
+
 
 <!-- GoatCounter Analytics -->
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
