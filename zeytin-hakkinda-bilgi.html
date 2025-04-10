@@ -157,7 +157,7 @@
 @media (max-width: 768px) {
   .submenu {
       position: static;
-      display: block;
+      display: none;
       width: 100%;
     }
 
@@ -462,16 +462,46 @@ body {
       document.getElementById("last-updated").textContent = "bilgi alınamadı";
     });
 </script>
+<!-- JavaScript hovermenü mobil -->
 <script>
-  document.querySelectorAll('.has-submenu').forEach(item => {
-      item.addEventListener('click', function(e) {
-          e.preventDefault();  // Verhindert das Standard-Verhalten (Navigation)
-          const submenu = this.querySelector('.submenu');
-          submenu.classList.toggle('open');  // Submenü ein-/ausblenden
-      });
-  });
-  </script>
+document.querySelectorAll('.has-submenu').forEach(item => {
+  let clickCount = 0; // Zähler für Klicks
 
+  item.addEventListener('click', function(e) {
+      e.preventDefault();  // Verhindert das Standard-Verhalten (Navigation)
+
+      const submenu = this.querySelector('.submenu');
+      const isMobile = window.innerWidth <= 768; // Überprüft, ob es sich um ein mobiles Gerät handelt
+
+      // Wenn es sich um ein mobiles Gerät handelt:
+      if (isMobile) {
+          clickCount++;  // Klickzähler erhöhen
+
+          if (clickCount === 1) {
+              submenu.style.display = 'block';  // Zeigt das Submenü
+              this.classList.add('open');  // Fügt die 'open'-Klasse hinzu
+          }
+
+          // Beim zweiten Klick navigieren wir zur Seite
+          if (clickCount === 2) {
+              window.location.href = this.querySelector('a').href;  // Weiterleitung zur Seite
+              clickCount = 0; // Klickzähler zurücksetzen
+          }
+      } else {
+          // Auf dem Desktop das Submenü beim Hover anzeigen
+          submenu.style.display = 'block'; // Zeigt das Submenü
+      }
+  });
+
+  // Schließen des Submenüs, wenn auf einen anderen Menüpunkt geklickt wird
+  document.addEventListener('click', function(e) {
+      if (!item.contains(e.target)) {
+          item.querySelector('.submenu').style.display = 'none'; // Versteckt das Submenü
+          item.classList.remove('open');
+      }
+  });
+});
+</script>
 <!-- 📜 Bottom-Navigation Logik -->
 <script>
   function goTo(url) {
