@@ -122,32 +122,37 @@ h2, h3 {
   }
 }
 
-/* 📜 Hauptnavigation: mobil horizontal scrollfähig */
+/* 📱 Submenü auf Mobil als kleines Popup unter Menüpunkt */
 @media (max-width: 768px) {
-  .main-nav {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 0.5em 0;
-    scrollbar-width: none; /* Firefox */
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
     background-color: #607744;
+    display: none;
+    min-width: 180px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 9999;
   }
 
-  .main-nav::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+  .has-submenu {
+    position: relative;
   }
 
-  .main-nav > li {
-    display: inline-block;
-    flex: 0 0 auto;
-    scroll-snap-align: start;
+  .has-submenu:focus-within .submenu,
+  .has-submenu:hover .submenu {
+    display: block;
   }
 
-  .main-nav > li > a {
-    white-space: nowrap;
-    display: inline-block;
-    padding: 1em 1.2em;
+  .submenu li a {
+    padding: 0.75em 1.5em;
+    display: block;
+    color: white;
+    text-decoration: none;
+  }
+
+  .submenu li a:hover {
+    background-color: #4e6137;
   }
 }
 
