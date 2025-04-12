@@ -432,6 +432,29 @@ body {
     display: none !important;
   }
 }
+/* 💳 Ödeme Sayfası Button Styling für beide Overlays */
+#cart-overlay-desktop a.checkout-btn,
+#cart-overlay-mobile a.checkout-btn {
+  display: block;
+  width: 100%;
+  background-color: #607744;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+#cart-overlay-desktop a.checkout-btn:hover,
+#cart-overlay-mobile a.checkout-btn:hover {
+  background-color: #4e6137;
+  color: #fff;
+}
 
 /* 📱 Anzeige je nach Gerät */
 @media (max-width: 768px) {
@@ -492,14 +515,14 @@ table {
   <h4>Sepetiniz</h4>
   <ul id="cart-items-desktop"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
-  <a href="checkout.html">Ödeme Sayfası</a>
+  <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
 </div>
 <!-- 📱 Mobil-Warenkorb -->
 <div id="cart-overlay-mobile" class="cart-overlay" style="display: none;">
   <h4>Sepetiniz</h4>
   <ul id="cart-items-mobile"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total-mobile">0</span> TL</p>
-  <a href="checkout.html">Ödeme Sayfası</a>
+  <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
 </div>
 <!-- Hauptnavigation -->
 <nav>
@@ -577,7 +600,7 @@ table {
     <h4>Sepetiniz</h4>
     <ul id="cart-items"></ul>
     <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
-    <a href="checkout.html">Ödeme Sayfası</a>
+    <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
   </div>
   <!-- Fußzeile mit Copyright -->   
   <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
