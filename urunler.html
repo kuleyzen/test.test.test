@@ -425,6 +425,12 @@ body {
     display: block;
   }
 }
+/* 🧽 Mobil: Oberes Warenkorb-Icon ausblenden */
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none !important;
+  }
+}
 /* 🛍️ Produktkarten-Stil auf der Produktseite */
 .product-container {
   display: flex;
@@ -659,50 +665,34 @@ body {
     const sub = document.getElementById("subKacheln");
     sub.style.display = sub.style.display === "block" ? "none" : "block";
   }
-</script>
-
-<!-- 🧠 Kuleyzen Warenkorb-Logik – sauber und vollständig -->
+</script> 
+<!-- 🛒 Kuleyzen – Warenkorb mit Mengenfunktion (Phase 1) -->
 <script>
-  // 🧺 1. Warenkorb aus dem Browser-Speicher laden oder neu starten
+  // Warenkorb aus localStorage laden oder neuen Korb starten
   let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
 
-  // 💾 2. Warenkorb im Storage speichern & UI synchronisieren
+  // Speichern und Anzeige aktualisieren
   function saveCart() {
     localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
     updateCartDisplay();
   }
 
-  // ➕ 3. Produkt zum Warenkorb hinzufügen mit optionaler Menge
+  // Produkt hinzufügen
   function addToCart(name, price, qty = 1) {
     const existing = cart.find(item => item.name === name);
     if (existing) {
-      existing.qty += qty; // Falls schon im Warenkorb → Menge erhöhen
+      existing.qty += qty;
     } else {
-      cart.push({ name, price, qty }); // Neues Produkt hinzufügen
+      cart.push({ name, price, qty });
     }
-    saveCart(); // Speichern & anzeigen
+    saveCart();
   }
 
-  // 🔁 4. Menge anpassen über Plus/Minus-Buttons
-  function adjustQty(id, delta) {
-    const input = document.getElementById(id);
-    let value = parseInt(input.value) || 1;
-    value = Math.max(1, value + delta); // Mindestmenge: 1
-    input.value = value;
-  }
-
-  // 🔢 5. Aktuelle Menge auslesen (für den jeweiligen Input)
-  function getQty(id) {
-    const input = document.getElementById(id);
-    return Math.max(1, parseInt(input.value) || 1);
-  }
-
-  // 📦 6. Mini-Warenkorb-Overlay + Icons aktualisieren
+  // Anzeige aktualisieren (Icon + Overlay)
   function updateCartDisplay() {
     const count = cart.reduce((sum, item) => sum + item.qty, 0);
     const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
 
-    // Produktanzahl neben Icon aktualisieren
     const countEl = document.getElementById("cart-count");
     const countMobile = document.getElementById("cart-count-mobile");
     const totalEl = document.getElementById("cart-total");
@@ -722,14 +712,33 @@ body {
     }
   }
 
-  // 👁️ 7. Warenkorb-Overlay ein-/ausblenden
+  // Overlay anzeigen/ausblenden
   function toggleCart() {
     const overlay = document.getElementById("cart-overlay");
-    overlay.style.display = (overlay.style.display === "none") ? "block" : "none";
+    overlay.style.display = (overlay.style.display === "none" || overlay.style.display === "") ? "block" : "none";
   }
 
-  // ⏳ 8. Nach Seitenladen: Warenkorb-Anzeige sofort aktualisieren
+  // Beim Laden: Warenkorb anzeigen
   document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
+<!-- 🧮 Kuleyzen – Mengensteuerung für Produktanzahl (➖➕ Buttons) -->
+<script>
+  // ➕➖ Buttons: Menge anpassen
+  function adjustQty(id, delta) {
+    const input = document.getElementById(id);
+    let value = parseInt(input.value) || 1;
+    value = Math.max(1, value + delta); // Nie unter 1
+    input.value = value;
+  }
+
+  // 🔢 Aktuelle Menge auslesen (z. B. für Sepete Ekle)
+  function getQty(id) {
+    const input = document.getElementById(id);
+    return Math.max(1, parseInt(input.value) || 1);
+  }
+</script>
+</body>
+</html>
+
 </body>
 </html>

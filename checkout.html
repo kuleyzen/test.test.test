@@ -625,19 +625,39 @@ table {
         total += itemTotal;
   
         const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${item.name}</td>
-          <td>
-            <button onclick="changeQty(${JSON.stringify(item.name)}, -1)">➖</button>
-            ${item.qty}
-            <button onclick="changeQty(${JSON.stringify(item.name)}, 1)">➕</button>
-          </td>
-          <td>${item.price} TL</td>
-          <td>
-            ${itemTotal} TL
-            <button onclick="removeItem(${JSON.stringify(item.name)})" title="Ürünü sil">🗑️</button>
-          </td>
-        `;
+        const nameTd = document.createElement("td");
+nameTd.textContent = item.name;
+
+const qtyTd = document.createElement("td");
+const minusBtn = document.createElement("button");
+minusBtn.textContent = "➖";
+minusBtn.onclick = () => changeQty(item.name, -1);
+
+const qtyText = document.createTextNode(` ${item.qty} `);
+
+const plusBtn = document.createElement("button");
+plusBtn.textContent = "➕";
+plusBtn.onclick = () => changeQty(item.name, 1);
+
+qtyTd.appendChild(minusBtn);
+qtyTd.appendChild(qtyText);
+qtyTd.appendChild(plusBtn);
+
+const priceTd = document.createElement("td");
+priceTd.textContent = `${item.price} TL`;
+
+const totalTd = document.createElement("td");
+totalTd.textContent = `${itemTotal} TL`;
+const deleteBtn = document.createElement("button");
+deleteBtn.textContent = "🗑️";
+deleteBtn.title = "Ürünü sil";
+deleteBtn.onclick = () => removeItem(item.name);
+totalTd.appendChild(deleteBtn);
+
+row.appendChild(nameTd);
+row.appendChild(qtyTd);
+row.appendChild(priceTd);
+row.appendChild(totalTd);
         tbody.appendChild(row);
       });
   
@@ -707,7 +727,7 @@ table {
       event.preventDefault();
   
       const name = document.getElementById("name").value;
-      const phone = document.getElementById("phone").value;
+      //"const phone = document.getElementById("phone").value;   (momentan inaktiv wird später entfernt!!!)//
       const note = document.getElementById("note").value;
   
       let message = `📦 Yeni Sipariş / Kuleyzen\n\n🛍️ Ürünler:\n`;
@@ -717,7 +737,7 @@ table {
   
       const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
       message += `\n💰 Toplam: ${total} TL\n\n`;
-      message += `👤 Ad: ${name}\n📞 Tel: ${phone}`;
+      message += `👤 Ad: ${name}`;
       if (note) message += `\n📝 Not: ${note}`;
   
       const url = `https://wa.me/905362419158?text=${encodeURIComponent(message)}`;

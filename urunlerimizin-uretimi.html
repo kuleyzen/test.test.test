@@ -425,7 +425,12 @@ body {
     display: block;
   }
 }
-
+/* 🧽 Mobil: Oberes Warenkorb-Icon ausblenden */
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none !important;
+  }
+}
 /* 🛍️ Submenükarten-Stil auf der submenüübergeordneten seite */
 .product-grid {
   display: flex;
