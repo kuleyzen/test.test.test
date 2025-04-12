@@ -718,73 +718,97 @@ form textarea {
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <!-- 🧠 Kuleyzen Warenkorb-Logik (Phase 1) -->
 <script>
-  // 🧺 Warenkorb aus dem Local Storage laden oder leeren Korb starten
+  // 🧺 Warenkorb aus dem Local Storage laden oder mit leerem Korb starten
   let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
-
-// 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
-function saveCart() {
-  localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
-  updateCartDisplay();
-}
-
-// ➕ Produkt zum Warenkorb hinzufügen
-function addToCart(name, price) {
-  const existing = cart.find(item => item.name === name);
-  if (existing) {
-    existing.qty += 1; // bereits vorhanden → Menge erhöhen
-  } else {
-    cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
+  
+  // 💾 Warenkorb speichern & Anzeige aktualisieren
+  function saveCart() {
+    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+    updateCartDisplay();
   }
-  saveCart(); // speichern & aktualisieren
-}
-
-// 🔄 Mini-Warenkorb-Anzeige aktualisieren
-function updateCartDisplay() {
-  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-  // Icons aktualisieren
-  document.getElementById("cart-count").textContent = cartCount;
-  const mobileCount = document.getElementById("cart-count-mobile");
-  if (mobileCount) mobileCount.textContent = cartCount;
-
-  // Beide Overlays füllen
-  const overlays = [
-    { itemsId: "cart-items-desktop", totalId: "cart-total-desktop" },
-    { itemsId: "cart-items-mobile", totalId: "cart-total-mobile" }
-  ];
-
-  overlays.forEach(({ itemsId, totalId }) => {
-    const list = document.getElementById(itemsId);
-    const totalElem = document.getElementById(totalId);
-    if (!list || !totalElem) return;
-
-    list.innerHTML = "";
-    cart.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
-      list.appendChild(li);
+  
+  // ➕ Produkt hinzufügen
+  function addToCart(name, price, qty = 1) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ name, price, qty });
+    }
+    saveCart();
+  }
+  
+  // ➕/➖ Menge anpassen
+  function adjustQty(id, delta) {
+    const input = document.getElementById(id);
+    const current = parseInt(input.value) || 1;
+    const newQty = Math.max(1, current + delta);
+    input.value = newQty;
+  }
+  
+  // 🔢 Menge abrufen
+  function getQty(id) {
+    const input = document.getElementById(id);
+    return parseInt(input.value) || 1;
+  }
+  
+  // 🔄 Anzeige aktualisieren in allen Overlays
+  function updateCartDisplay() {
+    const cartCount = document.getElementById("cart-count");
+    const cartCountMobile = document.getElementById("cart-count-mobile");
+    const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  
+    if (cartCount) cartCount.textContent = totalCount;
+    if (cartCountMobile) cartCountMobile.textContent = totalCount;
+  
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  
+    const totalElement = document.getElementById("cart-total");
+    const totalElementMobile = document.getElementById("cart-total-mobile");
+    const totalElementDesktop = document.querySelector("#cart-overlay-desktop #cart-total");
+  
+    if (totalElement) totalElement.textContent = total;
+    if (totalElementMobile) totalElementMobile.textContent = total;
+    if (totalElementDesktop) totalElementDesktop.textContent = total;
+  
+    const list = document.getElementById("cart-items");
+    const listMobile = document.getElementById("cart-items-mobile");
+    const listDesktop = document.getElementById("cart-items-desktop");
+  
+    const renderItems = (targetList) => {
+      if (!targetList) return;
+      targetList.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+        targetList.appendChild(li);
+      });
+    };
+  
+    renderItems(list);
+    renderItems(listMobile);
+    renderItems(listDesktop);
+  }
+  
+  // 🧺 Warenkorb-Overlay ein-/ausblenden
+  function toggleCart() {
+    const overlayDesktop = document.getElementById("cart-overlay-desktop");
+    const overlayMobile = document.getElementById("cart-overlay-mobile");
+    const overlayNeutral = document.getElementById("cart-overlay");
+  
+    [overlayDesktop, overlayMobile, overlayNeutral].forEach(overlay => {
+      if (overlay) {
+        if (overlay.style.display === "none" || overlay.style.display === "") {
+          overlay.style.display = "block";
+        } else {
+          overlay.style.display = "none";
+        }
+      }
     });
-
-    totalElem.textContent = total;
-  });
-}
-
-// 🧺 Warenkorb-Overlay ein- und ausblenden (mobil/desktop automatisch)
-function toggleCart() {
-  const isMobile = window.innerWidth <= 768;
-  const overlay = isMobile
-    ? document.getElementById("cart-overlay-mobile")
-    : document.getElementById("cart-overlay-desktop");
-
-  if (!overlay) return;
-
-  overlay.style.display =
-    overlay.style.display === "block" ? "none" : "block";
-}
-
-// 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
-document.addEventListener("DOMContentLoaded", updateCartDisplay);
-</script>
+  }
+  
+  // 📦 Seite geladen → Anzeige aktualisieren
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+  </script>
 </body>
 </html>

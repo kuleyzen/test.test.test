@@ -503,6 +503,53 @@ body {
 .product a:hover {
   background-color: #4e6137;
 }
+.quantity-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.quantity-control button {
+  background-color: #607744;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quantity-control button:hover {
+  background-color: #4e6137;
+}
+
+.quantity-control input {
+  width: 50px;
+  height: 36px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+}
+.add-to-basket {
+  background-color: #607744;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 0 auto; /* zentriert unter dem Produkt */
+}
+
+.add-to-basket:hover {
+  background-color: #4e6137;
+}
 </style>
 
 
@@ -560,59 +607,63 @@ body {
 </header>
 
 <main>
-<h2 style="text-align: center; color: #4a5534;">Ürünlerimiz</h2>
-<div class="product-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
-<!-- 🫒 Produkt 1: 0,75L Cam Şişe -->
-<div class="product">
-  <img alt="0,75L Cam Şişe Zeytinyağı" src="zeytinyagi_750ml.jpg" />
-  <h3>0,75L Cam Şişe Zeytinyağı</h3>
-  <p>Fiyat: 750 TL</p>
-  <div class="qty-control">
-    <button onclick="adjustQty('qty-cam', -1)">➖</button>
-    <input type="number" id="qty-cam" value="1" min="1" />
-    <button onclick="adjustQty('qty-cam', 1)">➕</button>
-  </div>
-  <button onclick="addToCart('0,75L Cam Şişe Zeytinyağı', 750, getQty('qty-cam'))">Sepete Ekle</button>
-</div>
+  <h2 style="text-align: center; color: #4a5534;">Ürünlerimiz</h2>
+  <div class="product-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
+  
+    <!-- 🫒 Produkt 1: 0,75L Cam Şişe -->
+    <div class="product">
+      <img alt="0,75L Cam Şişe Zeytinyağı" src="zeytinyagi_750ml.jpg" />
+      <h3>0,75L Cam Şişe Zeytinyağı</h3>
+      <p>Fiyat: 750 TL</p>
+      <div class="quantity-control">
+        <button onclick="adjustQty('qty-cam', -1)">➖</button>
+        <input type="number" id="qty-cam" value="1" min="1" />
+        <button onclick="adjustQty('qty-cam', 1)">➕</button>
+      </div>
+      <button class="add-to-basket" onclick="addToCart('0,75L Cam Şişe Zeytinyağı', 750, getQty('qty-cam'))">Sepete Ekle</button>
+    </div>
 
-<!-- 🛢️ Produkt 2: 5L Teneke (Tek) -->
-<div class="product">
-  <img alt="5L Teneke Zeytinyağı" src="zeytinyagi_5l_single.jpg" />
-  <h3>5L Teneke Zeytinyağı (Tek)</h3>
-  <p>Fiyat: 2800 TL</p>
-  <div class="qty-control">
-    <button onclick="adjustQty('qty-5l-tek', -1)">➖</button>
-    <input type="number" id="qty-5l-tek" value="1" min="1" />
-    <button onclick="adjustQty('qty-5l-tek', 1)">➕</button>
-  </div>
-  <button onclick="addToCart('5L Teneke Zeytinyağı (Tek)', 2800, getQty('qty-5l-tek'))">Sepete Ekle</button>
-</div>
+    <!-- 🛢️ Produkt 2: 5L Teneke (Tek) -->
+    <div class="product">
+      <img alt="5L Teneke Zeytinyağı" src="zeytinyagi_5l_single.jpg" />
+      <h3>5L Teneke Zeytinyağı (Tek)</h3>
+      <p>Fiyat: 2800 TL</p>
+      <div class="quantity-control">
+        <button onclick="adjustQty('qty-5l-tek', -1)">➖</button>
+        <input type="number" id="qty-5l-tek" value="1" min="1" />
+        <button onclick="adjustQty('qty-5l-tek', 1)">➕</button>
+      </div>
+      <button class="add-to-basket" onclick="addToCart('5L Teneke Zeytinyağı (Tek)', 2800, getQty('qty-5l-tek'))">Sepete Ekle</button>
+    </div>
 
-<!-- 🛢️🛢️ Produkt 3: 5L x2 Paket -->
-<div class="product">
-  <img alt="5L Teneke Zeytinyağı (2'li Paket)" src="zeytinyagi_5l_bundle.jpg" />
-  <h3>5L Teneke Zeytinyağı (2'li Paket)</h3>
-  <p>Fiyat: 5000 TL</p>
-  <div class="qty-control">
-    <button onclick="adjustQty('qty-5l-bundle', -1)">➖</button>
-    <input type="number" id="qty-5l-bundle" value="1" min="1" />
-    <button onclick="adjustQty('qty-5l-bundle', 1)">➕</button>
-  </div>
-  <button onclick="addToCart('5L Teneke Zeytinyağı (2\'li Paket)', 5000, getQty('qty-5l-bundle'))">Sepete Ekle</button>
-</div>
+    <!-- 🛢️🛢️ Produkt 3: 5L x2 Paket -->
+    <div class="product">
+      <img alt="5L Teneke Zeytinyağı (2'li Paket)" src="zeytinyagi_5l_bundle.jpg" />
+      <h3>5L Teneke Zeytinyağı (2'li Paket)</h3>
+      <p>Fiyat: 5000 TL</p>
+      <div class="quantity-control">
+        <button onclick="adjustQty('qty-5l-bundle', -1)">➖</button>
+        <input type="number" id="qty-5l-bundle" value="1" min="1" />
+        <button onclick="adjustQty('qty-5l-bundle', 1)">➕</button>
+      </div>
+      <button class="add-to-basket" onclick="addToCart('5L Teneke Zeytinyağı (2\'li Paket)', 5000, getQty('qty-5l-bundle'))">Sepete Ekle</button>
+    </div>
 
-<!-- 🌿 Produkt 4: Nar Ekşisi -->
-<div class="product">
-  <img alt="Nar Ekşisi" src="nar_eksi.jpg" />
-  <h3>0,75L Nar Ekşisi</h3>
-  <p>Fiyat: 750 TL</p>
-  <div class="qty-control">
-    <button onclick="adjustQty('qty-nar', -1)">➖</button>
-    <input type="number" id="qty-nar" value="1" min="1" />
-    <button onclick="adjustQty('qty-nar', 1)">➕</button>
+    <!-- 🌿 Produkt 4: Nar Ekşisi -->
+    <div class="product">
+      <img alt="Nar Ekşisi" src="nar_eksi.jpg" />
+      <h3>0,75L Nar Ekşisi</h3>
+      <p>Fiyat: 750 TL</p>
+      <div class="quantity-control">
+        <button onclick="adjustQty('qty-nar', -1)">➖</button>
+        <input type="number" id="qty-nar" value="1" min="1" />
+        <button onclick="adjustQty('qty-nar', 1)">➕</button>
+      </div>
+      <button class="add-to-basket" onclick="addToCart('0,75L Nar Ekşisi', 750, getQty('qty-nar'))">Sepete Ekle</button>
+    </div>
+
   </div>
-  <button onclick="addToCart('0,75L Nar Ekşisi', 750, getQty('qty-nar'))">Sepete Ekle</button>
-</div>
+
 
 </main>
 <!-- 🎮 Vereinfachtes Bottom-Menü (mobil) -->
@@ -695,74 +746,98 @@ body {
 </script> 
 <!-- 🛒 Kuleyzen – Warenkorb mit Mengenfunktion (Phase 1) -->
 <script>
-  // 🧺 Warenkorb aus dem Local Storage laden oder leeren Korb starten
+  // 🧺 Warenkorb aus dem Local Storage laden oder mit leerem Korb starten
   let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
-
-// 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
-function saveCart() {
-  localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
-  updateCartDisplay();
-}
-
-// ➕ Produkt zum Warenkorb hinzufügen
-function addToCart(name, price) {
-  const existing = cart.find(item => item.name === name);
-  if (existing) {
-    existing.qty += 1; // bereits vorhanden → Menge erhöhen
-  } else {
-    cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
+  
+  // 💾 Warenkorb speichern & Anzeige aktualisieren
+  function saveCart() {
+    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+    updateCartDisplay();
   }
-  saveCart(); // speichern & aktualisieren
-}
-
-// 🔄 Mini-Warenkorb-Anzeige aktualisieren
-function updateCartDisplay() {
-  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-  // Icons aktualisieren
-  document.getElementById("cart-count").textContent = cartCount;
-  const mobileCount = document.getElementById("cart-count-mobile");
-  if (mobileCount) mobileCount.textContent = cartCount;
-
-  // Beide Overlays füllen
-  const overlays = [
-    { itemsId: "cart-items-desktop", totalId: "cart-total-desktop" },
-    { itemsId: "cart-items-mobile", totalId: "cart-total-mobile" }
-  ];
-
-  overlays.forEach(({ itemsId, totalId }) => {
-    const list = document.getElementById(itemsId);
-    const totalElem = document.getElementById(totalId);
-    if (!list || !totalElem) return;
-
-    list.innerHTML = "";
-    cart.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
-      list.appendChild(li);
+  
+  // ➕ Produkt hinzufügen
+  function addToCart(name, price, qty = 1) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += qty;
+    } else {
+      cart.push({ name, price, qty });
+    }
+    saveCart();
+  }
+  
+  // ➕/➖ Menge anpassen
+  function adjustQty(id, delta) {
+    const input = document.getElementById(id);
+    const current = parseInt(input.value) || 1;
+    const newQty = Math.max(1, current + delta);
+    input.value = newQty;
+  }
+  
+  // 🔢 Menge abrufen
+  function getQty(id) {
+    const input = document.getElementById(id);
+    return parseInt(input.value) || 1;
+  }
+  
+  // 🔄 Anzeige aktualisieren in allen Overlays
+  function updateCartDisplay() {
+    const cartCount = document.getElementById("cart-count");
+    const cartCountMobile = document.getElementById("cart-count-mobile");
+    const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  
+    if (cartCount) cartCount.textContent = totalCount;
+    if (cartCountMobile) cartCountMobile.textContent = totalCount;
+  
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  
+    const totalElement = document.getElementById("cart-total");
+    const totalElementMobile = document.getElementById("cart-total-mobile");
+    const totalElementDesktop = document.querySelector("#cart-overlay-desktop #cart-total");
+  
+    if (totalElement) totalElement.textContent = total;
+    if (totalElementMobile) totalElementMobile.textContent = total;
+    if (totalElementDesktop) totalElementDesktop.textContent = total;
+  
+    const list = document.getElementById("cart-items");
+    const listMobile = document.getElementById("cart-items-mobile");
+    const listDesktop = document.getElementById("cart-items-desktop");
+  
+    const renderItems = (targetList) => {
+      if (!targetList) return;
+      targetList.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+        targetList.appendChild(li);
+      });
+    };
+  
+    renderItems(list);
+    renderItems(listMobile);
+    renderItems(listDesktop);
+  }
+  
+  // 🧺 Warenkorb-Overlay ein-/ausblenden
+  function toggleCart() {
+    const overlayDesktop = document.getElementById("cart-overlay-desktop");
+    const overlayMobile = document.getElementById("cart-overlay-mobile");
+    const overlayNeutral = document.getElementById("cart-overlay");
+  
+    [overlayDesktop, overlayMobile, overlayNeutral].forEach(overlay => {
+      if (overlay) {
+        if (overlay.style.display === "none" || overlay.style.display === "") {
+          overlay.style.display = "block";
+        } else {
+          overlay.style.display = "none";
+        }
+      }
     });
-
-    totalElem.textContent = total;
-  });
-}
-
-// 🧺 Warenkorb-Overlay ein- und ausblenden (mobil/desktop automatisch)
-function toggleCart() {
-  const isMobile = window.innerWidth <= 768;
-  const overlay = isMobile
-    ? document.getElementById("cart-overlay-mobile")
-    : document.getElementById("cart-overlay-desktop");
-
-  if (!overlay) return;
-
-  overlay.style.display =
-    overlay.style.display === "block" ? "none" : "block";
-}
-
-// 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
-document.addEventListener("DOMContentLoaded", updateCartDisplay);
-</script>
+  }
+  
+  // 📦 Seite geladen → Anzeige aktualisieren
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+  </script>>
 
 
 <!-- 🧮 Kuleyzen – Mengensteuerung für Produktanzahl (➖➕ Buttons) -->
