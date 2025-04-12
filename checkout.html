@@ -381,7 +381,13 @@ body {
   flex: 1;
   border-radius: 50%;
   cursor: pointer;
-  display: none;
+}
+
+/* 📱 Mobil: Warenkorb-Button sichtbar */
+@media (max-width: 768px) {
+  #mini-cart-mobile {
+    display: block;
+  }
 }
 
 /* 📦 Overlay */
@@ -526,10 +532,10 @@ table {
   </main>
   <!-- 🎮 Vereinfachtes Bottom-Menü (mobil) -->
 <div class="bottom-nav">
-    <a href="iletisim.html" title="İletişim">📩</a>
-    <button onclick="toggleMenu()">☰</button>
-    <button id="mini-cart-mobile" onclick="toggleCart()" title="Sepetiniz">🛒<span id="cart-count-mobile">0</span></button>
-  </div>
+  <a href="iletisim.html" title="İletişim">📩</a>
+  <button onclick="toggleMenu()">☰</button>
+  <button id="mini-cart-mobile" onclick="toggleCart()" title="Sepetiniz">🛒<span id="cart-count-mobile">0</span></button>
+</div>
   
   <!-- 📦 Mobile Kachelmenü -->
   <div class="mobile-kacheln" id="mobileKacheln">
