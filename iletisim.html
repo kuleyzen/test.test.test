@@ -125,18 +125,19 @@
     line-height: 1.2;
   }
 
-  @media (max-width: 768px) {
-  /* mobiler Submenüblock */
   .submenu {
-    position: static;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #607744;
     display: none;
-    padding-left: 2em;
+    min-width: 180px;
+    z-index: 999;
   }
 
-  .has-submenu:hover .submenu {
+  .has-submenu:hover > .submenu {
     display: block;
   }
-}
 
   .submenu li a {
     display: block;
@@ -152,7 +153,6 @@
   }
 }
    
-
     
  /* 📂 Submenü im mobilen Layout */
  @media (max-width: 768px) {
@@ -166,6 +166,7 @@
     display: block;
   }
 }
+   
   
 /* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
 @media (min-width: 769px) {
@@ -173,7 +174,6 @@
     display: none;
   }
 }
-
 /* 🎮 Nintendo-Style Bottom Navigation (Mobil) */
 .bottom-grid {
   position: fixed;
@@ -249,7 +249,7 @@
     padding: 1em 1.2em;
   }
 }
-/* 🎮 Nintendo-Style Bottom Navigation */
+/* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -257,27 +257,41 @@
   width: 100%;
   background-color: #607744;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around; /* sorgt für gleichmäßige Verteilung */
   align-items: center;
   padding: 10px;
   z-index: 999;
 }
 
-.bottom-nav a {
+
+.bottom-nav a, 
+.bottom-nav button 
+#mini-cart-mobile{
   background-color: #4e6137;
   color: white;
-  padding: 15px;
+  padding: 12px;  /* Padding leicht erhöht, um Symmetrie zu gewährleisten */
+ 
   border-radius: 50%;
-  font-size: 1.2em;
+  font-size: 1.3em;
   text-align: center;
+  border: none;
   text-decoration: none;
   transition: background 0.3s, transform 0.3s;
-}
+ }
 
-.bottom-nav a:hover {
+.bottom-nav a:hover, 
+.bottom-nav button:hover 
+#mini-cart-mobile{
   background-color: #eef1ea;
   transform: scale(1.1);
   color: #2f2f2f;
+}
+
+/* 📱 Mobil: Warenkorb-Button sichtbar */
+@media (max-width: 768px) {
+  #mini-cart-mobile {
+    display: block;
+  }
 }
 
 /* 📵 Bottom-Menü nur auf Mobil anzeigen */
@@ -376,25 +390,6 @@ body {
 @media (max-width: 768px) {
   #mini-cart-desktop {
     display: none !important;
-  }
-}
-
-/* 📱 Mobil-Icon */
-#mini-cart-mobile {
-  background: #607744;
-  color: white;
-  padding: 12px;
-  font-size: 1.3em;
-  text-align: center;
-  flex: 1;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* 📱 Mobil: Warenkorb-Button sichtbar */
-@media (max-width: 768px) {
-  #mini-cart-mobile {
-    display: block;
   }
 }
 
