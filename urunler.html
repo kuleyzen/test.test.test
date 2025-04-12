@@ -360,6 +360,71 @@ body {
   color: #2f2f2f;
   text-decoration: none;
 }
+/* 🛒 Desktop-Icon */
+#mini-cart-desktop {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #607744;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 9999;
+  display: block;
+}
+
+/* 📱 Mobil-Icon */
+#mini-cart-mobile {
+  background: #607744;
+  color: white;
+  padding: 12px;
+  font-size: 1.3em;
+  text-align: center;
+  flex: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+
+/* 📦 Overlay */
+#cart-overlay {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border: 2px solid #607744;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+#cart-overlay ul {
+  list-style: none;
+  padding: 0;
+}
+
+#cart-overlay a {
+  display: block;
+  margin-top: 10px;
+  background: #607744;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+/* 📱 Anzeige je nach Gerät */
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none;
+  }
+  #mini-cart-mobile {
+    display: block;
+  }
+}
 /* 🛍️ Produktkarten-Stil auf der Produktseite */
 .product-container {
   display: flex;
@@ -413,6 +478,20 @@ body {
 </head>
 <body>
 
+  <!-- 🛒 Desktop-Warenkorb-Icon -->
+<div id="mini-cart-desktop" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+
+<!-- 📱 Mobil-Warenkorb-Icon -->
+<div id="mini-cart-mobile" onclick="toggleCart()">🛒 <span id="cart-count-mobile">0</span></div>
+
+<!-- 📦 Overlay mit Warenkorb-Inhalt -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
+</div>
+
 <!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
@@ -445,41 +524,64 @@ body {
 <main>
 <h2 style="text-align: center; color: #4a5534;">Ürünlerimiz</h2>
 <div class="product-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
-<!-- Produkt 1: 0,75L Cam Şişe -->
-  <div class="product" style="background: white; border-radius: 8px; padding: 20px; max-width: 280px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-<img alt="0,75L Cam Şişe Zeytinyağı" src="zeytinyagi_750ml.jpg" style="max-width: 100%; border-radius: 6px;"/>
-<h3>0,75L Cam Şişe Zeytinyağı</h3>
-<p>Fiyat: 750 TL</p>
-<a href="iletisim.html" style="display:inline-block;padding:10px 20px;background:#607744;color:white;text-decoration:none;border-radius:4px;">Şimdi Sipariş Ver</a>
+<!-- 🫒 Produkt 1: 0,75L Cam Şişe -->
+<div class="product">
+  <img alt="0,75L Cam Şişe Zeytinyağı" src="zeytinyagi_750ml.jpg" />
+  <h3>0,75L Cam Şişe Zeytinyağı</h3>
+  <p>Fiyat: 750 TL</p>
+  <div class="qty-control">
+    <button onclick="adjustQty('qty-cam', -1)">➖</button>
+    <input type="number" id="qty-cam" value="1" min="1" />
+    <button onclick="adjustQty('qty-cam', 1)">➕</button>
+  </div>
+  <button onclick="addToCart('0,75L Cam Şişe Zeytinyağı', 750, getQty('qty-cam'))">Sepete Ekle</button>
 </div>
-<!-- Produkt 2: 5L Teneke -->
-<div class="product" style="background: white; border-radius: 8px; padding: 20px; max-width: 280px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-<img alt="5L Teneke Zeytinyağı" src="zeytinyagi_5l_single.jpg" style="max-width: 100%; border-radius: 6px;"/>
-<h3>5L Teneke Zeytinyağı (Tek)</h3>
-<p>Fiyat: 2800 TL</p>
-<a href="iletisim.html" style="display:inline-block;padding:10px 20px;background:#607744;color:white;text-decoration:none;border-radius:4px;">Şimdi Sipariş Ver</a>
+
+<!-- 🛢️ Produkt 2: 5L Teneke (Tek) -->
+<div class="product">
+  <img alt="5L Teneke Zeytinyağı" src="zeytinyagi_5l_single.jpg" />
+  <h3>5L Teneke Zeytinyağı (Tek)</h3>
+  <p>Fiyat: 2800 TL</p>
+  <div class="qty-control">
+    <button onclick="adjustQty('qty-5l-tek', -1)">➖</button>
+    <input type="number" id="qty-5l-tek" value="1" min="1" />
+    <button onclick="adjustQty('qty-5l-tek', 1)">➕</button>
+  </div>
+  <button onclick="addToCart('5L Teneke Zeytinyağı (Tek)', 2800, getQty('qty-5l-tek'))">Sepete Ekle</button>
 </div>
-<!-- Produkt 3: 5L x2 Paket -->
-<div class="product" style="background: white; border-radius: 8px; padding: 20px; max-width: 280px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-<img alt="5L Teneke Zeytinyağı (2'li Paket)" src="zeytinyagi_5l_bundle.jpg" style="max-width: 100%; border-radius: 6px;"/>
-<h3>5L Teneke Zeytinyağı (2'li Paket)</h3>
-<p>Fiyat: 5000 TL</p>
-<a href="iletisim.html" style="display:inline-block;padding:10px 20px;background:#607744;color:white;text-decoration:none;border-radius:4px;">Şimdi Sipariş Ver</a>
+
+<!-- 🛢️🛢️ Produkt 3: 5L x2 Paket -->
+<div class="product">
+  <img alt="5L Teneke Zeytinyağı (2'li Paket)" src="zeytinyagi_5l_bundle.jpg" />
+  <h3>5L Teneke Zeytinyağı (2'li Paket)</h3>
+  <p>Fiyat: 5000 TL</p>
+  <div class="qty-control">
+    <button onclick="adjustQty('qty-5l-bundle', -1)">➖</button>
+    <input type="number" id="qty-5l-bundle" value="1" min="1" />
+    <button onclick="adjustQty('qty-5l-bundle', 1)">➕</button>
+  </div>
+  <button onclick="addToCart('5L Teneke Zeytinyağı (2\'li Paket)', 5000, getQty('qty-5l-bundle'))">Sepete Ekle</button>
 </div>
-<!-- Produkt 4: Nar Ekşisi -->
-<div class="product" style="background: white; border-radius: 8px; padding: 20px; max-width: 280px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-<img alt="Nar Ekşisi" src="nar_eksi.jpg" style="max-width: 100%; border-radius: 6px;"/>
-<h3>0,75L Nar Ekşisi</h3>
-<p>Fiyat: 750 TL</p>
-<a href="iletisim.html" style="display:inline-block;padding:10px 20px;background:#607744;color:white;text-decoration:none;border-radius:4px;">Şimdi Sipariş Ver</a>
+
+<!-- 🌿 Produkt 4: Nar Ekşisi -->
+<div class="product">
+  <img alt="Nar Ekşisi" src="nar_eksi.jpg" />
+  <h3>0,75L Nar Ekşisi</h3>
+  <p>Fiyat: 750 TL</p>
+  <div class="qty-control">
+    <button onclick="adjustQty('qty-nar', -1)">➖</button>
+    <input type="number" id="qty-nar" value="1" min="1" />
+    <button onclick="adjustQty('qty-nar', 1)">➕</button>
+  </div>
+  <button onclick="addToCart('0,75L Nar Ekşisi', 750, getQty('qty-nar'))">Sepete Ekle</button>
 </div>
-</div>
+
 </main>
 <!-- 🎮 Vereinfachtes Bottom-Menü (mobil) -->
 <div class="bottom-nav">
   <a href="iletisim.html" title="İletişim">📩</a>
   <button onclick="toggleMenu()">☰</button>
-  <a href="sss.html" title="Sıkça Sorulan Sorular">🔍</a>
+  <button id="mini-cart-mobile" onclick="toggleCart()" title="Sepetiniz">🛒<span id="cart-count-mobile">0</span></button>
 </div>
 
 <!-- 📦 Mobile Kachelmenü -->
@@ -495,6 +597,13 @@ body {
     <a class="box" href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
   </div>
   <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
+</div>
+<!-- 📦 Warenkorb-Overlay -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
 </div>
 <!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
@@ -550,6 +659,77 @@ body {
     const sub = document.getElementById("subKacheln");
     sub.style.display = sub.style.display === "block" ? "none" : "block";
   }
+</script>
+
+<!-- 🧠 Kuleyzen Warenkorb-Logik – sauber und vollständig -->
+<script>
+  // 🧺 1. Warenkorb aus dem Browser-Speicher laden oder neu starten
+  let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
+
+  // 💾 2. Warenkorb im Storage speichern & UI synchronisieren
+  function saveCart() {
+    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+    updateCartDisplay();
+  }
+
+  // ➕ 3. Produkt zum Warenkorb hinzufügen mit optionaler Menge
+  function addToCart(name, price, qty = 1) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += qty; // Falls schon im Warenkorb → Menge erhöhen
+    } else {
+      cart.push({ name, price, qty }); // Neues Produkt hinzufügen
+    }
+    saveCart(); // Speichern & anzeigen
+  }
+
+  // 🔁 4. Menge anpassen über Plus/Minus-Buttons
+  function adjustQty(id, delta) {
+    const input = document.getElementById(id);
+    let value = parseInt(input.value) || 1;
+    value = Math.max(1, value + delta); // Mindestmenge: 1
+    input.value = value;
+  }
+
+  // 🔢 5. Aktuelle Menge auslesen (für den jeweiligen Input)
+  function getQty(id) {
+    const input = document.getElementById(id);
+    return Math.max(1, parseInt(input.value) || 1);
+  }
+
+  // 📦 6. Mini-Warenkorb-Overlay + Icons aktualisieren
+  function updateCartDisplay() {
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+    const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+
+    // Produktanzahl neben Icon aktualisieren
+    const countEl = document.getElementById("cart-count");
+    const countMobile = document.getElementById("cart-count-mobile");
+    const totalEl = document.getElementById("cart-total");
+    const listEl = document.getElementById("cart-items");
+
+    if (countEl) countEl.textContent = count;
+    if (countMobile) countMobile.textContent = count;
+    if (totalEl) totalEl.textContent = total;
+
+    if (listEl) {
+      listEl.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+        listEl.appendChild(li);
+      });
+    }
+  }
+
+  // 👁️ 7. Warenkorb-Overlay ein-/ausblenden
+  function toggleCart() {
+    const overlay = document.getElementById("cart-overlay");
+    overlay.style.display = (overlay.style.display === "none") ? "block" : "none";
+  }
+
+  // ⏳ 8. Nach Seitenladen: Warenkorb-Anzeige sofort aktualisieren
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
 </body>
 </html>

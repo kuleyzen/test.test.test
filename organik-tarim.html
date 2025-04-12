@@ -355,11 +355,90 @@ body {
   color: #2f2f2f;
   text-decoration: none;
 }
+/* 🛒 Desktop-Icon */
+#mini-cart-desktop {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #607744;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 9999;
+  display: block;
+}
+
+/* 📱 Mobil-Icon */
+#mini-cart-mobile {
+  background: #607744;
+  color: white;
+  padding: 12px;
+  font-size: 1.3em;
+  text-align: center;
+  flex: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+
+/* 📦 Overlay */
+#cart-overlay {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border: 2px solid #607744;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+#cart-overlay ul {
+  list-style: none;
+  padding: 0;
+}
+
+#cart-overlay a {
+  display: block;
+  margin-top: 10px;
+  background: #607744;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+/* 📱 Anzeige je nach Gerät */
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none;
+  }
+  #mini-cart-mobile {
+    display: block;
+  }
+}
 </style>
 
   
 </head>
 <body>
+
+  <!-- 🛒 Desktop-Warenkorb-Icon -->
+<div id="mini-cart-desktop" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+
+<!-- 📱 Mobil-Warenkorb-Icon -->
+<div id="mini-cart-mobile" onclick="toggleCart()">🛒 <span id="cart-count-mobile">0</span></div>
+
+<!-- 📦 Overlay mit Warenkorb-Inhalt -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
+</div>
 
 <!-- Hauptnavigation -->
 <nav>
@@ -431,7 +510,7 @@ body {
 <div class="bottom-nav">
   <a href="iletisim.html" title="İletişim">📩</a>
   <button onclick="toggleMenu()">☰</button>
-  <a href="sss.html" title="Sıkça Sorulan Sorular">🔍</a>
+  <button id="mini-cart-mobile" onclick="toggleCart()" title="Sepetiniz">🛒<span id="cart-count-mobile">0</span></button>
 </div>
 
 <!-- 📦 Mobile Kachelmenü -->
@@ -447,6 +526,13 @@ body {
     <a class="box" href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
   </div>
   <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
+</div>
+<!-- 📦 Warenkorb-Overlay -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
 </div>
 <!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
@@ -501,6 +587,59 @@ body {
     const sub = document.getElementById("subKacheln");
     sub.style.display = sub.style.display === "block" ? "none" : "block";
   }
+</script>
+<!-- 🧠 Kuleyzen Warenkorb-Logik (Phase 1) -->
+<script>
+  // 🧺 Warenkorb aus dem Local Storage laden oder leeren Korb starten
+  let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
+
+  // 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
+  function saveCart() {
+    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+    updateCartDisplay();
+  }
+
+  // ➕ Produkt zum Warenkorb hinzufügen
+  function addToCart(name, price) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += 1; // bereits vorhanden → Menge erhöhen
+    } else {
+      cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
+    }
+    saveCart(); // speichern & aktualisieren
+  }
+
+  // 🔄 Mini-Warenkorb-Anzeige aktualisieren
+  function updateCartDisplay() {
+    // Produktzähler neben Icon
+    document.getElementById("cart-count").textContent =
+      cart.reduce((sum, item) => sum + item.qty, 0);
+
+    // Gesamtpreis berechnen
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    document.getElementById("cart-total").textContent = total;
+
+    // Liste der Produkte im Overlay aktualisieren
+    const list = document.getElementById("cart-items");
+    if (list) {
+      list.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+        list.appendChild(li);
+      });
+    }
+  }
+
+  // 🟩 Mini-Warenkorb (Overlay) ein-/ausblenden
+  function toggleCart() {
+    const overlay = document.getElementById("cart-overlay");
+    overlay.style.display = (overlay.style.display === "none") ? "block" : "none";
+  }
+
+  // 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
 </body>
 </html>

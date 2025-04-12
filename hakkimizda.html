@@ -357,11 +357,90 @@ body {
   color: #2f2f2f;
   text-decoration: none;
 }
+/* 🛒 Desktop-Icon */
+#mini-cart-desktop {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #607744;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 9999;
+  display: block;
+}
+
+/* 📱 Mobil-Icon */
+#mini-cart-mobile {
+  background: #607744;
+  color: white;
+  padding: 12px;
+  font-size: 1.3em;
+  text-align: center;
+  flex: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+
+/* 📦 Overlay */
+#cart-overlay {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border: 2px solid #607744;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+#cart-overlay ul {
+  list-style: none;
+  padding: 0;
+}
+
+#cart-overlay a {
+  display: block;
+  margin-top: 10px;
+  background: #607744;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+/* 📱 Anzeige je nach Gerät */
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none;
+  }
+  #mini-cart-mobile {
+    display: block;
+  }
+}
 </style>
 
 
 </head>
 <body>
+
+  <!-- 🛒 Desktop-Warenkorb-Icon -->
+<div id="mini-cart-desktop" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
+
+<!-- 📱 Mobil-Warenkorb-Icon -->
+<div id="mini-cart-mobile" onclick="toggleCart()">🛒 <span id="cart-count-mobile">0</span></div>
+
+<!-- 📦 Overlay mit Warenkorb-Inhalt -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
+</div>
 
 <!-- Hauptnavigation -->
 <nav>
@@ -394,66 +473,66 @@ body {
 
 <!-- Hauptinhalt: Geschichte von Kuleyzen -->
 <main>
-<!-- 📜 Einleitungstext: Warum Kuleyzen? -->  
-    <h2>Neden Kuleyzen?</h2>
-    <p>Kuleyzen yalnızca bir marka adı değil — bir yerin, bir geleneğin ve bir yaşam biçiminin adıdır. Bugün resmi olarak <strong>Kalınsan mevkii</strong> olarak anılsa da, halk arasında hâlâ eski ismiyle bilinir: <strong>Kuleyzen</strong>. Bu küçük yerleşim, Tokaclı köyünün hemen yanı başında, çoğunlukla <strong>Çelikel sülalesinin</strong> yaşadığı, zeytin ağaçlarının gölgelediği bir yerdir.</p>
-    <p>İsmini, bu topraklarda hep birlikte yaşayan Hristiyan ve Müslüman halkların kurduğu dostluk bağından alır. “Kuleyzen” sözcüğü, Arapça “kul” (iyi) ve “eyzen” (iyi insan) kelimelerinin birleşiminden oluşur. Rivayete göre, Hristiyan köylüler Müslüman komşuları için bu adı kullanırmış: iyi insanlar. Biz de bu mirası sahipleniyor ve Kuleyzen’in ruhunu yaşatıyoruz — doğaya, emeğe ve komşuluğa saygı ile.</p>
-<!-- Abschnitt: Großvater Durmuş Çelikel -->
-    <h3>Bir Ağacın İzinde</h3>
-    <div class="section">
-      <img src="durmus-celikel.jpg" alt="Dedemiz Durmuş Ağa">
-      <div>
-        <p>Bu topraklarla kurduğumuz bağ, yalnızca ürünle değil, geçmişle ve aileyle de örülüdür. Çelikel ailesinin Tokaclı’daki varlığı, hafızalarda başlangıcı olmayan bir geçmiş gibi, hep oradaydı. Zeytin ağacı bu ailenin içinde hep vardı — gölge veren, besleyen, öğreten.</p>
-        <p>Ailenin bugünkü çiftliğini şekillendiren kişi, Eris Çelikel’in dedesi <strong>Durmuş Çelikel</strong> oldu. 1940’ların sonunda, ailesinin arazisinde yüzlerce zeytin ağacının çoğunu bizzat eliyle dikti. Ona göre zeytincilik yalnızca bir iş değil, doğayla kurulan derin bir dostluktu.</p>
-        <p><strong>Durmuş Ağa</strong>’nın gösterdiği bu yol, sonraki kuşaklar için bir pusula oldu. Zeytine duyulan saygı, ağaca gösterilen özen ve emeğin kutsallığı, Kuleyzen’in karakterine dönüştü.</p>
-      </div>
+  <!-- 📜 Einleitungstext: Warum Kuleyzen? -->  
+  <h2>Neden Kuleyzen?</h2>
+  <p>Kuleyzen yalnızca bir marka adı değil — bir yerin, bir geleneğin ve bir yaşam biçiminin adıdır. Bugün resmi olarak <strong>Kalınsan mevkii</strong> olarak anılsa da, halk arasında hâlâ eski ismiyle bilinir: <strong>Kuleyzen</strong>. Bu küçük yerleşim, Tokaclı köyünün hemen yanı başında, çoğunlukla <strong>Çelikel sülalesinin</strong> yaşadığı, zeytin ağaçlarının gölgelediği bir yerdir.</p>
+  <p>İsmini, bu topraklarda hep birlikte yaşayan Hristiyan ve Müslüman halkların kurduğu dostluk bağından alır. “Kuleyzen” sözcüğü, Arapça “kul” (iyi) ve “eyzen” (iyi insan) kelimelerinin birleşiminden oluşur. Rivayete göre, Hristiyan köylüler Müslüman komşuları için bu adı kullanırmış: iyi insanlar. Biz de bu mirası sahipleniyor ve Kuleyzen’in ruhunu yaşatıyoruz — doğaya, emeğe ve komşuluğa saygı ile.</p>
+
+  <!-- Abschnitt: Großvater Durmuş Çelikel -->
+  <h3>Bir Ağacın İzinde</h3>
+  <div class="section">
+    <div>
+      <p>Bu topraklarla kurduğumuz bağ, yalnızca ürünle değil, geçmişle ve aileyle de örülüdür. Çelikel ailesinin Tokaclı’daki varlığı, hafızalarda başlangıcı olmayan bir geçmiş gibi, hep oradaydı. Zeytin ağacı bu ailenin içinde hep vardı — gölge veren, besleyen, öğreten.</p>
+      <p>Ailenin bugünkü çiftliğini şekillendiren kişi, Eris Çelikel’in dedesi <strong>Durmuş Çelikel</strong> oldu. 1940’ların sonunda, ailesinin arazisinde yüzlerce zeytin ağacının çoğunu bizzat eliyle dikti. Ona göre zeytincilik yalnızca bir iş değil, doğayla kurulan derin bir dostluktu.</p>
+      <p><strong>Durmuş Ağa</strong>’nın gösterdiği bu yol, sonraki kuşaklar için bir pusula oldu. Zeytine duyulan saygı, ağaca gösterilen özen ve emeğin kutsallığı, Kuleyzen’in karakterine dönüştü.</p>
     </div>
-<!-- Abschnitt: Nilüfer Çelikel -->
-    <h3>Nilüfer’in Yolculuğu</h3>
-    <div class="section">
-      <img src="nilufer-celikel.jpg" alt="Nilüfer Çelikel zeytinlikte">
-      <div>
-        <p>2010 yılında, Durmuş Ağa artık işleri devretmeye hazır olduğunda, çiftliği gelini <strong>Nilüfer Çelikel</strong> üstlendi. Nilüfer Hanım’ın yolu başta topraktan çok uzaktı. O kendini hep şehirli biri olarak tanımlardı ve kendi sözleriyle: “Buraya gelmeden önce zeytini sadece sofrada, toprağı sadece saksıda bilirdim.”</p>
-        <p>Ancak 1979’da, eşi Mehmet Çelikel’le Tokaclı’ya yaptığı ilk ziyaret her şeyi değiştirdi. Zeytin ağaçlarının duruşu, köyün kokusu ve doğanın dinginliği ona derinden dokundu. Yıllar sonra çiftliğin başına geçtiğinde bu bağ yeniden canlandı.</p>
-        <p>Nilüfer, bu yaklaşımı tersine çevirmeye karar verdi. Eşsiz bir özveriyle çiftliği yeniden yapılandırdı, toprağa saygıyı merkeze aldı. Kayınpederi Durmuş Ağa’dan öğrendiklerini modern yöntemlerle birleştirerek çiftliği organik üretime yöneltti.</p>
-      </div>
+  </div>
+
+  <!-- Abschnitt: Nilüfer Çelikel -->
+  <h3>Nilüfer’in Yolculuğu</h3>
+  <div class="section">
+    <div>
+      <p>2010 yılında, Durmuş Ağa artık işleri devretmeye hazır olduğunda, çiftliği gelini <strong>Nilüfer Çelikel</strong> üstlendi. Nilüfer Hanım’ın yolu başta topraktan çok uzaktı. O kendini hep şehirli biri olarak tanımlardı ve kendi sözleriyle: “Buraya gelmeden önce zeytini sadece sofrada, toprağı sadece saksıda bilirdim.”</p>
+      <p>Ancak 1979’da, eşi Mehmet Çelikel’le Tokaclı’ya yaptığı ilk ziyaret her şeyi değiştirdi. Zeytin ağaçlarının duruşu, köyün kokusu ve doğanın dinginliği ona derinden dokundu. Yıllar sonra çiftliğin başına geçtiğinde bu bağ yeniden canlandı.</p>
+      <p>Nilüfer, bu yaklaşımı tersine çevirmeye karar verdi. Eşsiz bir özveriyle çiftliği yeniden yapılandırdı, toprağa saygıyı merkeze aldı. Kayınpederi Durmuş Ağa’dan öğrendiklerini modern yöntemlerle birleştirerek çiftliği organik üretime yöneltti.</p>
     </div>
- <!-- Abschnitt: Eris Çelikel -->
-    <h3>Ata Toprağına Dönüş</h3>
-    <div class="section">
-      <img src="eris-celikel.jpg" alt="Eris Çelikel zeytinlikte">
-      <div>
-        <p><strong>Eris Çelikel</strong>, 1980 yılında İstanbul’da doğdu. Henüz beş yaşındayken ailesiyle birlikte İsviçre’ye taşındı. Orada büyüdü, eğitim aldı ve hayata atıldı. 2007’de Türkiye’ye döndü ve tıpkı annesi gibi, toprağa uzaktan bakan biriydi.</p>
-        <p>Kurumsal dünyada, büyük şehirlerde, uluslararası projelerde çalıştı. Bir süreliğine Güney Afrika’da yaşadı. Ancak içinde bir şey eksikti. 2015 yılında, bu eksikliği anlamlandırmak için büyük bir karar aldı: beyaz yakalı hayatına veda etti ve ailesinin çiftliğini devraldı.</p>
-        <p>Ziraat hakkında neredeyse hiçbir şey bilmiyordu. Bu yüzden hemen ikinci üniversitesine başladı: 2016’da Ziraat Mühendisliği (Bitki Koruma) okumaya koyuldu. Toprakla tanıştıkça, çocukken gölgesinde oynadığı ağaçlarla bağı derinleşti.</p>
-      </div>
+  </div>
+
+  <!-- Abschnitt: Eris Çelikel -->
+  <h3>Ata Toprağına Dönüş</h3>
+  <div class="section">
+    <div>
+      <p><strong>Eris Çelikel</strong>, 1980 yılında İstanbul’da doğdu. Henüz beş yaşındayken ailesiyle birlikte İsviçre’ye taşındı. Orada büyüdü, eğitim aldı ve hayata atıldı. 2007’de Türkiye’ye döndü ve tıpkı annesi gibi, toprağa uzaktan bakan biriydi.</p>
+      <p>Kurumsal dünyada, büyük şehirlerde, uluslararası projelerde çalıştı. Bir süreliğine Güney Afrika’da yaşadı. Ancak içinde bir şey eksikti. 2015 yılında, bu eksikliği anlamlandırmak için büyük bir karar aldı: beyaz yakalı hayatına veda etti ve ailesinin çiftliğini devraldı.</p>
+      <p>Ziraat hakkında neredeyse hiçbir şey bilmiyordu. Bu yüzden hemen ikinci üniversitesine başladı: 2016’da Ziraat Mühendisliği (Bitki Koruma) okumaya koyuldu. Toprakla tanıştıkça, çocukken gölgesinde oynadığı ağaçlarla bağı derinleşti.</p>
     </div>
-<!-- Abschnitt: Eris & Pınar – gemeinsames Leben -->
-    <h3>Birlikte Üreten Bir Hayat</h3>
-    <div class="section">
-      <img src="eris-pinar.jpg" alt="Eris ve Pınar birlikte">
-      <div>
-        <p>2019 yılında hayatına <strong>Pınar Coşkun</strong> girdi. Pınar, 1986’da İstanbul’da doğmuş, henüz üç yaşındayken ailesiyle birlikte Hollanda’ya taşınmıştı. Genç yaşta çok uluslu şirketlerde çalışmaya başlamış, dünya çapında bir kariyer inşa etmişti.</p>
-        <p>2014 yılında Türkiye’ye geri dönse de, işleri gereği uzun süre yurt dışında yaşamaya devam etti. 2022 yılında çiftliği birlikte yönetmeye başladılar. Bugün Kuleyzen, bu iki farklı dünyanın uyumlu birleşimiyle hayat buluyor.</p>
-        <p>Onlara köpekleri <strong>Panço</strong> ve beyaz Pers kedileri <strong>Luna</strong> da eşlik ediyor. Ailece kurdukları bu düzen, doğaya saygılı, insana sıcak ve emeğe odaklı bir yaşam biçiminin ifadesi oldu.</p>
-      </div>
+  </div>
+
+  <!-- Abschnitt: Eris & Pınar – gemeinsames Leben -->
+  <h3>Birlikte Üreten Bir Hayat</h3>
+  <div class="section">
+    <div>
+      <p>2019 yılında hayatına <strong>Pınar Coşkun</strong> girdi. Pınar, 1986’da İstanbul’da doğmuş, henüz üç yaşındayken ailesiyle birlikte Hollanda’ya taşınmıştı. Genç yaşta çok uluslu şirketlerde çalışmaya başlamış, dünya çapında bir kariyer inşa etmişti.</p>
+      <p>2014 yılında Türkiye’ye geri dönse de, işleri gereği uzun süre yurt dışında yaşamaya devam etti. 2022 yılında çiftliği birlikte yönetmeye başladılar. Bugün Kuleyzen, bu iki farklı dünyanın uyumlu birleşimiyle hayat buluyor.</p>
+      <p>Onlara köpekleri <strong>Panço</strong> ve beyaz Pers kedileri <strong>Luna</strong> da eşlik ediyor. Ailece kurdukları bu düzen, doğaya saygılı, insana sıcak ve emeğe odaklı bir yaşam biçiminin ifadesi oldu.</p>
     </div>
-<!-- Abschnitt: Die Philosophie von Kuleyzen -->
-    <h3>Kuleyzen Çiftliği</h3>
-    <div class="section">
-      <img src="zeytinlik-gunes.jpg" alt="Zeytinlikte gün batımı">
-      <div>
-        <p>Kuleyzen, geleneksel yöntemlerle organik tarım yaparak, soğuk sıkım ve filtreli üretimle zeytinyağını özenle üreten bir aile çiftliğidir. Her zeytin tanesi, üç kuşağın bilgeliği, emeği ve sevgisiyle işlenir. Tüm üretim süreci, zeytinlerin toplanmasından sıkımına, depolanmasından şişelenmesine kadar kendi ellerimizdedir.</p>
-        <p>Biz bu işi sadece zeytinyağı üretmek için değil; geçmişe saygı, bugüne emek ve geleceğe umut bırakmak için yapıyoruz.</p>
-      </div>
+  </div>
+
+  <!-- Abschnitt: Die Philosophie von Kuleyzen -->
+  <h3>Kuleyzen Çiftliği</h3>
+  <div class="section">
+    <div>
+      <p>Kuleyzen, geleneksel yöntemlerle organik tarım yaparak, soğuk sıkım ve filtreli üretimle zeytinyağını özenle üreten bir aile çiftliğidir. Her zeytin tanesi, üç kuşağın bilgeliği, emeği ve sevgisiyle işlenir. Tüm üretim süreci, zeytinlerin toplanmasından sıkımına, depolanmasından şişelenmesine kadar kendi ellerimizdedir.</p>
+      <p>Biz bu işi sadece zeytinyağı üretmek için değil; geçmişe saygı, bugüne emek ve geleceğe umut bırakmak için yapıyoruz.</p>
     </div>
-  </main>
+  </div>
+</main>
   <!-- 🎮 Vereinfachtes Bottom-Menü (mobil) -->
-<div class="bottom-nav">
-  <a href="iletisim.html" title="İletişim">📩</a>
-  <button onclick="toggleMenu()">☰</button>
-  <a href="sss.html" title="Sıkça Sorulan Sorular">🔍</a>
-</div>
+  <div class="bottom-nav">
+    <a href="iletisim.html" title="İletişim">📩</a>
+    <button onclick="toggleMenu()">☰</button>
+    <button id="mini-cart-mobile" onclick="toggleCart()" title="Sepetiniz">🛒<span id="cart-count-mobile">0</span></button>
+  </div>
 
 <!-- 📦 Mobile Kachelmenü -->
 <div class="mobile-kacheln" id="mobileKacheln">
@@ -468,6 +547,13 @@ body {
     <a class="box" href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
   </div>
   <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
+</div>
+<!-- 📦 Warenkorb-Overlay -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
 </div>
 <!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
@@ -523,6 +609,59 @@ body {
     const sub = document.getElementById("subKacheln");
     sub.style.display = sub.style.display === "block" ? "none" : "block";
   }
+</script>
+<!-- 🧠 Kuleyzen Warenkorb-Logik (Phase 1) -->
+<script>
+  // 🧺 Warenkorb aus dem Local Storage laden oder leeren Korb starten
+  let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
+
+  // 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
+  function saveCart() {
+    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+    updateCartDisplay();
+  }
+
+  // ➕ Produkt zum Warenkorb hinzufügen
+  function addToCart(name, price) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += 1; // bereits vorhanden → Menge erhöhen
+    } else {
+      cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
+    }
+    saveCart(); // speichern & aktualisieren
+  }
+
+  // 🔄 Mini-Warenkorb-Anzeige aktualisieren
+  function updateCartDisplay() {
+    // Produktzähler neben Icon
+    document.getElementById("cart-count").textContent =
+      cart.reduce((sum, item) => sum + item.qty, 0);
+
+    // Gesamtpreis berechnen
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    document.getElementById("cart-total").textContent = total;
+
+    // Liste der Produkte im Overlay aktualisieren
+    const list = document.getElementById("cart-items");
+    if (list) {
+      list.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+        list.appendChild(li);
+      });
+    }
+  }
+
+  // 🟩 Mini-Warenkorb (Overlay) ein-/ausblenden
+  function toggleCart() {
+    const overlay = document.getElementById("cart-overlay");
+    overlay.style.display = (overlay.style.display === "none") ? "block" : "none";
+  }
+
+  // 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
 </body>
 </html>

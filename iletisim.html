@@ -357,6 +357,71 @@ body {
   color: #2f2f2f;
   text-decoration: none;
 }
+/* 🛒 Desktop-Icon */
+#mini-cart-desktop {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #607744;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 9999;
+  display: block;
+}
+
+/* 📱 Mobil-Icon */
+#mini-cart-mobile {
+  background: #607744;
+  color: white;
+  padding: 12px;
+  font-size: 1.3em;
+  text-align: center;
+  flex: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+
+/* 📦 Overlay */
+#cart-overlay {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border: 2px solid #607744;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+#cart-overlay ul {
+  list-style: none;
+  padding: 0;
+}
+
+#cart-overlay a {
+  display: block;
+  margin-top: 10px;
+  background: #607744;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+/* 📱 Anzeige je nach Gerät */
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none;
+  }
+  #mini-cart-mobile {
+    display: block;
+  }
+}
 /* 📝 Kontaktformular-Stil */
 form {
   background-color: #fff;
@@ -415,7 +480,19 @@ form textarea {
 </head>
 <body>
 
+<!-- 🛒 Desktop-Warenkorb-Icon -->
+<div id="mini-cart-desktop" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 
+<!-- 📱 Mobil-Warenkorb-Icon -->
+<div id="mini-cart-mobile" onclick="toggleCart()">🛒 <span id="cart-count-mobile">0</span></div>
+
+<!-- 📦 Overlay mit Warenkorb-Inhalt -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
+</div>
 
 <!-- Hauptnavigation -->
 <nav>
@@ -440,35 +517,63 @@ form textarea {
 <!-- Überschrift -->    
     <h2>Bizimle İletişime Geçin</h2>
 <!-- 🔒 Kontaktformular mit Netlify und Google reCAPTCHA -->
+<!-- 📝 Kontaktformular (sichtbar) -->
 <form name="contact"
       method="POST"
       data-netlify="true"
       data-netlify-recaptcha="true"
-      action="/tesekkurler.html"
+      netlify-honeypot="bot-field"
+      action="tesekkurler.html"
       style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
 
-      
-<!-- Name und E-Mail Eingabe -->      
-      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <div style="flex: 1;">
-          <label for="name" style="font-weight: bold;">Adınız:</label>
-          <input id="name" name="name" required type="text" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;"/>
-        </div>
-        <div style="flex: 1;">
-          <label for="email" style="font-weight: bold;">E-posta:</label>
-          <input id="email" name="email" required type="email" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;"/>
-        </div>
-      </div>
-  
-      <label for="message" style="font-weight: bold;">Mesajınız:</label>
-      <textarea id="message" name="message" required rows="4" style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;"></textarea>
-<!-- 🔲 Google reCAPTCHA Checkbox -->
-<div class="g-recaptcha" data-sitekey="6LcC_BErAAAAACuDjMDloHffF8J6KBdMTvodvF94" style="margin: 20px 0;"></div>
-<!-- Absenden-Button mit verzögerung -->    
-      <button type="submit" style="width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Gönder</button>
-<!-- WhatsApp-Link -->
-      <a href="https://wa.me/905362419158" style="padding: 12px 30px; background-color: #25D366; color: white; text-decoration: none; font-size: 1.2em; border-radius: 4px; margin-top: 20px; display: inline-block;">Bizimle WhatsApp üzerinden sohbet edin</a>
-    </form>
+  <!-- 🕵️ Unsichtbares Honeypot-Feld für Spam-Schutz -->
+  <input type="hidden" name="form-name" value="contact" />
+  <p style="display:none">
+    <label>Bot: <input name="bot-field" /></label>
+  </p>
+
+  <!-- Name und E-Mail Eingabe -->
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <div style="flex: 1;">
+      <label for="name" style="font-weight: bold;">Adınız:</label>
+      <input id="name" name="name" required type="text"
+             style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;" />
+    </div>
+    <div style="flex: 1;">
+      <label for="email" style="font-weight: bold;">E-posta:</label>
+      <input id="email" name="email" required type="email"
+             style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;" />
+    </div>
+  </div>
+
+  <!-- Nachricht -->
+  <label for="message" style="font-weight: bold;">Mesajınız:</label>
+  <textarea id="message" name="message" required rows="4"
+            style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;"></textarea>
+
+  <!-- 🔲 Google reCAPTCHA -->
+  <div class="g-recaptcha" data-sitekey="6LcC_BErAAAAACuDjMDloHffF8J6KBdMTvodvF94" style="margin: 20px 0;"></div>
+
+  <!-- Absenden -->
+  <button type="submit"
+          style="width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+    Gönder
+  </button>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/905362419158"
+     style="padding: 12px 30px; background-color: #25D366; color: white; text-decoration: none; font-size: 1.2em; border-radius: 4px; margin-top: 20px; display: inline-block;">
+    Bizimle WhatsApp üzerinden sohbet edin
+  </a>
+</form>
+
+<!-- 🛡️ Unsichtbares statisches Backup-Formular für Netlify-Erkennung -->
+<form name="contact" netlify hidden>
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <textarea name="message"></textarea>
+</form>
+
 <!-- Standortüberschrift -->  
     <h3>Lokasyonumuz</h3>
   
@@ -496,7 +601,7 @@ form textarea {
 <div class="bottom-nav">
   <a href="iletisim.html" title="İletişim">📩</a>
   <button onclick="toggleMenu()">☰</button>
-  <a href="sss.html" title="Sıkça Sorulan Sorular">🔍</a>
+  <button id="mini-cart-mobile" onclick="toggleCart()" title="Sepetiniz">🛒<span id="cart-count-mobile">0</span></button>
 </div>
 
 <!-- 📦 Mobile Kachelmenü -->
@@ -512,6 +617,13 @@ form textarea {
     <a class="box" href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
   </div>
   <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
+</div>
+<!-- 📦 Warenkorb-Overlay -->
+<div id="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
 </div>
 <!-- Fußzeile mit Copyright -->  
 <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
@@ -569,5 +681,58 @@ form textarea {
 </script>
 <!-- 📜 Google reCAPTCHA Skript von Google laden -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<!-- 🧠 Kuleyzen Warenkorb-Logik (Phase 1) -->
+<script>
+  // 🧺 Warenkorb aus dem Local Storage laden oder leeren Korb starten
+  let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
+
+  // 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
+  function saveCart() {
+    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+    updateCartDisplay();
+  }
+
+  // ➕ Produkt zum Warenkorb hinzufügen
+  function addToCart(name, price) {
+    const existing = cart.find(item => item.name === name);
+    if (existing) {
+      existing.qty += 1; // bereits vorhanden → Menge erhöhen
+    } else {
+      cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
+    }
+    saveCart(); // speichern & aktualisieren
+  }
+
+  // 🔄 Mini-Warenkorb-Anzeige aktualisieren
+  function updateCartDisplay() {
+    // Produktzähler neben Icon
+    document.getElementById("cart-count").textContent =
+      cart.reduce((sum, item) => sum + item.qty, 0);
+
+    // Gesamtpreis berechnen
+    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    document.getElementById("cart-total").textContent = total;
+
+    // Liste der Produkte im Overlay aktualisieren
+    const list = document.getElementById("cart-items");
+    if (list) {
+      list.innerHTML = "";
+      cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+        list.appendChild(li);
+      });
+    }
+  }
+
+  // 🟩 Mini-Warenkorb (Overlay) ein-/ausblenden
+  function toggleCart() {
+    const overlay = document.getElementById("cart-overlay");
+    overlay.style.display = (overlay.style.display === "none") ? "block" : "none";
+  }
+
+  // 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+</script>
 </body>
 </html>
