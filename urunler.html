@@ -393,8 +393,8 @@ body {
   }
 }
 
-/* 📦 Overlay */
-#cart-overlay {
+/* 💻 Desktop-Warenkorb */
+#cart-overlay-desktop {
   position: fixed;
   top: 60px;
   right: 20px;
@@ -406,20 +406,30 @@ body {
   z-index: 998;
 }
 
-#cart-overlay ul {
-  list-style: none;
-  padding: 0;
+@media (max-width: 768px) {
+  #cart-overlay-desktop {
+    display: none !important;
+  }
 }
 
-#cart-overlay a {
-  display: block;
-  margin-top: 10px;
-  background: #607744;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
-  border-radius: 8px;
+/* 📱 Mobil-Warenkorb */
+#cart-overlay-mobile {
+  position: fixed;
+  bottom: 70px; /* über dem Bottom-Menü */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  background: white;
+  border: 2px solid #607744;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+@media (min-width: 769px) {
+  #cart-overlay-mobile {
+    display: none !important;
+  }
 }
 
 /* 🛍️ Produktkarten-Stil auf der Produktseite */
@@ -481,10 +491,18 @@ body {
 
 
 <!-- 📦 Overlay mit Warenkorb-Inhalt -->
-<div id="cart-overlay" style="display: none;">
+<!-- 📦 Desktop-Warenkorb -->
+<div id="cart-overlay-desktop" style="display: none;">
   <h4>Sepetiniz</h4>
-  <ul id="cart-items"></ul>
+  <ul id="cart-items-desktop"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
+</div>
+<!-- 📱 Mobil-Warenkorb -->
+<div id="cart-overlay-mobile" class="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items-mobile"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total-mobile">0</span> TL</p>
   <a href="checkout.html">Ödeme Sayfası</a>
 </div>
 
@@ -658,59 +676,76 @@ body {
 </script> 
 <!-- 🛒 Kuleyzen – Warenkorb mit Mengenfunktion (Phase 1) -->
 <script>
-  // Warenkorb aus localStorage laden oder neuen Korb starten
+  // 🧺 Warenkorb aus dem Local Storage laden oder leeren Korb starten
   let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
 
-  // Speichern und Anzeige aktualisieren
-  function saveCart() {
-    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
-    updateCartDisplay();
+// 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
+function saveCart() {
+  localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+  updateCartDisplay();
+}
+
+// ➕ Produkt zum Warenkorb hinzufügen
+function addToCart(name, price) {
+  const existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.qty += 1; // bereits vorhanden → Menge erhöhen
+  } else {
+    cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
   }
+  saveCart(); // speichern & aktualisieren
+}
 
-  // Produkt hinzufügen
-  function addToCart(name, price, qty = 1) {
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.qty += qty;
-    } else {
-      cart.push({ name, price, qty });
-    }
-    saveCart();
-  }
+// 🔄 Mini-Warenkorb-Anzeige aktualisieren
+function updateCartDisplay() {
+  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  // Anzeige aktualisieren (Icon + Overlay)
-  function updateCartDisplay() {
-    const count = cart.reduce((sum, item) => sum + item.qty, 0);
-    const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+  // Icons aktualisieren
+  document.getElementById("cart-count").textContent = cartCount;
+  const mobileCount = document.getElementById("cart-count-mobile");
+  if (mobileCount) mobileCount.textContent = cartCount;
 
-    const countEl = document.getElementById("cart-count");
-    const countMobile = document.getElementById("cart-count-mobile");
-    const totalEl = document.getElementById("cart-total");
-    const listEl = document.getElementById("cart-items");
+  // Beide Overlays füllen
+  const overlays = [
+    { itemsId: "cart-items-desktop", totalId: "cart-total-desktop" },
+    { itemsId: "cart-items-mobile", totalId: "cart-total-mobile" }
+  ];
 
-    if (countEl) countEl.textContent = count;
-    if (countMobile) countMobile.textContent = count;
-    if (totalEl) totalEl.textContent = total;
+  overlays.forEach(({ itemsId, totalId }) => {
+    const list = document.getElementById(itemsId);
+    const totalElem = document.getElementById(totalId);
+    if (!list || !totalElem) return;
 
-    if (listEl) {
-      listEl.innerHTML = "";
-      cart.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
-        listEl.appendChild(li);
-      });
-    }
-  }
+    list.innerHTML = "";
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+      list.appendChild(li);
+    });
 
-  // Overlay anzeigen/ausblenden
-  function toggleCart() {
-    const overlay = document.getElementById("cart-overlay");
-    overlay.style.display = (overlay.style.display === "none" || overlay.style.display === "") ? "block" : "none";
-  }
+    totalElem.textContent = total;
+  });
+}
 
-  // Beim Laden: Warenkorb anzeigen
-  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+// 🧺 Warenkorb-Overlay ein- und ausblenden (mobil/desktop automatisch)
+function toggleCart() {
+  const isMobile = window.innerWidth <= 768;
+  const overlay = isMobile
+    ? document.getElementById("cart-overlay-mobile")
+    : document.getElementById("cart-overlay-desktop");
+
+  if (!overlay) return;
+
+  overlay.style.display =
+    overlay.style.display === "block" ? "none" : "block";
+}
+
+// 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
+document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
+
+
 <!-- 🧮 Kuleyzen – Mengensteuerung für Produktanzahl (➖➕ Buttons) -->
 <script>
   // ➕➖ Buttons: Menge anpassen

@@ -392,433 +392,8 @@
     }
   }
   
-  /* 📦 Overlay */
-  #cart-overlay {
-    position: fixed;
-    top: 60px;
-    right: 20px;
-    width: 300px;
-    background: white;
-    border: 2px solid #607744;
-    padding: 20px;
-    border-radius: 12px;
-    z-index: 998;
-  }
-  
-  #cart-overlay ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  #cart-overlay a {
-    display: block;
-    margin-top: 10px;
-    background: #607744;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    text-decoration: none;
-    border-radius: 8px;
-  }
-  
-  /* 🌿 Grundlegende Layout- und Farbstile */
-  body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fafaf5;
-      color: #2f2f2f;
-      margin: 0;
-      padding: 0;
-    }
-/* 📄 Hauptbereich-Layout */    
-    main {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-/* 🖼️ Flexbox für Sektionen mit Bild und Text */    
-    .section {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      margin-bottom: 60px;
-    }
-    .section img {
-      flex: 1 1 300px;
-      max-width: 300px;
-      margin-right: 30px;
-      border-radius: 8px;
-    }
-    .section div {
-      flex: 2 1 400px;
-    }
-/* 🧱 Überschriften-Layout */    
-    h2, h3 {
-      margin-top: 40px;
-    }
-/* 📱 Responsive Anpassung für kleine Bildschirme */    
-    @media (max-width: 768px) {
-      .section {
-        flex-direction: column;
-      }
-      .section img {
-        margin: 0 0 20px 0;
-        max-width: 100%;
-      }
-    }
-/* 📷 Allgemeine Bildformatierung */    
-   img {
-      width: 100%;
-      max-width: 600px;
-      margin: 20px 0;
-      border-radius: 8px;
-    }
-  
-/* 🔝 Navigationsleiste (Desktop) */    
-  .main-nav {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-color: #607744;
-  }
-
-  .main-nav > li {
-    position: relative;
-  }
-
-  .main-nav > li > a {
-    display: block;
-    padding: 1em 1.5em;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-
-  .main-nav > li > a:hover {
-    background-color: #4e6137;
-  }
-/* 📂 Submenü (Desktop Hover) */
-  .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #607744;
-    z-index: 9999;
-    min-width: 180px;
-  }
-
-  .has-submenu:hover .submenu {
-    display: block;
-  }
-/* 🛠️ Submenü Hintergrundfarbe und Hover-Korrektur */
-.submenu li a {
-  display: block;
-  padding: 0.75em 1.5em;
-  color: white;
-  text-decoration: none;
-  background-color: #607744; /* ← das kann fehlen */
-  line-height: 1.4; /* optional: reduziert unnötige Höhe */
-}
-
-.submenu li a:hover {
-  background-color: #4e6137;
-}
-
-
-/* 🖱️ Submenü Hover-Effekt (nur Desktop, verhindert Zeilenverbreiterung) */
-@media (min-width: 769px) {
-  .has-submenu {
-    position: relative;
-  }
-  .main-nav > li {
-    position: relative;
-  }
-  .main-nav > li > a {
-    line-height: 1.2;
-  }
-
-  .submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #607744;
-    display: none;
-    min-width: 180px;
-    z-index: 999;
-  }
-
-  .has-submenu:hover > .submenu {
-    display: block;
-  }
-
-  .submenu li a {
-    display: block;
-    padding: 0.75em 1.5em;
-    color: white;
-    background-color: #607744;
-    text-decoration: none;
-    line-height: 1.4;
-  }
-
-  .submenu li a:hover {
-    background-color: #4e6137;
-  }
-}
-   
-    
- /* 📂 Submenü im mobilen Layout */
-@media (max-width: 768px) {
-  .submenu {
-    position: static;
-    display: none;
-    padding-left: 2em;
-  }
-
-  .has-submenu:hover .submenu {
-    display: block;
-  }
-}
-    
-  
-/* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
-@media (min-width: 769px) {
-  .bottom-nav {
-    display: none;
-  }
-}
-
-
-
-/* 🎮 Nintendo-Style Bottom Navigation (Mobil) */
-.bottom-grid {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #607744;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 2px;
-  padding: 10px;
-  z-index: 999;
-}
-
-.bottom-grid button {
-  background-color: #4e6137;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 5px;
-  font-size: 1.3em;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.bottom-grid button span {
-  font-size: 0.8em;
-  margin-top: 5px;
-}
-
-.bottom-grid button:hover {
-  background-color: #eef1ea;
-  color: #2f2f2f;
-  transform: scale(1.05);
-}
-
-/* 📵 Bottom-Menü nur auf Mobil anzeigen */
-@media (min-width: 769px) {
-  .bottom-nav {
-    display: none;
-  }
-}
-/* 📜 Hauptnavigation: mobil horizontal scrollfähig */
-@media (max-width: 768px) {
-  .main-nav {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 0.5em 0;
-    scrollbar-width: none; /* Firefox */
-    background-color: #607744;
-  }
-
-  .main-nav::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
-
-  .main-nav > li {
-    display: inline-block;
-    margin: 0;
-    flex: 0 0 auto;  /* 👈 Ergänzt */
-    scroll-snap-align: start;
-  }
-
-  .main-nav > li > a {
-    white-space: nowrap;
-    display: inline-block;  /* 👈 Ergänzt */
-    padding: 1em 1.2em;
-  }
-}
-/* 🎮 Nintendo-Style Bottom Navigation */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #607744;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-  z-index: 999;
-}
-
-.bottom-nav a {
-  background-color: #4e6137;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  font-size: 1.2em;
-  text-align: center;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.bottom-nav a:hover {
-  background-color: #eef1ea;
-  transform: scale(1.1);
-  color: #2f2f2f;
-}
-
-/* 📵 Bottom-Menü nur auf Mobil anzeigen */
-@media (min-width: 769px) {
-  .bottom-nav {
-    display: none;
-  }
-}
-/* 🦶 Platz für Footer sichtbar unter Bottom-Menü */
-body {
-  padding-bottom: 80px; /* Genug Platz für .bottom-nav */
-}
-/* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #607744;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10px;
-  z-index: 999;
-}
-
-.bottom-nav a,
-.bottom-nav button {
-  background-color: #4e6137;
-  color: white;
-  padding: 12px;
-  border-radius: 50%;
-  font-size: 1.3em;
-  text-align: center;
-  border: none;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.bottom-nav a:hover,
-.bottom-nav button:hover {
-  background-color: #eef1ea;
-  transform: scale(1.1);
-  color: #2f2f2f;
-}
-
-/* 👀 Nur auf Mobilgeräten anzeigen */
-@media (min-width: 769px) {
-  .bottom-nav,
-  .mobile-kacheln {
-    display: none;
-  }
-}
-
-/* 📦 Kachelmenü bei Klick auf Hamburger */
-.mobile-kacheln {
-  display: none;
-  position: fixed;
-  bottom: 60px;
-  left: 0;
-  width: 100%;
-  background-color: #f5f5f0;
-  padding: 1em;
-  z-index: 998;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.mobile-kacheln .box {
-  display: inline-block;
-  background: #fff;
-  padding: 0.8em 1em;
-  margin: 0.3em;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 0.95em;
-  font-weight: bold;
-  color: #2f2f2f;
-  text-decoration: none;
-}
-/* 🛒 Desktop-Icon – Nur auf Desktop anzeigen */
-@media (min-width: 769px) {
-  #mini-cart-desktop {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #607744;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 30px;
-    cursor: pointer;
-    z-index: 9999;
-    display: block;
-  }
-}
-
-@media (max-width: 768px) {
-  #mini-cart-desktop {
-    display: none !important;
-  }
-}
-
-/* 📱 Mobil-Icon */
-#mini-cart-mobile {
-  background: #607744;
-  color: white;
-  padding: 12px;
-  font-size: 1.3em;
-  text-align: center;
-  flex: 1;
-  border-radius: 50%;
-  cursor: pointer;
-  display: block; /* HINZUFÜGEN */
-}
-
-/* 📱 Mobil: Warenkorb-Button sichtbar */
-@media (max-width: 768px) {
-  #mini-cart-mobile {
-    display: block;
-  }
-}
-
-/* 📦 Overlay */
-#cart-overlay {
+  /* 💻 Desktop-Warenkorb */
+#cart-overlay-desktop {
   position: fixed;
   top: 60px;
   right: 20px;
@@ -830,21 +405,32 @@ body {
   z-index: 998;
 }
 
-#cart-overlay ul {
-  list-style: none;
-  padding: 0;
+@media (max-width: 768px) {
+  #cart-overlay-desktop {
+    display: none !important;
+  }
 }
 
-#cart-overlay a {
-  display: block;
-  margin-top: 10px;
-  background: #607744;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
-  border-radius: 8px;
+/* 📱 Mobil-Warenkorb */
+#cart-overlay-mobile {
+  position: fixed;
+  bottom: 70px; /* über dem Bottom-Menü */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  background: white;
+  border: 2px solid #607744;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
 }
+
+@media (min-width: 769px) {
+  #cart-overlay-mobile {
+    display: none !important;
+  }
+}
+ 
 
 /* 🛍️ Submenükarten-Stil auf der submenüübergeordneten seite */
 .product-grid {
@@ -890,10 +476,18 @@ body {
 
 
 <!-- 📦 Overlay mit Warenkorb-Inhalt -->
-<div id="cart-overlay" style="display: none;">
+<!-- 📦 Desktop-Warenkorb -->
+<div id="cart-overlay-desktop" style="display: none;">
   <h4>Sepetiniz</h4>
-  <ul id="cart-items"></ul>
+  <ul id="cart-items-desktop"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
+</div>
+<!-- 📱 Mobil-Warenkorb -->
+<div id="cart-overlay-mobile" class="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items-mobile"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total-mobile">0</span> TL</p>
   <a href="checkout.html">Ödeme Sayfası</a>
 </div>
 
@@ -1001,53 +595,70 @@ body {
   // 🧺 Warenkorb aus dem Local Storage laden oder leeren Korb starten
   let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
 
-  // 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
-  function saveCart() {
-    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
-    updateCartDisplay();
+// 💾 Warenkorb im Local Storage speichern & Anzeige aktualisieren
+function saveCart() {
+  localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+  updateCartDisplay();
+}
+
+// ➕ Produkt zum Warenkorb hinzufügen
+function addToCart(name, price) {
+  const existing = cart.find(item => item.name === name);
+  if (existing) {
+    existing.qty += 1; // bereits vorhanden → Menge erhöhen
+  } else {
+    cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
   }
+  saveCart(); // speichern & aktualisieren
+}
 
-  // ➕ Produkt zum Warenkorb hinzufügen
-  function addToCart(name, price) {
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.qty += 1; // bereits vorhanden → Menge erhöhen
-    } else {
-      cart.push({ name, price, qty: 1 }); // neues Produkt hinzufügen
-    }
-    saveCart(); // speichern & aktualisieren
-  }
+// 🔄 Mini-Warenkorb-Anzeige aktualisieren
+function updateCartDisplay() {
+  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  // 🔄 Mini-Warenkorb-Anzeige aktualisieren
-  function updateCartDisplay() {
-    // Produktzähler neben Icon
-    document.getElementById("cart-count").textContent =
-      cart.reduce((sum, item) => sum + item.qty, 0);
+  // Icons aktualisieren
+  document.getElementById("cart-count").textContent = cartCount;
+  const mobileCount = document.getElementById("cart-count-mobile");
+  if (mobileCount) mobileCount.textContent = cartCount;
 
-    // Gesamtpreis berechnen
-    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    document.getElementById("cart-total").textContent = total;
+  // Beide Overlays füllen
+  const overlays = [
+    { itemsId: "cart-items-desktop", totalId: "cart-total-desktop" },
+    { itemsId: "cart-items-mobile", totalId: "cart-total-mobile" }
+  ];
 
-    // Liste der Produkte im Overlay aktualisieren
-    const list = document.getElementById("cart-items");
-    if (list) {
-      list.innerHTML = "";
-      cart.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
-        list.appendChild(li);
-      });
-    }
-  }
+  overlays.forEach(({ itemsId, totalId }) => {
+    const list = document.getElementById(itemsId);
+    const totalElem = document.getElementById(totalId);
+    if (!list || !totalElem) return;
 
-  // 🟩 Mini-Warenkorb (Overlay) ein-/ausblenden
-  function toggleCart() {
-    const overlay = document.getElementById("cart-overlay");
-    overlay.style.display = (overlay.style.display === "none") ? "block" : "none";
-  }
+    list.innerHTML = "";
+    cart.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+      list.appendChild(li);
+    });
 
-  // 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
-  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+    totalElem.textContent = total;
+  });
+}
+
+// 🧺 Warenkorb-Overlay ein- und ausblenden (mobil/desktop automatisch)
+function toggleCart() {
+  const isMobile = window.innerWidth <= 768;
+  const overlay = isMobile
+    ? document.getElementById("cart-overlay-mobile")
+    : document.getElementById("cart-overlay-desktop");
+
+  if (!overlay) return;
+
+  overlay.style.display =
+    overlay.style.display === "block" ? "none" : "block";
+}
+
+// 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
+document.addEventListener("DOMContentLoaded", updateCartDisplay);
 </script>
 </body>
 </html>

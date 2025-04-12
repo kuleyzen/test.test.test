@@ -394,8 +394,8 @@ body {
   }
 }
 
-/* 📦 Overlay */
-#cart-overlay {
+/* 💻 Desktop-Warenkorb */
+#cart-overlay-desktop {
   position: fixed;
   top: 60px;
   right: 20px;
@@ -407,20 +407,30 @@ body {
   z-index: 998;
 }
 
-#cart-overlay ul {
-  list-style: none;
-  padding: 0;
+@media (max-width: 768px) {
+  #cart-overlay-desktop {
+    display: none !important;
+  }
 }
 
-#cart-overlay a {
-  display: block;
-  margin-top: 10px;
-  background: #607744;
-  color: white;
-  text-align: center;
-  padding: 10px;
-  text-decoration: none;
-  border-radius: 8px;
+/* 📱 Mobil-Warenkorb */
+#cart-overlay-mobile {
+  position: fixed;
+  bottom: 70px; /* über dem Bottom-Menü */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  background: white;
+  border: 2px solid #607744;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+@media (min-width: 769px) {
+  #cart-overlay-mobile {
+    display: none !important;
+  }
 }
 
 /* 📱 Anzeige je nach Gerät */
@@ -477,13 +487,20 @@ table {
 
 
 <!-- 📦 Overlay mit Warenkorb-Inhalt -->
-<div id="cart-overlay" style="display: none;">
+<!-- 📦 Desktop-Warenkorb -->
+<div id="cart-overlay-desktop" style="display: none;">
   <h4>Sepetiniz</h4>
-  <ul id="cart-items"></ul>
+  <ul id="cart-items-desktop"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
   <a href="checkout.html">Ödeme Sayfası</a>
 </div>
-
+<!-- 📱 Mobil-Warenkorb -->
+<div id="cart-overlay-mobile" class="cart-overlay" style="display: none;">
+  <h4>Sepetiniz</h4>
+  <ul id="cart-items-mobile"></ul>
+  <p><strong>Toplam:</strong> <span id="cart-total-mobile">0</span> TL</p>
+  <a href="checkout.html">Ödeme Sayfası</a>
+</div>
 <!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
@@ -725,11 +742,19 @@ row.appendChild(totalTd);
       }
     }
   
-    // 🟦 7. Mini-Warenkorb-Overlay ein-/ausblenden
-    function toggleCart() {
-      const overlay = document.getElementById("cart-overlay");
-      overlay.style.display = (overlay.style.display === "none") ? "block" : "none";
-    }
+   // 🧺 Warenkorb ein- und ausblenden
+function toggleCart() {
+  const overlay = document.getElementById("cart-overlay");
+  if (overlay.style.display === "none" || overlay.style.display === "") {
+    overlay.style.display = "block"; // Zeige das Overlay an
+  } else {
+    overlay.style.display = "none"; // Verstecke das Overlay
+  }
+}
+
+  // 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
+  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+
   
     // ✅ 8. Bestellung via WhatsApp senden und Warenkorb leeren
     function submitOrder(event) {
