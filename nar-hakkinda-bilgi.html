@@ -355,18 +355,26 @@ body {
   color: #2f2f2f;
   text-decoration: none;
 }
-/* 🛒 Desktop-Icon */
-#mini-cart-desktop {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #607744;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 30px;
-  cursor: pointer;
-  z-index: 9999;
-  display: block;
+/* 🛒 Desktop-Icon – Nur auf Desktop anzeigen */
+@media (min-width: 769px) {
+  #mini-cart-desktop {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #607744;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 9999;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none !important;
+  }
 }
 
 /* 📱 Mobil-Icon */
@@ -411,21 +419,6 @@ body {
   border-radius: 8px;
 }
 
-/* 📱 Anzeige je nach Gerät */
-@media (max-width: 768px) {
-  #mini-cart-desktop {
-    display: none;
-  }
-  #mini-cart-mobile {
-    display: none;
-  }
-}
-/* 🧽 Mobil: Oberes Warenkorb-Icon ausblenden */
-@media (max-width: 768px) {
-  #mini-cart-desktop {
-    display: none !important;
-  }
-}
 </style>
 </head>
 <body>
