@@ -187,6 +187,126 @@ main {
 }
 
 /* ===================== */
+/* 📱 MOBILE KACHELMENÜ (Bottom-Nav) */
+/* ===================== */
+.mobile-kacheln {
+  display: none;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  padding: 15px;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+  z-index: 998;
+  border-top: 2px solid var(--primary);
+}
+
+.mobile-kacheln .box {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background-color: var(--light-bg);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--primary);
+}
+
+.mobile-kacheln .box:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+#subKacheln {
+  display: none;
+  background-color: rgba(96, 119, 68, 0.05);
+  border-radius: 6px;
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+#subKacheln .box {
+  padding-left: 30px;
+  font-size: 0.95em;
+  border-left: 3px solid var(--primary-dark);
+  background-color: transparent;
+}
+
+/* Animation beim Einblenden */
+.mobile-kacheln[style*="block"] {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===================== */
+/* 📱 MOBILE KACHELMENÜ (Bottom-Nav) */
+/* ===================== */
+.mobile-kacheln {
+  display: none;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  padding: 15px;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+  z-index: 998;
+  border-top: 2px solid var(--primary);
+}
+
+.mobile-kacheln .box {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background-color: var(--light-bg);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--primary);
+}
+
+.mobile-kacheln .box:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+#subKacheln {
+  display: none;
+  background-color: rgba(96, 119, 68, 0.05);
+  border-radius: 6px;
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+#subKacheln .box {
+  padding-left: 30px;
+  font-size: 0.95em;
+  border-left: 3px solid var(--primary-dark);
+  background-color: transparent;
+}
+
+/* Animation beim Einblenden */
+.mobile-kacheln[style*="block"] {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===================== */
 /* 🖥️ DESKTOP-ONLY ELEMENTE */
 /* ===================== */
 @media (min-width: 769px) {
@@ -198,6 +318,19 @@ main {
   #cart-overlay-mobile {
     display: none !important;
   }
+}
+
+/* ===================== */
+/* 📱 MOBILE-ONLY ELEMENTE */
+/* ===================== */
+@media (max-width: 768px) {
+  /* Desktop-Warenkorb ausblenden */
+  #mini-cart-desktop,
+  #cart-overlay-desktop {
+    display: none !important;
+  }
+  
+  /* Rest Ihrer mobilen Styles... */
 }
 
 /* ===================== */
@@ -273,37 +406,68 @@ img {
   border-radius: 8px;
 }
 
-/* 🛍️ Submenükarten-Stil auf der submenüübergeordneten seite */
+/* ===================== */
+/* 🏡 PRODUKTIONS-THEMEN KACHELN */
+/* ===================== */
 .product-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
 }
+
 .product-box {
-  background-color: #f5f5f5;
-  padding: 2rem;
-  border-radius: 12px;
-  width: 280px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  text-align: center;
+  background: var(--white);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid var(--primary);
 }
+
+.product-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
 .product-box h2 {
+  color: var(--primary-dark);
   margin-top: 0;
-  color: #4a5e3b;
+  font-size: 1.5em;
 }
+
 .product-box p {
-  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.6;
 }
+
 .product-box .button {
-  margin-top: 1rem;
   display: inline-block;
-  background-color: #4a5e3b;
-  color: white;
-  padding: 10px 16px;
-  border-radius: 8px;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: var(--white);
   text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.product-box .button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .product-box {
+    padding: 20px;
+  }
 }
 </style>
 

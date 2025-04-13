@@ -191,6 +191,66 @@ main {
 }
 
 /* ===================== */
+/* 📱 MOBILE KACHELMENÜ (Bottom-Nav) */
+/* ===================== */
+.mobile-kacheln {
+  display: none;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  padding: 15px;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+  z-index: 998;
+  border-top: 2px solid var(--primary);
+}
+
+.mobile-kacheln .box {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background-color: var(--light-bg);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--primary);
+}
+
+.mobile-kacheln .box:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+#subKacheln {
+  display: none;
+  background-color: rgba(96, 119, 68, 0.05);
+  border-radius: 6px;
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+#subKacheln .box {
+  padding-left: 30px;
+  font-size: 0.95em;
+  border-left: 3px solid var(--primary-dark);
+  background-color: transparent;
+}
+
+/* Animation beim Einblenden */
+.mobile-kacheln[style*="block"] {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===================== */
 /* 🖥️ DESKTOP-ONLY ELEMENTE */
 /* ===================== */
 @media (min-width: 769px) {
@@ -202,6 +262,19 @@ main {
   #cart-overlay-mobile {
     display: none !important;
   }
+}
+
+/* ===================== */
+/* 📱 MOBILE-ONLY ELEMENTE */
+/* ===================== */
+@media (max-width: 768px) {
+  /* Desktop-Warenkorb ausblenden */
+  #mini-cart-desktop,
+  #cart-overlay-desktop {
+    display: none !important;
+  }
+  
+  /* Rest Ihrer mobilen Styles... */
 }
 
 /* ===================== */

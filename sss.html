@@ -188,6 +188,66 @@ main {
 }
 
 /* ===================== */
+/* 📱 MOBILE KACHELMENÜ (Bottom-Nav) */
+/* ===================== */
+.mobile-kacheln {
+  display: none;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  padding: 15px;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+  z-index: 998;
+  border-top: 2px solid var(--primary);
+}
+
+.mobile-kacheln .box {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background-color: var(--light-bg);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--primary);
+}
+
+.mobile-kacheln .box:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+#subKacheln {
+  display: none;
+  background-color: rgba(96, 119, 68, 0.05);
+  border-radius: 6px;
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+#subKacheln .box {
+  padding-left: 30px;
+  font-size: 0.95em;
+  border-left: 3px solid var(--primary-dark);
+  background-color: transparent;
+}
+
+/* Animation beim Einblenden */
+.mobile-kacheln[style*="block"] {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===================== */
 /* 🖥️ DESKTOP-ONLY ELEMENTE */
 /* ===================== */
 @media (min-width: 769px) {
@@ -199,6 +259,19 @@ main {
   #cart-overlay-mobile {
     display: none !important;
   }
+}
+
+/* ===================== */
+/* 📱 MOBILE-ONLY ELEMENTE */
+/* ===================== */
+@media (max-width: 768px) {
+  /* Desktop-Warenkorb ausblenden */
+  #mini-cart-desktop,
+  #cart-overlay-desktop {
+    display: none !important;
+  }
+  
+  /* Rest Ihrer mobilen Styles... */
 }
 
 /* ===================== */
@@ -274,54 +347,21 @@ img {
   border-radius: 8px;
 }
 
-/* 🧭 Kategorie-Kacheln auf der FAQ-Seite */
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1.2em;
-  margin: 2em 0;
-  max-width: 900px;
-  margin: 2em auto;
-}
+/* ===================== */
+/* ❓ FAQ-SEITEN-STYLES */
+/* ===================== */
 
-.category-box {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 1.2em 0.8em;
-  text-align: center;
-  text-decoration: none;
-  color: #333;
-  border: 1px solid #e0e0e0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.category-box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
-}
-
-.category-box .icon {
-  font-size: 2em;
-  margin-bottom: 0.4em;
-}
-
-.category-box .label {
-  font-size: 1em;
-  font-weight: bold;
-}
-
-/* 🔍 Suchfeld für FAQ-Seite */
+/* 🔍 Suchfeld */
 #faq-search {
-  display: block;
+  width: 100%;
   max-width: 600px;
-  margin: 0 auto 2.5em;
-  padding: 1em;
-  font-size: 1em;
+  margin: 0 auto 2em;
+  padding: 12px 20px;
+  border: 2px solid var(--primary);
   border-radius: 8px;
-  border: 2px solid #607744;
+  font-size: 1em;
   box-shadow: 0 0 0 3px rgba(96, 119, 68, 0.1);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 #faq-search:focus {
@@ -329,132 +369,123 @@ img {
   box-shadow: 0 0 0 3px rgba(96, 119, 68, 0.25);
 }
 
-/* 📦 FAQ Akkordeon-Stil */
-details {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 1.5em;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
-  overflow: hidden;
+/* 📦 Kategorie-Kacheln */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin: 2em auto;
+  max-width: 800px;
 }
 
-summary {
-  padding: 1.2em;
+.category-box {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px 10px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.category-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: var(--primary);
+}
+
+.category-box .icon {
+  font-size: 2em;
+  margin-bottom: 8px;
+}
+
+.category-box .label {
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+/* 📚 Akkordeon-Styles */
+.accordion {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: var(--white);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 8px;
   font-weight: 600;
+  font-size: 1.05em;
   cursor: pointer;
   position: relative;
-  list-style: none;
-  font-size: 1.05em;
-  color: #222;
-}
-
-summary::after {
-  content: "+";
-  position: absolute;
-  right: 1.2em;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: bold;
-  font-size: 1.3em;
-  color: #999;
-  transition: 0.2s ease;
-}
-
-details[open] summary {
-  color: #607744;
-  background-color: #f1f5f1;
-}
-
-details[open] summary::after {
-  content: "–";
-  color: #607744;
-}
-
-details p {
-  padding: 0 1.5em 1.2em;
-  margin: 0;
-  font-size: 1em;
-  color: #444;
-}
-
-
-
-.bottom-nav button:hover,
-.bottom-nav a:hover {
-  background-color: #eef1ea;
-  transform: scale(1.1);
-  color: #2f2f2f;
-}
-
-/* 📦 Akkordeon aktive Buttons */
-.accordion-button.active {
-  background-color: #f1f5f1;
-  color: #607744;
-}
-.accordion-button::after {
-  content: "+";
-  position: absolute;
-  right: 1.2em;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: bold;
-  font-size: 1.3em;
-  color: #999;
-  transition: 0.2s ease;
-}
-.accordion-button.active::after {
-  content: "–";
-  color: #607744;
-}
-
-/* 📚 Akkordeon-Button-Stil für FAQ */
-.accordion-button {
-  background-color: #fff;
-  color: #2f2f2f;
-  padding: 1.2em;
-  font-size: 1.1em;
-  font-weight: bold;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 0.5em 0;
-  cursor: pointer;
-  text-align: left;
-  width: 100%;
-  transition: background 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .accordion-button:hover {
-  background-color: #f1f5f1;
-}
-
-.accordion-button.active {
-  background-color: #f1f5f1;
-  color: #607744;
+  background: #f5f5f0;
 }
 
 .accordion-button::after {
   content: "+";
-  float: right;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 1.2em;
-  transition: transform 0.2s ease;
+  color: #999;
+}
+
+.accordion-button.active {
+  background: #f1f5f1;
+  color: var(--primary);
+  border-color: var(--primary);
 }
 
 .accordion-button.active::after {
-  content: "–";
-  color: #607744;
+  content: "-";
+  color: var(--primary);
 }
 
-/* 📘 Akkordeon-Inhalt */
 .accordion-panel {
-  display: none;
-  padding: 1em 1.5em;
-  border-left: 4px solid #607744;
-  background-color: #fcfcf9;
-  margin-bottom: 1em;
-  border-radius: 0 8px 8px 0;
-  color: #444;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.accordion-panel.show {
+  padding: 15px 20px 25px;
+  max-height: 1000px;
+  border-left: 3px solid var(--primary);
+  margin-bottom: 15px;
+}
+
+/* 📱 Mobile-Optimierungen */
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .accordion-button {
+    padding: 14px 16px;
+    font-size: 1em;
+  }
+  
+  #faq-search {
+    margin-bottom: 1.5em;
+  }
+}
+
+/* 🎨 Icons für Kategorien */
+[class*="Soru"] .accordion-button::before {
+  margin-right: 10px;
+  font-size: 1.2em;
 }
 </style>
 
@@ -729,26 +760,63 @@ details p {
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <!-- JavaScript: Akkordeon-Logik mit Plus/Minus -->
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const buttons = document.querySelectorAll(".accordion-button");
-
-    buttons.forEach(button => {
-      button.addEventListener("click", () => {
-        const panel = button.nextElementSibling;
-        const isOpen = button.classList.contains("active");
-
-        // Alle schließen
-        document.querySelectorAll(".accordion-button").forEach(btn => btn.classList.remove("active"));
-        document.querySelectorAll(".accordion-panel").forEach(p => p.style.display = "none");
-
-        // Falls nicht offen, dieses öffnen
-        if (!isOpen) {
-          button.classList.add("active");
-          panel.style.display = "block";
+  // 📚 Akkordeon-Funktionalität (für FAQ-Seite)
+document.addEventListener("DOMContentLoaded", function() {
+  const accordionButtons = document.querySelectorAll('.accordion-button');
+  
+  accordionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Aktuellen Zustand prüfen
+      const isActive = this.classList.contains('active');
+      const panel = this.nextElementSibling;
+      
+      // Alle anderen schließen
+      accordionButtons.forEach(btn => {
+        if (btn !== this) {
+          btn.classList.remove('active');
+          btn.nextElementSibling.classList.remove('show');
         }
       });
+      
+      // Aktuelles Element umschalten
+      this.classList.toggle('active');
+      panel.classList.toggle('show');
+      
+      // Suchfunktion nach Klick zurücksetzen (falls vorhanden)
+      if (document.getElementById('faq-search')) {
+        document.getElementById('faq-search').value = '';
+        filterFAQs(); // Falls eine Filterfunktion existiert
+      }
     });
   });
+  
+  // Suchfunktion für FAQs (falls gewünscht)
+  const faqSearch = document.getElementById('faq-search');
+  if (faqSearch) {
+    faqSearch.addEventListener('input', filterFAQs);
+  }
+});
+
+// 🔍 Filterfunktion für FAQs
+function filterFAQs() {
+  const searchTerm = document.getElementById('faq-search').value.toLowerCase();
+  const questions = document.querySelectorAll('.accordion-button');
+  
+  questions.forEach(q => {
+    const questionText = q.textContent.toLowerCase();
+    const panel = q.nextElementSibling;
+    const shouldShow = questionText.includes(searchTerm);
+    
+    q.style.display = shouldShow ? 'block' : 'none';
+    panel.style.display = shouldShow ? 'block' : 'none';
+    
+    // Automatisch öffnen bei Treffern
+    if (shouldShow && searchTerm.length > 2) {
+      q.classList.add('active');
+      panel.classList.add('show');
+    }
+  });
+}
 </script>
 
 <!-- JavaScript letztes update github -->

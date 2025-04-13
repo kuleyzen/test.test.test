@@ -188,6 +188,66 @@ main {
 }
 
 /* ===================== */
+/* 📱 MOBILE KACHELMENÜ (Bottom-Nav) */
+/* ===================== */
+.mobile-kacheln {
+  display: none;
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  background-color: var(--white);
+  padding: 15px;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+  z-index: 998;
+  border-top: 2px solid var(--primary);
+}
+
+.mobile-kacheln .box {
+  display: block;
+  padding: 12px 15px;
+  margin: 8px 0;
+  background-color: var(--light-bg);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border-left: 3px solid var(--primary);
+}
+
+.mobile-kacheln .box:hover {
+  background-color: var(--primary);
+  color: var(--white);
+  transform: translateX(5px);
+}
+
+#subKacheln {
+  display: none;
+  background-color: rgba(96, 119, 68, 0.05);
+  border-radius: 6px;
+  margin-top: 5px;
+  padding: 5px 0;
+}
+
+#subKacheln .box {
+  padding-left: 30px;
+  font-size: 0.95em;
+  border-left: 3px solid var(--primary-dark);
+  background-color: transparent;
+}
+
+/* Animation beim Einblenden */
+.mobile-kacheln[style*="block"] {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===================== */
 /* 🖥️ DESKTOP-ONLY ELEMENTE */
 /* ===================== */
 @media (min-width: 769px) {
@@ -199,6 +259,19 @@ main {
   #cart-overlay-mobile {
     display: none !important;
   }
+}
+
+/* ===================== */
+/* 📱 MOBILE-ONLY ELEMENTE */
+/* ===================== */
+@media (max-width: 768px) {
+  /* Desktop-Warenkorb ausblenden */
+  #mini-cart-desktop,
+  #cart-overlay-desktop {
+    display: none !important;
+  }
+  
+  /* Rest Ihrer mobilen Styles... */
 }
 
 /* ===================== */
@@ -274,99 +347,146 @@ img {
   border-radius: 8px;
 }
 
-/* 🛍️ Produktkarten-Stil auf der Produktseite */
+/* ===================== */
+/* 🛍️ PRODUKT-STYLES (Ergänzungen) */
+/* ===================== */
+
+/* Produkt-Container Anpassungen */
 .product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Produktkarten - falls nicht vorhanden */
+.product-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(96, 119, 68, 0.1);
 }
 
-.product {
-  background: white;
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Produktbild */
+.product-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin: 0 auto 20px;
   border-radius: 8px;
-  padding: 20px;
-  max-width: 280px;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
 }
 
-.product img {
-  max-width: 100%;
-  border-radius: 6px;
+.product-card:hover .product-image {
+  transform: scale(1.03);
 }
 
-.product h3 {
-  margin-top: 0.8em;
-  color: #2f2f2f;
+/* Produkttitel */
+.product-title {
+  color: var(--primary-dark);
+  margin: 0 0 12px;
+  font-size: 1.3em;
+  font-weight: 600;
 }
 
-.product p {
-  font-size: 1.1em;
-  margin-bottom: 1em;
-  color: #444;
-}
-
-.product a {
-  display: inline-block;
-  padding: 10px 20px;
-  background: #607744;
-  color: white;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.product a:hover {
-  background-color: #4e6137;
-}
-.quantity-control {
+/* ===================== */
+/* 🔢 MENGENSTEUERUNG (Ergänzungen) */
+/* ===================== */
+.quantity-selector {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin: 10px 0;
+  gap: 12px;
+  margin: 20px 0;
 }
 
-.quantity-control button {
-  background-color: #607744;
-  color: white;
+.quantity-btn {
+  background-color: var(--primary);
+  color: var(--white);
   border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.quantity-control button:hover {
-  background-color: #4e6137;
+.quantity-btn:hover {
+  background-color: var(--primary-dark);
+  transform: scale(1.1);
 }
 
-.quantity-control input {
-  width: 50px;
-  height: 36px;
+.quantity-input {
+  width: 60px;
+  height: 40px;
   text-align: center;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 6px;
   font-size: 1em;
+  font-weight: bold;
 }
-.add-to-basket {
-  background-color: #607744;
-  color: white;
+
+/* ===================== */
+/* 🛒 IN DEN WARENKORB BUTTON (Ergänzungen) */
+/* ===================== */
+.add-to-cart-btn {
+  background-color: var(--primary);
+  color: var(--white);
   border: none;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 6px;
   font-size: 1em;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   display: block;
-  margin: 0 auto; /* zentriert unter dem Produkt */
+  width: 100%;
+  font-weight: 600;
+  margin-top: auto;
 }
 
-.add-to-basket:hover {
-  background-color: #4e6137;
+.add-to-cart-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ===================== */
+/* 📱 MOBILE OPTIMIERUNG (Ergänzungen) */
+/* ===================== */
+@media (max-width: 768px) {
+  .product-container {
+    grid-template-columns: 1fr;
+    padding: 15px;
+    gap: 20px;
+  }
+  
+  .product-card {
+    padding: 20px;
+  }
+  
+  .quantity-selector {
+    margin: 15px 0;
+  }
+  
+  .quantity-input {
+    width: 50px;
+  }
 }
 </style>
 
