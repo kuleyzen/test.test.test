@@ -61,15 +61,15 @@
     }
   
 /* 🔝 Navigationsleiste (Desktop) */    
-  .main-nav {
+.main-nav {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 10px; /* 👈 Padding links hinzugefügt */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* 👈 Von "center" zu "flex-start" geändert */
     flex-wrap: wrap;
     background-color: #607744;
-  }
+}
 
   .main-nav > li {
     position: relative;
@@ -223,32 +223,35 @@
 }
 /* 📜 Hauptnavigation: mobil horizontal scrollfähig */
 @media (max-width: 768px) {
-  .main-nav {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 0.5em 0;
-    scrollbar-width: none; /* Firefox */
-    background-color: #607744;
-  }
+    .main-nav {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0.5em 0 0.5em 10px; /* 👈 Padding links hinzugefügt */
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch; /* 👈 Für iOS-Smooth-Scroll */
+        scroll-snap-type: x mandatory; /* 👈 Neu: Snap-Effekt */
+        background-color: #607744;
+    }
 
-  .main-nav::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
+    .main-nav::-webkit-scrollbar {
+        display: none;
+    }
 
-  .main-nav > li {
-    display: inline-block;
-    margin: 0;
-    flex: 0 0 auto;  /* 👈 Ergänzt */
-    scroll-snap-align: start;
-  }
+    .main-nav > li {
+        display: inline-block;
+        margin: 0;
+        flex: 0 0 auto; /* 👈 Wichtig: Fixe Breite */
+        scroll-snap-align: start; /* 👈 Neu: Snap-Punkt */
+        scroll-snap-stop: always; /* 👈 Neu: Stoppt immer am Menüpunkt */
+    }
 
-  .main-nav > li > a {
-    white-space: nowrap;
-    display: inline-block;  /* 👈 Ergänzt */
-    padding: 1em 1.2em;
-  }
+    .main-nav > li > a {
+        white-space: nowrap;
+        display: inline-block;
+        padding: 1em 1.2em;
+    }
 }
 /* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
 .bottom-nav {
@@ -394,6 +397,28 @@ body {
   }
 }
 
+/* 🛒 Desktop-Icon – Nur auf Desktop anzeigen */
+@media (min-width: 769px) {
+  #mini-cart-desktop {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #607744;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 9999;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  #mini-cart-desktop {
+    display: none !important;
+  }
+}
+
 /* 💻 Desktop-Warenkorb */
 #cart-overlay-desktop {
   position: fixed;
@@ -456,15 +481,6 @@ body {
   color: #fff;
 }
 
-/* 📱 Anzeige je nach Gerät */
-@media (max-width: 768px) {
-  #mini-cart-desktop {
-    display: none;
-  }
-  #mini-cart-mobile {
-    display: block;
-  }
-}
 /* 📋 Stil für die Warenkorb-Tabelle im Checkout */
 table {
   width: 100%;
@@ -559,14 +575,14 @@ form {
   <h4>Sepetiniz</h4>
   <ul id="cart-items-desktop"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
-  <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
+  <a href="checkout.html" class="checkout-btn">Sipariş Ver</a>
 </div>
 <!-- 📱 Mobil-Warenkorb -->
 <div id="cart-overlay-mobile" class="cart-overlay" style="display: none;">
   <h4>Sepetiniz</h4>
   <ul id="cart-items-mobile"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total-mobile">0</span> TL</p>
-  <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
+  <a href="checkout.html" class="checkout-btn">Sipariş Ver</a>
 </div>
 <!-- Hauptnavigation -->
 <nav>
@@ -639,13 +655,7 @@ form {
     </div>
     <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
   </div>
-  <!-- 📦 Warenkorb-Overlay -->
-  <div id="cart-overlay" style="display: none;">
-    <h4>Sepetiniz</h4>
-    <ul id="cart-items"></ul>
-    <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
-    <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
-  </div>
+  
   <!-- Fußzeile mit Copyright -->   
   <footer style="text-align: center; padding: 20px; background-color: #4a5534; color: white;">
     <p>© 2025 Kuleyzen Aile Çiftliği – Tüm hakları saklıdır.</p>
@@ -699,7 +709,7 @@ form {
       sub.style.display = sub.style.display === "block" ? "none" : "block";
     }
   </script>
-  
+ 
 
   <!-- 🧠 Kuleyzen Checkout-Logik (Mengenänderung + WhatsApp + Reset) -->
 <script>
@@ -810,14 +820,21 @@ row.appendChild(totalTd);
     }
   
    // 🧺 Warenkorb ein- und ausblenden
-function toggleCart() {
-  const overlay = document.getElementById("cart-overlay");
-  if (overlay.style.display === "none" || overlay.style.display === "") {
-    overlay.style.display = "block"; // Zeige das Overlay an
-  } else {
-    overlay.style.display = "none"; // Verstecke das Overlay
+   function toggleCart() {
+    const overlayDesktop = document.getElementById("cart-overlay-desktop");
+    const overlayMobile = document.getElementById("cart-overlay-mobile");
+    const overlayNeutral = document.getElementById("cart-overlay");
+  
+    [overlayDesktop, overlayMobile, overlayNeutral].forEach(overlay => {
+      if (overlay) {
+        if (overlay.style.display === "none" || overlay.style.display === "") {
+          overlay.style.display = "block";
+        } else {
+          overlay.style.display = "none";
+        }
+      }
+    });
   }
-}
 
   // 📦 Seite geladen → Warenkorb-Anzeige aktualisieren
   document.addEventListener("DOMContentLoaded", updateCartDisplay);

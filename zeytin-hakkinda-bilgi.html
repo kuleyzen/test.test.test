@@ -60,15 +60,15 @@
     }
   
 /* 🔝 Navigationsleiste (Desktop) */    
-  .main-nav {
+.main-nav {
     list-style: none;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 10px; /* 👈 Padding links hinzugefügt */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* 👈 Von "center" zu "flex-start" geändert */
     flex-wrap: wrap;
     background-color: #607744;
-  }
+}
 
   .main-nav > li {
     position: relative;
@@ -222,32 +222,35 @@
 }
 /* 📜 Hauptnavigation: mobil horizontal scrollfähig */
 @media (max-width: 768px) {
-  .main-nav {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 0.5em 0;
-    scrollbar-width: none; /* Firefox */
-    background-color: #607744;
-  }
+    .main-nav {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0.5em 0 0.5em 10px; /* 👈 Padding links hinzugefügt */
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch; /* 👈 Für iOS-Smooth-Scroll */
+        scroll-snap-type: x mandatory; /* 👈 Neu: Snap-Effekt */
+        background-color: #607744;
+    }
 
-  .main-nav::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
-  }
+    .main-nav::-webkit-scrollbar {
+        display: none;
+    }
 
-  .main-nav > li {
-    display: inline-block;
-    margin: 0;
-    flex: 0 0 auto;  /* 👈 Ergänzt */
-    scroll-snap-align: start;
-  }
+    .main-nav > li {
+        display: inline-block;
+        margin: 0;
+        flex: 0 0 auto; /* 👈 Wichtig: Fixe Breite */
+        scroll-snap-align: start; /* 👈 Neu: Snap-Punkt */
+        scroll-snap-stop: always; /* 👈 Neu: Stoppt immer am Menüpunkt */
+    }
 
-  .main-nav > li > a {
-    white-space: nowrap;
-    display: inline-block;  /* 👈 Ergänzt */
-    padding: 1em 1.2em;
-  }
+    .main-nav > li > a {
+        white-space: nowrap;
+        display: inline-block;
+        padding: 1em 1.2em;
+    }
 }
 /* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
 .bottom-nav {
@@ -470,14 +473,14 @@ body {
   <h4>Sepetiniz</h4>
   <ul id="cart-items-desktop"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
-  <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
+  <a href="checkout.html" class="checkout-btn">Sipariş Ver</a>
 </div>
 <!-- 📱 Mobil-Warenkorb -->
 <div id="cart-overlay-mobile" class="cart-overlay" style="display: none;">
   <h4>Sepetiniz</h4>
   <ul id="cart-items-mobile"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total-mobile">0</span> TL</p>
-  <a href="checkout.html" class="checkout-btn">Ödeme Sayfası</a>
+  <a href="checkout.html" class="checkout-btn">Sipariş Ver</a>
 </div>
 
 <!-- Hauptnavigation -->
