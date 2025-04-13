@@ -7,313 +7,159 @@
   <title>Kuleyzen - Doğal Zeytinyağı</title>
 <!-- Eingebettetes CSS für Seitenlayout, Menü und Akkordeon -->  
 <style>
-  /* 🌿 Grundlegende Layout- und Farbstile */
-  body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fafaf5;
-      color: #2f2f2f;
-      margin: 0;
-      padding: 0;
-    }
-/* 📄 Hauptbereich-Layout */    
-    main {
-      padding: 40px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
-/* 🖼️ Flexbox für Sektionen mit Bild und Text */    
-    .section {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      margin-bottom: 60px;
-    }
-    .section img {
-      flex: 1 1 300px;
-      max-width: 300px;
-      margin-right: 30px;
-      border-radius: 8px;
-    }
-    .section div {
-      flex: 2 1 400px;
-    }
-/* 🧱 Überschriften-Layout */    
-    h2, h3 {
-      margin-top: 40px;
-    }
-/* 📱 Responsive Anpassung für kleine Bildschirme */    
-    @media (max-width: 768px) {
-      .section {
-        flex-direction: column;
-      }
-      .section img {
-        margin: 0 0 20px 0;
-        max-width: 100%;
-      }
-    }
-/* 📷 Allgemeine Bildformatierung */    
-   img {
-      width: 100%;
-      max-width: 600px;
-      margin: 20px 0;
-      border-radius: 8px;
-    }
-  
-/* 🔝 Navigationsleiste (Desktop) */    
-.main-nav {
-    list-style: none;
-    margin: 0;
-    padding: 0 0 0 10px; /* 👈 Padding links hinzugefügt */
-    display: flex;
-    justify-content: flex-start; /* 👈 Von "center" zu "flex-start" geändert */
-    flex-wrap: wrap;
-    background-color: #607744;
+/* ===================== */
+/* 🌿 BASIS-STYLES & VARIABLEN */
+/* ===================== */
+:root {
+  --primary: #607744;      /* Hauptfarbe (Olivgrün) */
+  --primary-dark: #4e6137; /* Dunklere Akzentfarbe */
+  --light-bg: #fafaf5;     /* Seitenhintergrund */
+  --text: #2f2f2f;         /* Haupttextfarbe */
+  --white: #ffffff;        /* Weiß für Kontraste */
 }
 
-  .main-nav > li {
-    position: relative;
-  }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text);
+  margin: 0;
+  padding: 0 0 80px; /* Platz für Bottom-Nav */
+}
 
-  .main-nav > li > a {
-    display: block;
-    padding: 1em 1.5em;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
+main {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
-  .main-nav > li > a:hover {
-    background-color: #4e6137;
-  }
-/* 📂 Submenü (Desktop Hover) */
-  .submenu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #607744;
-    z-index: 9999;
-    min-width: 180px;
-  }
+/* ===================== */
+/* 🖼️ BILD-TEXT-BLOECKE */
+/* ===================== */
+.section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
 
-  .has-submenu:hover .submenu {
-    display: block;
-  }
-/* 🛠️ Submenü Hintergrundfarbe und Hover-Korrektur */
+.section img {
+  flex: 1 1 300px;
+  max-width: 300px;
+  margin-right: 30px;
+  border-radius: 8px;
+}
+
+.section div {
+  flex: 2 1 400px;
+}
+
+/* ===================== */
+/* 🧭 NAVIGATION */
+/* ===================== */
+.main-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background-color: var(--primary);
+}
+
+.main-nav > li {
+  position: relative;
+}
+
+.main-nav > li > a {
+  display: block;
+  padding: 1em 1.5em;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.main-nav > li > a:hover {
+  background-color: var(--primary-dark);
+}
+
+/* ===================== */
+/* 🗂 UNTERMENÜS (DESKTOP) */
+/* ===================== */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--primary);
+  z-index: 9999;
+  min-width: 180px;
+}
+
+.has-submenu:hover .submenu {
+  display: block;
+}
+
 .submenu li a {
   display: block;
   padding: 0.75em 1.5em;
-  color: white;
+  color: var(--white);
   text-decoration: none;
-  background-color: #607744; /* ← das kann fehlen */
-  line-height: 1.4; /* optional: reduziert unnötige Höhe */
+  background-color: var(--primary);
+  line-height: 1.4;
 }
 
 .submenu li a:hover {
-  background-color: #4e6137;
+  background-color: var(--primary-dark);
 }
 
-/* 🖱️ Submenü Hover-Effekt (nur Desktop, verhindert Zeilenverbreiterung) */
-@media (min-width: 769px) {
-  .has-submenu {
-    position: relative;
+/* ===================== */
+/* 📱 MOBILE-STYLES (max-width: 768px) */
+/* ===================== */
+@media (max-width: 768px) {
+  /* Bild-Text-Blöcke anpassen */
+  .section {
+    flex-direction: column;
   }
+  
+  .section img {
+    margin: 0 0 20px 0;
+    max-width: 100%;
+  }
+
+  /* Navigation als Scrollmenü */
+  .main-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0.5em 0 0.5em 10px;
+  }
+
   .main-nav > li {
-    position: relative;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
   }
+
   .main-nav > li > a {
-    line-height: 1.2;
+    white-space: nowrap;
   }
 
-  .submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #607744;
-    display: none;
-    min-width: 180px;
-    z-index: 999;
-  }
-
-  .has-submenu:hover > .submenu {
-    display: block;
-  }
-
-  .submenu li a {
-    display: block;
-    padding: 0.75em 1.5em;
-    color: white;
-    background-color: #607744;
-    text-decoration: none;
-    line-height: 1.4;
-  }
-
-  .submenu li a:hover {
-    background-color: #4e6137;
-  }
-}
-   
-    
- /* 📂 Submenü im mobilen Layout */
- @media (max-width: 768px) {
+  /* Untermenüs anpassen */
   .submenu {
     position: static;
-    display: none;
-    padding-left: 2em;
-  }
-
-  .has-submenu:hover .submenu {
-    display: block;
+    margin: 0 15px;
   }
 }
-   
-  
-/* 📵 Bottom-Menü nur auf Mobilgeräten anzeigen */
-@media (min-width: 769px) {
-  .bottom-nav {
-    display: none;
-  }
-}
-/* 🎮 Nintendo-Style Bottom Navigation (Mobil) */
-.bottom-grid {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #607744;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 2px;
-  padding: 10px;
-  z-index: 999;
-}
 
-.bottom-grid button {
-  background-color: #4e6137;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 5px;
-  font-size: 1.3em;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.bottom-grid button span {
-  font-size: 0.8em;
-  margin-top: 5px;
-}
-
-.bottom-grid button:hover {
-  background-color: #eef1ea;
-  color: #2f2f2f;
-  transform: scale(1.05);
-}
-
-/* 📵 Nur auf Mobilgeräten anzeigen */
-@media (min-width: 769px) {
-  .bottom-grid {
-    display: none;
-  }
-}
-/* 📜 Hauptnavigation: mobil horizontal scrollfähig */
-@media (max-width: 768px) {
-    .main-nav {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        white-space: nowrap;
-        padding: 0.5em 0 0.5em 10px; /* 👈 Padding links hinzugefügt */
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch; /* 👈 Für iOS-Smooth-Scroll */
-        scroll-snap-type: x mandatory; /* 👈 Neu: Snap-Effekt */
-        background-color: #607744;
-    }
-
-    .main-nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    .main-nav > li {
-        display: inline-block;
-        margin: 0;
-        flex: 0 0 auto; /* 👈 Wichtig: Fixe Breite */
-        scroll-snap-align: start; /* 👈 Neu: Snap-Punkt */
-        scroll-snap-stop: always; /* 👈 Neu: Stoppt immer am Menüpunkt */
-    }
-
-    .main-nav > li > a {
-        white-space: nowrap;
-        display: inline-block;
-        padding: 1em 1.2em;
-    }
-}
-/* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
+/* ===================== */
+/* 🎮 BOTTOM-NAVIGATION (MOBILE) */
+/* ===================== */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: #607744;
-  display: flex;
-  justify-content: space-around; /* sorgt für gleichmäßige Verteilung */
-  align-items: center;
-  padding: 10px;
-  z-index: 999;
-}
-
-
-.bottom-nav a, 
-.bottom-nav button 
-#mini-cart-mobile{
-  background-color: #4e6137;
-  color: white;
-  padding: 12px;  /* Padding leicht erhöht, um Symmetrie zu gewährleisten */
- 
-  border-radius: 50%;
-  font-size: 1.3em;
-  text-align: center;
-  border: none;
-  text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
- }
-
-.bottom-nav a:hover, 
-.bottom-nav button:hover 
-#mini-cart-mobile{
-  background-color: #eef1ea;
-  transform: scale(1.1);
-  color: #2f2f2f;
-}
-
-/* 📱 Mobil: Warenkorb-Button sichtbar */
-@media (max-width: 768px) {
-  #mini-cart-mobile {
-    display: block;
-  }
-}
-
-/* 📵 Bottom-Menü nur auf Mobil anzeigen */
-@media (min-width: 769px) {
-  .bottom-nav {
-    display: none;
-  }
-}
-/* 🦶 Platz für Footer sichtbar unter Bottom-Menü */
-body {
-  padding-bottom: 80px; /* Genug Platz für .bottom-nav */
-}
-/* 🎮 Vereinfachte Bottom Navigation (mobil): Nur 3 Felder */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #607744;
+  background-color: var(--primary);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -323,140 +169,109 @@ body {
 
 .bottom-nav a,
 .bottom-nav button {
-  background-color: #4e6137;
-  color: white;
+  background-color: var(--primary-dark);
+  color: var(--white);
   padding: 12px;
   border-radius: 50%;
   font-size: 1.3em;
   text-align: center;
   border: none;
   text-decoration: none;
-  transition: background 0.3s, transform 0.3s;
+  transition: all 0.3s;
 }
 
 .bottom-nav a:hover,
 .bottom-nav button:hover {
   background-color: #eef1ea;
+  color: var(--text);
   transform: scale(1.1);
-  color: #2f2f2f;
 }
 
-/* 👀 Nur auf Mobilgeräten anzeigen */
+/* ===================== */
+/* 🖥️ DESKTOP-ONLY ELEMENTE */
+/* ===================== */
 @media (min-width: 769px) {
+  /* Mobile-Komponenten ausblenden */
   .bottom-nav,
-  .mobile-kacheln {
-    display: none;
-  }
-}
-
-/* 📦 Kachelmenü bei Klick auf Hamburger */
-.mobile-kacheln {
-  display: none;
-  position: fixed;
-  bottom: 60px;
-  left: 0;
-  width: 100%;
-  background-color: #f5f5f0;
-  padding: 1em;
-  z-index: 998;
-  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.mobile-kacheln .box {
-  display: inline-block;
-  background: #fff;
-  padding: 0.8em 1em;
-  margin: 0.3em;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 0.95em;
-  font-weight: bold;
-  color: #2f2f2f;
-  text-decoration: none;
-}
-/* 🛒 Desktop-Icon – Nur auf Desktop anzeigen */
-@media (min-width: 769px) {
-  #mini-cart-desktop {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #607744;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 30px;
-    cursor: pointer;
-    z-index: 9999;
-    display: block;
-  }
-}
-
-@media (max-width: 768px) {
-  #mini-cart-desktop {
-    display: none !important;
-  }
-}
-
-/* 💻 Desktop-Warenkorb */
-#cart-overlay-desktop {
-  position: fixed;
-  top: 60px;
-  right: 20px;
-  width: 300px;
-  background: white;
-  border: 2px solid #607744;
-  padding: 20px;
-  border-radius: 12px;
-  z-index: 998;
-}
-
-@media (max-width: 768px) {
-  #cart-overlay-desktop {
-    display: none !important;
-  }
-}
-
-/* 📱 Mobil-Warenkorb */
-#cart-overlay-mobile {
-  position: fixed;
-  bottom: 70px; /* über dem Bottom-Menü */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  background: white;
-  border: 2px solid #607744;
-  padding: 20px;
-  border-radius: 12px;
-  z-index: 998;
-}
-
-@media (min-width: 769px) {
+  .bottom-grid,
+  .mobile-kacheln,
+  #mini-cart-mobile,
   #cart-overlay-mobile {
     display: none !important;
   }
 }
 
-/* 💳 Ödeme Sayfası Button Styling für beide Overlays */
-#cart-overlay-desktop a.checkout-btn,
-#cart-overlay-mobile a.checkout-btn {
+/* ===================== */
+/* 🛒 WARENKORB-SYSTEM */
+/* ===================== */
+/* Desktop-Warenkorb */
+#mini-cart-desktop {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--primary);
+  color: var(--white);
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+#cart-overlay-desktop {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  width: 300px;
+  background: var(--white);
+  border: 2px solid var(--primary);
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+/* Mobile-Warenkorb */
+#cart-overlay-mobile {
+  position: fixed;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  background: var(--white);
+  border: 2px solid var(--primary);
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 998;
+}
+
+/* Allgemeine Warenkorb-Styles */
+.checkout-btn {
   display: block;
   width: 100%;
-  background-color: #607744;
-  color: white;
+  background-color: var(--primary);
+  color: var(--white);
   padding: 12px;
   text-align: center;
   text-decoration: none;
   font-weight: bold;
   border-radius: 8px;
   margin-top: 20px;
-  margin-bottom: 5px;
   box-sizing: border-box;
   transition: background-color 0.3s ease;
 }
 
-#cart-overlay-desktop a.checkout-btn:hover,
-#cart-overlay-mobile a.checkout-btn:hover {
-  background-color: #4e6137;
-  color: #fff;
+.checkout-btn:hover {
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+
+/* ===================== */
+/* 🖼️ BILDER & MEDIA */
+/* ===================== */
+img {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px 0;
+  border-radius: 8px;
 }
 
 /* 🧭 Kategorie-Kacheln auf der FAQ-Seite */
