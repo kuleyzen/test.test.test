@@ -56,6 +56,20 @@ main {
   flex: 2 1 400px;
 }
 
+#index,
+#hakkimizda,
+#urunler,
+#urunlerimizin-uretimi,
+#organik-tarim,
+#nar-hakkinda-bilgi,
+#zeytin-hakkinda-bilgi,
+#sss,
+#iletisim {
+  scroll-margin-top: 120px;
+}
+
+
+
 /* ===================== */
 /* 🧭 NAVIGATION */
 /* ===================== */
@@ -262,6 +276,12 @@ main {
   #cart-overlay-mobile {
     display: none !important;
   }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background-color: var(--primary); /* falls noch nicht gesetzt */
+  }
 }
 
 /* ===================== */
@@ -349,16 +369,661 @@ img {
   margin: 20px 0;
   border-radius: 8px;
 }
+/* ===================== */
+/* 🛍️ PRODUKT-STYLES (Ergänzungen) */
+/* ===================== */
+
+/* Produkt-Container Anpassungen */
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Produktkarten - falls nicht vorhanden */
+.product-card {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(96, 119, 68, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* Produktbild */
+.product-image {
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.03);
+}
+
+/* Produkttitel */
+.product-title {
+  color: var(--primary-dark);
+  margin: 0 0 12px;
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+/* ===================== */
+/* 🔢 MENGENSTEUERUNG (Ergänzungen) */
+/* ===================== */
+.quantity-selector {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.quantity-btn {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quantity-btn:hover {
+  background-color: var(--primary-dark);
+  transform: scale(1.1);
+}
+
+.quantity-input {
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+/* ===================== */
+/* 🛒 IN DEN WARENKORB BUTTON (Ergänzungen) */
+/* ===================== */
+.add-to-cart-btn {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: block;
+  width: 100%;
+  font-weight: 600;
+  margin-top: auto;
+}
+
+.add-to-cart-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ===================== */
+/* 📱 MOBILE OPTIMIERUNG (Ergänzungen) */
+/* ===================== */
+@media (max-width: 768px) {
+  .product-container {
+    grid-template-columns: 1fr;
+    padding: 15px;
+    gap: 20px;
+  }
+  
+  .product-card {
+    padding: 20px;
+  }
+  
+  .quantity-selector {
+    margin: 15px 0;
+  }
+  
+  .quantity-input {
+    width: 50px;
+  }
+}
+
+/* ===================== */
+/* 🏡 PRODUKTIONS-THEMEN KACHELN */
+/* ===================== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.product-box {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  border-top: 4px solid var(--primary);
+}
+
+.product-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.product-box h2 {
+  color: var(--primary-dark);
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+.product-box p {
+  color: var(--text);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.product-box .button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.product-box .button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Mobile Anpassungen */
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .product-box {
+    padding: 20px;
+  }
+}
+
+/* ===================== */
+/* ❓ FAQ-SEITEN-STYLES */
+/* ===================== */
+
+/* 🔍 Suchfeld */
+#faq-search {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 2em;
+  padding: 12px 20px;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  font-size: 1em;
+  box-shadow: 0 0 0 3px rgba(96, 119, 68, 0.1);
+  transition: all 0.3s ease;
+}
+
+#faq-search:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(96, 119, 68, 0.25);
+}
+
+/* 📦 Kategorie-Kacheln */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  margin: 2em auto;
+  max-width: 800px;
+}
+
+.category-box {
+  background: var(--white);
+  border-radius: 10px;
+  padding: 15px 10px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.category-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-color: var(--primary);
+}
+
+.category-box .icon {
+  font-size: 2em;
+  margin-bottom: 8px;
+}
+
+.category-box .label {
+  font-weight: bold;
+  font-size: 0.95em;
+}
+
+/* 📚 Akkordeon-Styles */
+.accordion {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.accordion-button {
+  width: 100%;
+  padding: 16px 20px;
+  text-align: left;
+  background: var(--white);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  font-size: 1.05em;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.accordion-button:hover {
+  background: #f5f5f0;
+}
+
+.accordion-button::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2em;
+  color: #999;
+}
+
+.accordion-button.active {
+  background: #f1f5f1;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.accordion-button.active::after {
+  content: "-";
+  color: var(--primary);
+}
+
+.accordion-panel {
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  display: none;
+}
+
+.accordion-panel.show {
+  padding: 15px 20px 25px;
+  max-height: 1000px;
+  border-left: 3px solid var(--primary);
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* 📱 Mobile-Optimierungen */
+@media (max-width: 768px) {
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .accordion-button {
+    padding: 14px 16px;
+    font-size: 1em;
+  }
+  
+  #faq-search {
+    margin-bottom: 1.5em;
+  }
+}
+
+/* 🎨 Icons für Kategorien */
+[class*="Soru"] .accordion-button::before {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+/* ===================== */
+/* 📞 ILETISIM SAYFASI (Kontaktseite) */
+/* ===================== */
+
+/* 📋 Kontaktformular Container */
+.contact-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 📝 Formular-Stil */
+.contact-form {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--primary-dark);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+.contact-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.contact-form button[type="submit"] {
+  background: var(--primary);
+  color: var(--white);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.contact-form button[type="submit"]:hover {
+  background: var(--primary-dark);
+}
+
+/* 🗺️ Karten-Container */
+.map-wrapper {
+  height: 100%;
+  min-height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* 📱 WhatsApp-Button */
+.whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #25D366;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 15px;
+  transition: transform 0.3s;
+}
+
+.whatsapp-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ℹ️ Kontakt-Info Box */
+.contact-info {
+  background: var(--white);
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-top: 30px;
+}
+
+.contact-info h3 {
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.contact-info p {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ===================== */
+/* 🖥️ DESKTOP-OPTIMIERUNGEN */
+/* ===================== */
+@media (min-width: 1024px) {
+  .contact-container {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+
+/* ===================== */
+/* 📋 Overlays für Checkout & Teşekkürler */
+/* ===================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.65);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay .overlay-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+}
+
+/* ===================== */
+/* 💳 CHECKOUT-OVERLAY-STYLES */
+/* ===================== */
+
+/* 📋 Warenkorb-Tabelle */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+  background: var(--white);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.modal-overlay table {
+  margin-bottom: 40px;
+}
+
+th {
+  background: var(--primary);
+  color: var(--white);
+  text-align: left;
+  padding: 12px;
+  font-weight: bold;
+}
+
+td {
+  padding: 12px;
+  border-top: 1px solid #eee;
+}
+
+tfoot td {
+  font-weight: bold;
+  background: #f5f5f0;
+  border-top: 2px solid var(--primary);
+}
+
+/* 📝 Bestellformular */
+form {
+  background: var(--white);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 25px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: var(--primary-dark);
+}
+
+form input,
+form textarea,
+form button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: all 0.3s;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(96, 119, 68, 0.2);
+}
+
+form button {
+  background: var(--primary);
+  color: var(--white);
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+}
+
+form button:hover {
+  background: var(--primary-dark);
+}
+
+/* ➕➖ Mengen-Buttons */
+button[onclick*="changeQty"] {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 0 8px;
+  color: var(--primary);
+}
+
+/* 🗑️ Löschen-Button */
+button[onclick*="removeItem"] {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  color: #d33;
+}
+
 </style>  
 </head>
 
 
 <body>
 
+
   <!-- 🛒 Desktop-Warenkorb-Icon -->
 <div id="mini-cart-desktop" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div>
 
+<!-- 🧾 Checkout Overlay -->
+<div id="checkout-overlay" class="modal-overlay">
+    <div class="overlay-content">
+        <h2>Sepetiniz</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Ürün</th>
+          <th>Adet</th>
+          <th>Birim Fiyat</th>
+          <th>Toplam</th>
+        </tr>
+      </thead>
+      <tbody id="checkout-items"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="3"><strong>Genel Toplam</strong></td>
+          <td><strong><span id="checkout-total">0</span> TL</strong></td>
+        </tr>
+      </tfoot>
+    </table>
 
+    <h2>İletişim Bilgileriniz</h2>
+    <form onsubmit="submitOrder(event)">
+      <label for="name">Adınız</label>
+      <input type="text" id="name" required />
+
+      <label for="note">Notunuz</label>
+      <textarea id="note" rows="4" placeholder="Adres, teslimat notu veya başka bir bilgi..."></textarea>
+
+      <button type="submit">WhatsApp ile Siparişi Gönder</button>
+    </form>
+      
+      <button onclick="closeModal('checkout-overlay')">Kapat</button>
+    </div>
+  </div>
+  
+  <!-- ✅ Teşekkürler Overlay -->
+  <div id="tesekkurler-overlay" class="modal-overlay">
+    <div class="overlay-content">
+      <h2>🎉 Teşekkürler!</h2>
+      <p>Siparişiniz başarıyla alındı.</p>
+      <button onclick="closeModal('tesekkurler-overlay')">Tamam</button>
+    </div>
+  </div>
 
 <!-- 📦 Overlay mit Warenkorb-Inhalt -->
 <!-- 📦 Desktop-Warenkorb -->
@@ -366,31 +1031,31 @@ img {
   <h4>Sepetiniz</h4>
   <ul id="cart-items-desktop"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total">0</span> TL</p>
-  <a href="checkout.html" class="checkout-btn">Sipariş Ver</a>
+  <button onclick="openModal('checkout-overlay')" class="checkout-btn">Sipariş Ver</button>
 </div>
 <!-- 📱 Mobil-Warenkorb -->
 <div id="cart-overlay-mobile" class="cart-overlay" style="display: none;">
   <h4>Sepetiniz</h4>
   <ul id="cart-items-mobile"></ul>
   <p><strong>Toplam:</strong> <span id="cart-total-mobile">0</span> TL</p>
-  <a href="checkout.html" class="checkout-btn">Sipariş Ver</a>
+  <button onclick="openModal('checkout-overlay')" class="checkout-btn">Sipariş Ver</button>
 </div>
 
 <!-- Hauptnavigation -->
 <nav>
   <ul class="main-nav">
-    <li><a href="index.html">Anasayfa</a></li>
-    <li><a href="hakkimizda.html">Hakkımızda</a></li>
-    <li><a href="urunler.html">Ürünler</a></li>
+    <li><a href="#index">Ana Sayfa</a></li>
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
+    <li><a href="#urunler">Ürünler</a></li>
     <li class="has-submenu">
-      <a href="urunlerimizin-uretimi.html">Üretim Süreci</a>
+      <a href="#urunlerimizin-uretimi">Üretim Süreci</a>
       <ul class="submenu">
-        <li><a href="organik-tarim.html">Organik Tarım</a></li>
-        <li><a href="zeytin-hakkinda-bilgi.html">Zeytin Hakkında</a></li>
-        <li><a href="nar-hakkinda-bilgi.html">Nar Ekşisi</a></li>
+        <li><a href="#organik-tarim">Organik Tarım</a></li>
+        <li><a href="#zeytin-hakkinda-bilgi">Zeytin Hakkında</a></li>
+        <li><a href="#nar-hakkinda-bilgi">Nar Ekşisi</a></li>
       </ul>
     </li>
-    <li><a href="sss.html">Sıkça Sorulan Sorular</a></li>
+    <li><a href="#sss">Sıkça Sorulan Sorular</a></li>
     <li><a href="iletisim.html">İletişim</a></li>
   </ul>
 </nav>
@@ -403,36 +1068,553 @@ img {
   <div class="hero" style="background-image: url('hero.jpg'); background-size: cover; background-position: center center; color: white; padding: 80px 20px; text-align: center;">
     <h1 style="font-size: 3em; margin-bottom: 0.5em;">Kuleyzen'e Hoş Geldiniz</h1>
     <p style="font-size: 1.5em; margin-bottom: 1.5em;">Hatay bölgesinden gelen kaliteli, organik zeytinyağını keşfedin.</p>
-    <a href="iletisim.html" style="padding: 12px 30px; background-color: #607744; color: white; text-decoration: none; font-size: 1.2em; border-radius: 4px;">Bizimle İletişime Geçin</a>
+    <a href="#iletisim" style="padding: 12px 30px; background-color: #607744; color: white; text-decoration: none; font-size: 1.2em; border-radius: 4px;">Bizimle İletişime Geçin</a>
   </div>
 </header>
 
-<!-- Hauptinhalt mit Willkommenstext -->
+  <!-- Inhalte als Platzhalter -->
+  <main>
+    <!-- Hier kommt der Bereich mit dem Inhalt von index.html -->
+    <section id="index">
+    <!-- Hauptinhalt mit Willkommenstext -->
 <main style="padding: 2em;">
-  <h2>Hoş Geldiniz</h2>
-  <p>Kuleyzen'e hoş geldiniz. Doğal, organik ve Hatay'ın bereketli topraklarından gelen saf zeytinyağlarımızı keşfedin.</p>
-</main>
+    <h2>Hoş Geldiniz</h2>
+    <p>Kuleyzen'e hoş geldiniz. Doğal, organik ve Hatay'ın bereketli topraklarından gelen saf zeytinyağlarımızı keşfedin.</p>
+  </main>
+    </section>
+
+    <!-- Hier kommt der Inhalt von hakkimizda.html -->
+    <section id="hakkimizda">
+    <!-- 📜 Einleitungstext: Warum Kuleyzen? -->  
+  <h2>Neden Kuleyzen?</h2>
+  <p>Kuleyzen yalnızca bir marka adı değil — bir yerin, bir geleneğin ve bir yaşam biçiminin adıdır. Bugün resmi olarak <strong>Kalınsan mevkii</strong> olarak anılsa da, halk arasında hâlâ eski ismiyle bilinir: <strong>Kuleyzen</strong>. Bu küçük yerleşim, Tokaclı köyünün hemen yanı başında, çoğunlukla <strong>Çelikel sülalesinin</strong> yaşadığı, zeytin ağaçlarının gölgelediği bir yerdir.</p>
+  <p>İsmini, bu topraklarda hep birlikte yaşayan Hristiyan ve Müslüman halkların kurduğu dostluk bağından alır. “Kuleyzen” sözcüğü, Arapça “kul” (iyi) ve “eyzen” (iyi insan) kelimelerinin birleşiminden oluşur. Rivayete göre, Hristiyan köylüler Müslüman komşuları için bu adı kullanırmış: iyi insanlar. Biz de bu mirası sahipleniyor ve Kuleyzen’in ruhunu yaşatıyoruz — doğaya, emeğe ve komşuluğa saygı ile.</p>
+
+  <!-- Abschnitt: Großvater Durmuş Çelikel -->
+  <h3>Bir Ağacın İzinde</h3>
+  <div class="section">
+    <div>
+      <p>Bu topraklarla kurduğumuz bağ, yalnızca ürünle değil, geçmişle ve aileyle de örülüdür. Çelikel ailesinin Tokaclı’daki varlığı, hafızalarda başlangıcı olmayan bir geçmiş gibi, hep oradaydı. Zeytin ağacı bu ailenin içinde hep vardı — gölge veren, besleyen, öğreten.</p>
+      <p>Ailenin bugünkü çiftliğini şekillendiren kişi, Eris Çelikel’in dedesi <strong>Durmuş Çelikel</strong> oldu. 1940’ların sonunda, ailesinin arazisinde yüzlerce zeytin ağacının çoğunu bizzat eliyle dikti. Ona göre zeytincilik yalnızca bir iş değil, doğayla kurulan derin bir dostluktu.</p>
+      <p><strong>Durmuş Ağa</strong>’nın gösterdiği bu yol, sonraki kuşaklar için bir pusula oldu. Zeytine duyulan saygı, ağaca gösterilen özen ve emeğin kutsallığı, Kuleyzen’in karakterine dönüştü.</p>
+    </div>
+  </div>
+
+  <!-- Abschnitt: Nilüfer Çelikel -->
+  <h3>Nilüfer’in Yolculuğu</h3>
+  <div class="section">
+    <div>
+      <p>2010 yılında, Durmuş Ağa artık işleri devretmeye hazır olduğunda, çiftliği gelini <strong>Nilüfer Çelikel</strong> üstlendi. Nilüfer Hanım’ın yolu başta topraktan çok uzaktı. O kendini hep şehirli biri olarak tanımlardı ve kendi sözleriyle: “Buraya gelmeden önce zeytini sadece sofrada, toprağı sadece saksıda bilirdim.”</p>
+      <p>Ancak 1979’da, eşi Mehmet Çelikel’le Tokaclı’ya yaptığı ilk ziyaret her şeyi değiştirdi. Zeytin ağaçlarının duruşu, köyün kokusu ve doğanın dinginliği ona derinden dokundu. Yıllar sonra çiftliğin başına geçtiğinde bu bağ yeniden canlandı.</p>
+      <p>Nilüfer, bu yaklaşımı tersine çevirmeye karar verdi. Eşsiz bir özveriyle çiftliği yeniden yapılandırdı, toprağa saygıyı merkeze aldı. Kayınpederi Durmuş Ağa’dan öğrendiklerini modern yöntemlerle birleştirerek çiftliği organik üretime yöneltti.</p>
+    </div>
+  </div>
+
+  <!-- Abschnitt: Eris Çelikel -->
+  <h3>Ata Toprağına Dönüş</h3>
+  <div class="section">
+    <div>
+      <p><strong>Eris Çelikel</strong>, 1980 yılında İstanbul’da doğdu. Henüz beş yaşındayken ailesiyle birlikte İsviçre’ye taşındı. Orada büyüdü, eğitim aldı ve hayata atıldı. 2007’de Türkiye’ye döndü ve tıpkı annesi gibi, toprağa uzaktan bakan biriydi.</p>
+      <p>Kurumsal dünyada, büyük şehirlerde, uluslararası projelerde çalıştı. Bir süreliğine Güney Afrika’da yaşadı. Ancak içinde bir şey eksikti. 2015 yılında, bu eksikliği anlamlandırmak için büyük bir karar aldı: beyaz yakalı hayatına veda etti ve ailesinin çiftliğini devraldı.</p>
+      <p>Ziraat hakkında neredeyse hiçbir şey bilmiyordu. Bu yüzden hemen ikinci üniversitesine başladı: 2016’da Ziraat Mühendisliği (Bitki Koruma) okumaya koyuldu. Toprakla tanıştıkça, çocukken gölgesinde oynadığı ağaçlarla bağı derinleşti.</p>
+    </div>
+  </div>
+
+  <!-- Abschnitt: Eris & Pınar – gemeinsames Leben -->
+  <h3>Birlikte Üreten Bir Hayat</h3>
+  <div class="section">
+    <div>
+      <p>2019 yılında hayatına <strong>Pınar Coşkun</strong> girdi. Pınar, 1986’da İstanbul’da doğmuş, henüz üç yaşındayken ailesiyle birlikte Hollanda’ya taşınmıştı. Genç yaşta çok uluslu şirketlerde çalışmaya başlamış, dünya çapında bir kariyer inşa etmişti.</p>
+      <p>2014 yılında Türkiye’ye geri dönse de, işleri gereği uzun süre yurt dışında yaşamaya devam etti. 2022 yılında çiftliği birlikte yönetmeye başladılar. Bugün Kuleyzen, bu iki farklı dünyanın uyumlu birleşimiyle hayat buluyor.</p>
+      <p>Onlara köpekleri <strong>Panço</strong> ve beyaz Pers kedileri <strong>Luna</strong> da eşlik ediyor. Ailece kurdukları bu düzen, doğaya saygılı, insana sıcak ve emeğe odaklı bir yaşam biçiminin ifadesi oldu.</p>
+    </div>
+  </div>
+
+  <!-- Abschnitt: Die Philosophie von Kuleyzen -->
+  <h3>Kuleyzen Çiftliği</h3>
+  <div class="section">
+    <div>
+      <p>Kuleyzen, geleneksel yöntemlerle organik tarım yaparak, soğuk sıkım ve filtreli üretimle zeytinyağını özenle üreten bir aile çiftliğidir. Her zeytin tanesi, üç kuşağın bilgeliği, emeği ve sevgisiyle işlenir. Tüm üretim süreci, zeytinlerin toplanmasından sıkımına, depolanmasından şişelenmesine kadar kendi ellerimizdedir.</p>
+      <p>Biz bu işi sadece zeytinyağı üretmek için değil; geçmişe saygı, bugüne emek ve geleceğe umut bırakmak için yapıyoruz.</p>
+    </div>
+  </div>
+    </section>
+
+    <!-- Hier kommt der Inhalt von urunler.html -->
+    <section id="urunler">
+    
+  <h2 style="text-align: center; color: #4a5534;">Ürünlerimiz</h2>
+  <div class="product-container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px;">
+  
+    <!-- 🫒 Produkt 1: 0,75L Cam Şişe -->
+    <div class="product-card">
+      <img alt="0,75L Cam Şişe Zeytinyağı" src="zeytinyagi_750ml.jpg" />
+      <h3>0,75L Cam Şişe Zeytinyağı</h3>
+      <p>Fiyat: 750 TL</p>
+      <div class="quantity-selector">
+        <button class="quantity-btn" onclick="adjustQty('qty-cam', -1)">➖</button>
+        <input type="number" id="qty-cam" value="0" min="0" />
+        <button class="quantity-btn" onclick="adjustQty('qty-cam', 1)">➕</button>
+      </div>
+      <button class="add-to-cart-btn" onclick="addToCart('0,75L Cam Şişe Zeytinyağı', 750, getQty('qty-cam'))">Sepete Ekle</button>
+    </div>
+
+    <!-- 🛢️ Produkt 2: 5L Teneke (Tek) -->
+    <div class="product-card">
+      <img alt="5L Teneke Zeytinyağı" src="zeytinyagi_5l_single.jpg" />
+      <h3>5L Teneke Zeytinyağı (Tek)</h3>
+      <p>Fiyat: 2800 TL</p>
+      <div class="quantity-selector">
+        <button class="quantity-btn" onclick="adjustQty('qty-5l-tek', -1)">➖</button>
+        <input type="number" id="qty-5l-tek" value="0" min="0" />
+        <button class="quantity-btn" onclick="adjustQty('qty-5l-tek', 1)">➕</button>
+      </div>
+      <button class="add-to-cart-btn" onclick="addToCart('5L Teneke Zeytinyağı (Tek)', 2800, getQty('qty-5l-tek'))">Sepete Ekle</button>
+    </div>
+
+    <!-- 🛢️🛢️ Produkt 3: 5L x2 Paket -->
+    <div class="product-card">
+      <img alt="5L Teneke Zeytinyağı (2'li Paket)" src="zeytinyagi_5l_bundle.jpg" />
+      <h3>5L Teneke Zeytinyağı (2'li Paket)</h3>
+      <p>Fiyat: 5000 TL</p>
+      <div class="quantity-selector">
+        <button class="quantity-btn" onclick="adjustQty('qty-5l-bundle', -1)">➖</button>
+        <input type="number" id="qty-5l-bundle" value="0" min="0" />
+        <button class="quantity-btn" onclick="adjustQty('qty-5l-bundle', 1)">➕</button>
+      </div>
+      <button class="add-to-cart-btn" onclick="addToCart('5L Teneke Zeytinyağı (2\'li Paket)', 5000, getQty('qty-5l-bundle'))">Sepete Ekle</button>
+    </div>
+
+    <!-- 🌿 Produkt 4: Nar Ekşisi -->
+    <div class="product-card">
+      <img alt="Nar Ekşisi" src="nar_eksi.jpg" />
+      <h3>0,75L Nar Ekşisi</h3>
+      <p>Fiyat: 750 TL</p>
+      <div class="quantity-selector">
+        <button class="quantity-btn" onclick="adjustQty('qty-nar', -1)">➖</button>
+        <input type="number" id="qty-nar" value="0" min="0" />
+        <button class="quantity-btn" onclick="adjustQty('qty-nar', 1)">➕</button>
+      </div>
+      <button class="add-to-cart-btn" onclick="addToCart('0,75L Nar Ekşisi', 750, getQty('qty-nar'))">Sepete Ekle</button>
+    </div>
+
+  </div> 
+    </section>
+
+    <!-- Hier kommt der Inhalt von urunlerimizin-uretimi.html -->
+    <section id="urunlerimizin-uretimi">
+        <h1>Ürünlerimizin Üretimi</h1>
+        <p>Ürünlerimizin doğallığı ve kalitesi, üretim sürecimizin her aşamasındaki titizlikten kaynaklanır. Zeytinyağımız ve nar ekşimiz nasıl üretiliyor? Aşağıdan detayları öğrenebilirsiniz.</p>
+        <div class="product-grid">
+        <div class="product-box">
+        <h2>🌿 Organik Tarım</h2>
+        <p>Organik tarım anlayışımız ve sertifikalı üretim sürecimiz hakkında bilgi alın.</p>
+        <a class="button" href="#organik-tarim">Detaylı Bilgi</a>
+        </div>
+        <div class="product-box">
+        <h2>🫒 Zeytinyağı</h2>
+        <p>Zeytinlerimiz nasıl yetişiyor, nasıl toplanıyor ve sıkılıyor?</p>
+        <a class="button" href="#zeytin-hakkinda-bilgi">Detaylı Bilgi</a>
+        </div>
+        <div class="product-box">
+        <h2>🍷 Nar Ekşisi</h2>
+        <p>Gerçek nar ekşisi nasıl olmalı? Üretimimizin detayları burada.</p>
+        <a class="button" href="#nar-hakkinda-bilgi">Detaylı Bilgi</a>
+        </div>
+        </div>
+    </section>
+
+    <!-- Hier kommt der Inhalt von organik-tarim.html -->
+    <section id="organik-tarim">
+        <h1>Organik Tarım Bizim İçin Ne Demek?</h1>
+  
+    <p>Kuleyzen Çiftliği’nde organik tarım, bizim için bir tercih değil; bir yaşam biçimi ve vicdani sorumluluktur. Zeytin ağaçlarımızla kurduğumuz bağ, yalnızca üretimle ilgili değil; aynı zamanda doğayla kurduğumuz bir dostluğun parçası.</p>
+  
+    <p>Toprağa ve ağaca saygı göstermeden, kimyasal kullanmadan, doğanın dengesini bozmadan tarım yapmanın mümkün olduğunu her gün yeniden görüyoruz. Bizim için organik tarım, verimi zorlamak değil; doğayla uyumlu yaşamayı öğrenmektir.</p>
+  
+    <h2>Sertifikalı ve Denetimli Organik Üretim</h2>
+    <p>Kuleyzen, Ekotar tarafından denetlenmekte ve T.C. Tarım ve Orman Bakanlığı’nın organik tarım yönetmeliğine uygun şekilde üretim yapmaktadır. Sertifikamız yalnızca zeytinlik alanlarımızı değil, zeytinle bağlantılı tüm süreci kapsar: budama, bakım, hasat, taşıma, sıkım, filtreleme, depolama ve şişeleme.</p>
+  
+    <p>Tüm süreç yılda en az bir defa yerinde denetlenir. Kayıtlarımız şeffaftır, analizler bağımsız laboratuvarlarda yapılır. Sertifika numaramız yıllık olarak değiştiği için web sitemizde yayımlamıyoruz; ancak dileyen herkesle memnuniyetle paylaşırız.</p>
+  
+    <h2>Bir Ziraat Mühendisinin ve Çiftçinin Gözünden</h2>
+    <p>Benim için organik tarım; yalnızca neyi kullanmadığımızla değil, neye nasıl yaklaştığımızla tanımlanır. Ziraat mühendisi olarak edindiğim bilgiyle, çiftçi olarak ağacın altında öğrendiklerimi birleştiriyorum.</p>
+  
+    <p>Her ağacın farklı olduğunu biliyorum. Kimisi rüzgâra dirençlidir, kimisi gölgeyi sever. Organik tarım, bu farklılıkları tanımayı, her ağacı kendi ihtiyacına göre anlamayı gerektirir. Toprağa kimyasal vermemek yetmez; onun nefes almasına, dinlenmesine ve canlanmasına da izin vermek gerekir.</p>
+  
+    <h2>Zararlılarla Mücadelede Doğanın Yanındayız</h2>
+    <p>Zeytinliklerde sık karşılaşılan zararlılarla kimyasalsız mücadele ediyoruz. Özellikle zeytin sineği gibi zararlılara karşı:</p>
+    <ul>
+      <li>Feromon tuzakları kuruyoruz,</li>
+      <li>Budama ve dip temizliğiyle zararlıların ortamını azaltıyoruz,</li>
+      <li>Doğal düşmanları koruyoruz,</li>
+      <li>Popülasyonları gözlemleyip doğaya göre karar veriyoruz.</li>
+    </ul>
+    <p>Amacımız doğayı bastırmak değil, onunla birlikte hareket ederek dengeyi korumak.</p>
+  
+    <h2>Su Yönetimi ve Toprak Sağlığı</h2>
+    <p>Su kaynaklarının sınırlı olduğu bölgemizde, sulamayı yalnızca ihtiyaç olduğunda tankerle yapıyoruz. Toprağın canlı yapısını korumak için yalnızca sertifikalı organik gübre ve doğal materyaller kullanıyoruz.</p>
+  
+    <p>Toprak analizlerini düzenli olarak yaptırıyor, yalnızca gerçekten ihtiyaç olan besinleri sağlıyoruz. Yabancı otlarla mücadelede kimyasal ilaçlara başvurmuyor, mekanik yollarla temizliyoruz.</p>
+  
+    <h2>Zeytinle Kurduğumuz Bağ</h2>
+    <p>Zeytin ağacı sabrın, sessizliğin ve sürekliliğin sembolüdür. Meyve vermesi yıllar sürer ama verdiği her meyve, yüzlerce yıllık bir hikâyeyi taşır.</p>
+  
+    <p>Biz bu ağaca sadece verim kaynağı olarak değil, bir dost gibi yaklaşıyoruz. Hasat zamanı geldiğinde bağırmadan, kırmadan, sarsmadan, onunla konuşarak ve teşekkür ederek topluyoruz. Bu yüzden zeytinyağımızda sadece meyvenin değil, emeğin ve saygının da tadı vardır.</p>
+  
+    <h2>Neden Organik?</h2>
+    <p>Çünkü:</p>
+    <ul style="margin-left: 20px;">
+      <li>doğaya zarar vermeden üretmek mümkündür.</li>
+      <li>toprağın ömrü bizim ömrümüzden uzundur.</li>
+      <li>gerçek zeytinyağı, katkıya ihtiyaç duymaz.</li>
+      <li>biz çocuklarımıza sadece ürün değil, bir yaşam biçimi bırakmak istiyoruz.</li>
+    </ul>
+    <p>Organik tarım, bizim için sadece bir yöntem değil; bir duruş, bir yoldur. Toprağa saygı duyan, emeğe değer veren herkes bu yolun doğal parçasıdır.</p>
+    </section>
+
+    <!-- Hier kommt der Inhalt von nar-hakkinda-bilgi.html -->
+    <section id="nar-hakkinda-bilgi">
+        <h1>Nar Ekşimiz Hakkında</h1>
+        <p>Nar ekşisi, yüzyıllardır sofralarımıza eşlik eden bir lezzet, bir sağlık kaynağı ve aynı zamanda bir emek ürünüdür. Kuleyzen olarak, bu ürünü yalnızca üretmiyoruz – biz onun arkasında duruyoruz. Gerçek bir nar ekşisinin ne olduğunu bilmek, onu tanımakla başlar.</p>
+        <p>Biz üretimimizde yalnızca <strong>Katırbaşı</strong> cinsi narları kullanıyoruz. Bu tür, bölgenin iklimine uyumlu ve karakteristik olarak tatlı, yoğun aromalıdır. Her bir nar, mevsiminde <strong>tek tek elle toplanır</strong>. Otomatik makinelerle yapılan kabuk kırma ya da sıkma işlemleri bizde uygulanmaz. Çünkü narın içindeki <strong>beyaz zar kısmı</strong>, makinelerle kaçınılmaz olarak karışıma girer ve bu da nar ekşisine acı bir tat verir. Biz bu riski göze almayız.</p>
+        <p>Toplanan narlar, geleneksel yöntemle <strong>elle kabuklarından ayrılır</strong> ve sadece taneleri kullanılarak suyu çıkarılır. Bu saf nar suyu, odun ateşinde – üstelik <strong>kendi zeytin ağaçlarımızdan elde ettiğimiz odunlarla</strong> – yaklaşık <strong>5 ila 10 saat</strong> boyunca kaynatılır. Kaynama süreci boyunca hacim, ilk halinin <strong>onda birine kadar düşürülür</strong>. Yani 15 kilogram nar, yalnızca <strong>yaklaşık 0.75 litre nar ekşisine</strong> dönüşür.</p>
+        <p>Bu uzun süreçte başka hiçbir şey eklenmez: <strong>şeker yok, koruyucu yok, katkı maddesi yok.</strong> Bizim için bu bir prensip meselesi. Çünkü bu ürünü yalnızca satmak için değil, <strong>kendi soframızda da gönül rahatlığıyla kullanmak için</strong> üretiyoruz. İşte bu yüzden “gerçek nar ekşisi” diyebiliyoruz.</p>
+        <p>Yoğun kıvamı, hafif isli kokusu ve dengeli ekşi-tatlı profiliyle Kuleyzen nar ekşisi, her damlasında doğallığı ve emeği hissettirir. Salatalarda, kısırda, et marinasyonlarında ya da sadece bir dilim ekmek üzerinde… Sofranıza lezzet değil, bir gelenek katmak istiyorsanız – doğru yerdesiniz.</p>  nar-hakkinda-bilgi.html
+    </section>
+
+    <!-- Hier kommt der Inhalt von zeytin-hakkinda-bilgi.html -->
+    <section id="zeytin-hakkinda-bilgi">
+        <h1> Zeytin </h1>
+        <section>
+        <h2>İyi Bir Zeytinyağı Nasıl Olmalı?</h2>
+        <p>Gerçek bir zeytinyağını anlamak, sadece şişeye bakmakla olmaz. Kaliteli bir zeytinyağı; kokusuyla, tadıyla, üretim şekliyle ve saklama koşullarıyla kendini belli eder. Kuleyzen zeytinyağı, Hatay’ın bereketli topraklarında yetişen yerli zeytin çeşitlerinden üretilir. Hem geleneksel yöntemleri, hem de özenle uygulanan modern teknikleri bir araya getiririz. Ama bir zeytinyağını iyi yapan sadece üretim değil, onun taşıdığı doğallık, tazelik ve karakterdir.</p>
+        <p>İyi bir zeytinyağı, burnunuza gelen ilk kokuda meyvemsiliğiyle kendini gösterir. Taze yeşil ot, domates sapı ya da badem gibi notalar hissedilir. Bu aromalar, zeytinin zamanında toplandığını ve dikkatle işlendiğini gösterir. Damakta ise hafif bir acılık ve boğazda kısa süren yakıcılık hissi oluşur – zeytinin doğal antioksidanları olan fenolik bileşiklerin güçlü varlığını gösteren değerli işaretlerdir. Ne kadar belirginse, o kadar doğaldır ve o kadar faydalıdır.</p>
+        <p>Kuleyzen’de zeytinler özenle toplanır ve en geç 24 saat içinde, 27 dereceyi aşmayan “soğuk sıkım” yöntemiyle sıkılır. Bu yöntem, hem lezzetin hem de besin değerlerinin korunmasını sağlar. Elde edilen yağ, paslanmaz çelik tanklarda dinlendirilir, ardından kâğıt filtre ile berraklaştırılır ve ışık geçirmeyen koyu cam şişelere ya da 5 litrelik tenekelere doldurulur. Tüm süreç, kimyasal katkı maddesi kullanılmadan, doğal ve hijyenik koşullarda yürütülür.</p>
+        <p>Kuleyzen’de her üretim, kaliteye olan bağlılığımızı ve şeffaflığımızı yansıtır. Etiketimizde yazan her bilgi, arkasında duran emeği, bilgiyi ve aile değerlerini temsil eder. Çünkü bizce zeytinyağı sadece bir gıda değil, aynı zamanda bir kültürdür. Sofranıza gelen her damla, bu toprakların ve emeğin sadık bir yansımasıdır.</p>
+        <h2>Üretim Sürecimiz</h2>
+        <p>Kuleyzen zeytinyağı, yalnızca toprağımızdan değil, aynı zamanda emeğimizden, sabrımızdan ve birbirimize olan güvenimizden doğar. Üretim sürecimiz; doğaya saygılı, zamana duyarlı ve hiçbir aşaması tesadüfe bırakılmayan bir öyküdür.</p>
+        <p>Hasat zamanı geldiğinde, ağaçlarımızın altına geniş brandalar serilir. Deneyimli hasatçılarımız, Campagnola’nın hafif ve verimli titreşimli toplama cihazlarını kullanarak olgun zeytinleri dallarından nazikçe ayırır. Zeytinler yere düşerken beraberinde birkaç yaprak da gelir – bu bizim için önemlidir. Çünkü yapraklar sayesinde zeytinler havadar kalır. Ayrıca, zeytinler <strong>çuvallara konmaz</strong>, bunun yerine kasalara alınır; bu detay <strong>fermantasyonu önlemek</strong> açısından çok kritiktir. Toplandıktan sonra <strong>en fazla 4 saat</strong> içinde sıkıma ulaşırlar – böylece kalite ve tazelik korunur.</p>
+        <p>Toplanan zeytinler havadar kasalarda taşınır ve Kuleyzen’e ait Koçamaz MiniOlive taş değirmeninde aynı gün içinde işlenir. Bu modern ama nazik sistem, zeytinin aromasını, besin değerlerini ve karakterini koruyarak en saf halini çıkarır. İlk aşamada elde edilen yağ, yüksek konili bir krom tankta birkaç gün dinlenmeye alınır. Bu sayede meyve eti ve sudan gelen kalıntılar dibe çöker ve temiz yağ üstte kalır.</p>
+        <p>Ardından zeytinyağımız özel kâğıt filtreden geçirilir. Bu işlem, yağın berraklaşmasını sağlarken hiçbir faydalı içeriği kaybettirmez. Temizlenmiş ve dinlendirilmiş yağ, yine krom paslanmaz çelikten yapılmış özel tanklarda, güneş ışığından uzak, serin bir ortamda saklanır.</p>
+        <p>Bize sipariş ulaştığında, şişeleme işlemi başlar. Ne büyük makineler, ne de soğuk bant sistemleri… Bizde her şişe, her teneke, elle doldurulur. Çünkü küçük bir işletmeyiz ve işimizi büyük bir ciddiyetle yaparız. Her damlayı kendimiz tüketir gibi hazırlarız – çünkü zaten öyle yapıyoruz.</p>
+        <p>Kuleyzen zeytinyağı, bir üretim değil bir paylaşım sürecidir. Biz ailece bu sürecin her aşamasına dâhiliz – tarlada da, tankın başında da, kargonun önünde de… Ve şuna inanıyoruz: Gerçek zeytinyağı, sadece zeytinden değil, güvenilir insanların ellerinden doğar.</p>
+        <section>
+        <h2>Saurani Zeytini</h2>
+        <p>Hatay'a özgü, aromatik ve acı karakterli bir çeşittir. Soğuk sıkımda yüksek kalite verir.</p>
+        </section>
+        <section>
+        <h2>Karamani Zeytini</h2>
+        <p>Küçük taneli, yoğun aromalı, dengeli ve hafif acılı bir yağ üretir.</p>
+        </section>
+        <section>
+        <h2>Habese Zeytini</h2>
+        <p>Nadir, karakteristik aromaya sahip, baharatlı ve meyvemsidir.</p>
+        </section>
+        <section>
+        <h2>Halhali Zeytini</h2>
+        <p>Yumuşak içimli, düşük yakıcılı ve hafif meyvemsi bir profil sunar.</p>
+        </section>
+        </section>
+          zeytin-hakkinda-bilgi.html
+    </section>
+
+    <!-- Hier kommt der Inhalt von sss.html -->
+    <section id="sss">
+   <!-- 🔍 Suchfeld für FAQ -->
+<input type="text" id="faq-search" placeholder="Sorular arasında ara..." />  
+<h1>Merak Ettikleriniz</h1>
+<p>Aşağıda Kuleyzen Çiftliği ürünleri, üretim süreci, organik tarım anlayışımız ve sipariş süreciyle ilgili sıkça sorulan soruların yanıtlarını bulabilirsiniz.</p>
+
+<!-- 📦 Kategorie-Auswahl als Kacheln -->
+<div class="category-grid">
+<a href="#zeytin" class="category-box">
+  <div class="icon">🫒</div>
+  <div class="label">Zeytin Hakkında</div>
+</a>
+<a href="#organik" class="category-box">
+  <div class="icon">🌿</div>
+  <div class="label">Organik Tarım</div>
+</a>
+<a href="#siparis" class="category-box">
+  <div class="icon">🚚</div>
+  <div class="label">Sipariş</div>
+</a>
+<a href="#saklama" class="category-box">
+  <div class="icon">🧴</div>
+  <div class="label">Ambalaj</div>
+</a>
+<a href="#ciftlik" class="category-box">
+  <div class="icon">🧑‍🌾</div>
+  <div class="label">Çiftlik</div>
+</a>
+</div>
+
+<!-- Akkordeon-Komponente mit Fragen und Antworten -->
+<div class="accordion">
+
+<!-- 🫒 Zeytinyağı Hakkında -->
+<div id="zeytin"></div>
+<!-- 🫒Soru 1 -->
+<button class="accordion-button">🫒 Zeytinyağınız gerçekten soğuk sıkım mı?</button>
+<div class="accordion-panel">
+    <p>Evet. Zeytinlerimiz hasattan en geç 4 saat içinde, 27°C’yi geçmeyecek şekilde soğuk sıkım yöntemiyle işlenir.</p>
+</div>
+
+<!-- 🫒Soru 2 -->
+<button class="accordion-button">🫒 Zeytinyağınızın asit oranı nedir?</button>
+<div class="accordion-panel">
+    <p>Genellikle 0.3–0.6 aralığındadır. Her yıl yapılan analiz sonuçlarını isteyen müşterilerimizle paylaşmaktan memnuniyet duyarız.</p>
+</div>
+
+<!-- 🫒Soru 3 -->
+<button class="accordion-button">🫒 Güzel zeytinyağı nasıl olmalı?</button>
+<div class="accordion-panel">
+    <p>
+        Güzel bir zeytinyağı, taze meyvemsi aroması, dengeli acılığı ve hafif yakıcılığı ile öne çıkar.
+        Renk tonları yeşilden altın sarısına kadar değişebilir, ancak kaliteyi belirleyen esas unsurlar tat, koku ve fenolik bileşik içeriğidir.
+        Soğuk sıkım yöntemiyle, 27°C’yi geçmeden işlenmiş olması ve düşük asit oranına sahip olması gerekir.
+        Ayrıca filtre edilmiş ya da filtre edilmemiş olabilir, fakat tortusuz ve berrak olmalıdır.
+        Işıktan ve ısıdan korunmuş ortamda saklanması kaliteyi korur.
+    </p>
+</div>
+
+<!-- 🫒Soru 4 -->
+<button class="accordion-button">🫒 Acılık ve yakıcılık normal mi?</button>
+<div class="accordion-panel">
+    <p>Evet. Bu, yüksek fenolik bileşik içerdiğinin ve kaliteli sızma zeytinyağı olduğunun göstergesidir.</p>
+</div>
+
+<!-- 🌿 Organik Tarım ve Üretim -->
+<div id="organik"></div>
+<!-- 🌿Soru 1 -->
+<button class="accordion-button">🌿 Gerçekten organik misiniz?</button>
+<div class="accordion-panel">
+  <p>
+      Evet. <a href="http://www.eko-tar.com/" target="_blank">Ekotar</a> tarafından denetleniyoruz ve 
+      <a href="https://www.tarimorman.gov.tr/" target="_blank">T.C. Tarım ve Orman Bakanlığı</a> tarafından onaylanan organik tarım sertifikasına sahibiz.<br><br>
+      Üretimimiz %100 organiktir. Kuleyzen Çiftliği sadece tarımsal üretim değil, aynı zamanda zeytinyağı üretim sürecinin tamamı için de organik sertifikaya sahiptir.
+      Hatay ilinde, zeytinlerin işlenme aşaması da sertifikalı olan tek üretici olmamız (güncel duruma göre) bu konuda fark yaratır.
+      Bu nedenle, Hatay menşeli ve üzerinde “organik” etiketi olan zeytinyağlarında, işleme aşamasının da sertifikalı olup olmadığını sorgulamak önemlidir.
+  </p>
+</div>
+
+<!-- 🌿Soru 2 -->
+<button class="accordion-button">🌿 Zararlılarla nasıl mücadele ediyorsunuz?</button>
+<div class="accordion-panel">
+    <p>Feromon tuzakları, mekanik temizlik ve doğal dengeyi koruma yöntemleriyle mücadele ediyoruz. Kimyasal ilaç kullanmıyoruz.</p>
+</div>
+
+<!-- 🌿Soru 3 -->
+<button class="accordion-button">🌿 Feromon tuzakları nedir?</button>
+<div class="accordion-panel">
+    <p>
+        Feromon tuzakları, zararlı böceklerin doğal üreme sinyallerini taklit ederek onları cezbeden, çevre dostu tuzaklardır.
+        Bu sistem sayesinde zararlılar popülasyonu kontrol altına alınabilirken, faydalı böceklere ve doğaya zarar verilmez.
+        Kimyasal ilaç kullanımına alternatif olarak, organik tarımda yaygın şekilde kullanılan etkili bir biyoteknik mücadele yöntemidir.
+    </p>
+</div>
+
+<!-- 🌿Soru 4 -->
+<button class="accordion-button">🌿 Zeytinlerinizi nasıl topluyorsunuz?</button>
+<div class="accordion-panel">
+    <p>Zeytinlerimiz Kasım ayında, ağaca zarar vermeyen makinelerle ve yerel iş gücüyle, bez serilerek toplanır. Aynı gün işlenir.</p>
+</div>
+
+<!-- 🚚 Sipariş ve Teslimat -->
+<div id="siparis"></div>
+<!-- 🚚Soru 1 -->
+<button class="accordion-button">🚚 Nasıl sipariş verebilirim?</button>
+<div class="accordion-panel">
+    <p>
+        Şu anda <a href="iletisim.html">iletişim</a> sayfamız üzerinden sipariş alıyoruz.
+        WhatsApp veya e-posta yoluyla bize ulaşmanız yeterli.
+    </p>
+</div>
+
+<!-- 🧴 Saklama ve Ambalaj -->
+<div id="saklama"></div>
+<!-- 🧴Soru 1 -->
+<button class="accordion-button">🧴 Zeytinyağınız donarsa bozulur mu?</button>
+<div class="accordion-panel">
+    <p>
+        Zeytinyağının donması doğal bir durumdur. Ancak uzun süre donuk kalırsa, tadında ve yapısında hafif değişiklikler olabilir.
+        Oda sıcaklığında yavaşça çözülmesi en doğrusudur.
+    </p>
+</div>
+
+<!-- 🧴Soru 2 -->
+<button class="accordion-button">🧴 Zeytinyağı nasıl muhafaza edilmeli?</button>
+<div class="accordion-panel">
+    <p>
+        Zeytinyağı doğrudan ışık ve ısıdan korunmalıdır. En ideal saklama şekli koyu renkli cam şişeler veya metal tenekelerdir.
+        Şeffaf cam ya da PET şişeler, ışık geçirgenliği nedeniyle uygun değildir.
+        Büyük miktarlarda saklama için krom çelik (inox) tanklar da tercih edilir.
+        Serin, karanlık ve sabit sıcaklıkta bir ortamda muhafaza edilmesi kaliteyi korur.
+    </p>
+</div>
+
+<!-- 🧴Soru 3 -->
+<button class="accordion-button">🧴 Neden şeffaf şişe olmaz?</button>
+<div class="accordion-panel">
+    <p>
+        Şeffaf şişeler ışığı geçirir ve bu durum zeytinyağının yapısında bozulmalara neden olabilir.
+        Işıkla temas, zeytinyağında oksidasyonu hızlandırır, bu da hem lezzet kaybına hem de antioksidan değerlerin azalmasına yol açar.
+        Bu yüzden koyu renkli camlar tercih edilmelidir.
+    </p>
+</div>
+
+<!-- 🧴Soru 4 -->
+<button class="accordion-button">🧴 Neden PET şişelerde saklanmaz?</button>
+<div class="accordion-panel">
+    <p>
+        PET şişeler zamanla zeytinyağı ile kimyasal tepkimeye girebilir ve plastiğin yapısındaki zararlı maddeler yağa geçebilir.
+        Ayrıca hava geçirgenliği nedeniyle oksidasyon riski yüksektir.
+        Bu hem sağlıksız hem de kalitesiz bir saklama şeklidir.
+        Gıda güvenliği ve kalite açısından cam veya metal ambalajlar çok daha uygundur.
+    </p>
+</div>
+
+<!-- 🧑‍🌾 Çiftlik ve Üretim Süreci -->
+<div id="ciftlik"></div>
+<!-- 🧑‍🌾Soru 1 -->
+<button class="accordion-button">🧑‍🌾 Bu işi kaç kişilik bir ekip yapıyor?</button>
+<div class="accordion-panel">
+    <p>
+        Aile içinde yürütüyoruz. Hasat zamanı yerel çalışanlarla iş gücümüz genişliyor ama tüm süreçler bizim elimizden geçiyor.
+    </p>
+</div>
+
+<!-- 🧑‍🌾Soru 2 -->
+<button class="accordion-button">🧑‍🌾 Üretimi dışarıya yaptırıyor musunuz?</button>
+<div class="accordion-panel">
+    <p>
+        Hayır. Tüm üretim çiftliğimizde, kendi makinelerimizle ve kendi gözetimimizde gerçekleşir.
+    </p>
+</div>
+
+<!-- 🧑‍🌾Soru 3 -->
+<button class="accordion-button">🧑‍🌾 Çiftliğinizi ziyaret edebilir miyiz?</button>
+<div class="accordion-panel">
+    <p>
+        Tabii ki! <a href="iletisim.html">İletişim</a> sayfamızdan önceden haber verdiğiniz sürece sizi memnuniyetle ağırlamak isteriz.
+    </p>
+</div>
+
+</div>
+</section>
+
+    <!-- Hier kommt der Inhalt von iletisim.html -->
+    <section id="iletisim">
+   <!-- Überschrift -->    
+   <h2>Bizimle İletişime Geçin</h2>
+   <!-- 🔒 Kontaktformular mit Netlify und Google reCAPTCHA -->
+   <!-- 📝 Kontaktformular (sichtbar) -->
+   <form name="contact"
+         method="POST"
+         data-netlify="true"
+         data-netlify-recaptcha="true"
+         netlify-honeypot="bot-field"
+         onsubmit="event.preventDefault(); openModal('tesekkurler-overlay')"
+         style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+   
+     <!-- 🕵️ Unsichtbares Honeypot-Feld für Spam-Schutz -->
+     <input type="hidden" name="form-name" value="contact" />
+     <p style="display:none">
+       <label>Bot: <input name="bot-field" /></label>
+     </p>
+   
+     <!-- Name und E-Mail Eingabe -->
+     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+       <div style="flex: 1;">
+         <label for="name" style="font-weight: bold;">Adınız:</label>
+         <input id="name" name="name" required type="text"
+                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;" />
+       </div>
+       <div style="flex: 1;">
+         <label for="email" style="font-weight: bold;">E-posta:</label>
+         <input id="email" name="email" required type="email"
+                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;" />
+       </div>
+     </div>
+   
+     <!-- Nachricht -->
+     <label for="message" style="font-weight: bold;">Mesajınız:</label>
+     <textarea id="message" name="message" required rows="4"
+               style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;"></textarea>
+   
+     <!-- 🔲 Google reCAPTCHA -->
+     <div class="g-recaptcha" data-sitekey="6LcC_BErAAAAACuDjMDloHffF8J6KBdMTvodvF94" style="margin: 20px 0;"></div>
+   
+     <!-- Absenden -->
+     <button type="submit"
+             style="width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+       Gönder
+     </button>
+   
+     <!-- WhatsApp -->
+     <a href="https://wa.me/905362419158"
+        style="padding: 12px 30px; background-color: #25D366; color: white; text-decoration: none; font-size: 1.2em; border-radius: 4px; margin-top: 20px; display: inline-block;">
+       Bizimle WhatsApp üzerinden sohbet edin
+     </a>
+   </form>
+   
+   <!-- 🛡️ Unsichtbares statisches Backup-Formular für Netlify-Erkennung -->
+   <form name="contact" netlify hidden>
+     <input type="text" name="name" />
+     <input type="email" name="email" />
+     <textarea name="message"></textarea>
+   </form>
+   
+   <!-- Standortüberschrift -->  
+       <h3>Lokasyonumuz</h3>
+     
+       <!-- Stilvolle Adresse und Karte -->
+       <div style="background-color: #f0f4f1; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+         <p style="font-size: 18px; font-weight: bold; color: #4a5534;">Adresimiz:</p>
+         <a href="https://maps.app.goo.gl/pG2eTyrSVw4ben9H9" target="_blank" style="font-size: 16px; color: #666; line-height: 1.6;">
+           Kalınsan Mv. No: 51<br>
+           Tokaçlı Mahallesi, Altınözü<br>
+           Hatay, Türkiye
+         </a>
+       </div>
+     
+       <!-- Karte -->
+       <div style="width: 100%; height: 300px; border-radius: 8px; overflow: hidden;">
+         <iframe
+           width="100%" height="100%" frameborder="0"
+           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2178.215749421967!2d36.268471529455724!3d36.09056902511684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1str!2str!4v1744020087574!5m2!1str!2str"
+           frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+       </div>
+     
+       <a href="https://maps.app.goo.gl/xdWpps7erXLUNqsRA" target="_blank" style="display: block; text-align: center; margin-top: 15px; font-size: 16px; color: #007bff;">Google Maps'te Görüntüle</a>
+   
+    </section>
+  </main>  
 <!-- 🎮 Vereinfachtes Bottom-Menü (mobil) -->
 <div class="bottom-nav">
-  <a href="iletisim.html" title="İletişim">📩</a>
+  <a href="#iletisim" title="İletişim">📩</a>
   <button onclick="toggleMenu()">☰</button>
   <button id="mini-cart-mobile" onclick="toggleCart()" title="Sepetiniz">🛒<span id="cart-count-mobile">0</span></button>
 </div>
 
 <!-- 📦 Mobile Kachelmenü -->
 <div class="mobile-kacheln" id="mobileKacheln">
-  <a class="box" href="index.html">Anasayfa</a>
-  <a class="box" href="hakkimizda.html">Hakkımızda</a>
-  <a class="box" href="urunler.html">Ürünler</a>
-  <a class="box" href="urunlerimizin-uretimi.html" onclick="toggleSubKacheln(event)">Üretim Süreci</a>
+  <a class="box" href="#index">Anasayfa</a>
+  <a class="box" href="#hakkimizda">Hakkımızda</a>
+  <a class="box" href="#urunler">Ürünler</a>
+  <a class="box" href="#urunlerimizin-uretimi" onclick="toggleSubKacheln(event)">Üretim Süreci</a>
   <!-- 👇 Untermenü: wird per JS eingeblendet -->
   <div id="subKacheln" style="display:none; margin-top: 0.5em;">
-    <a class="box" href="organik-tarim.html">Organik Tarım</a>
-    <a class="box" href="zeytin-hakkinda-bilgi.html">Zeytin</a>
-    <a class="box" href="nar-hakkinda-bilgi.html">Nar Ekşisi</a>
+    <a class="box" href="#organik-tarim">Organik Tarım</a>
+    <a class="box" href="#zeytin-hakkinda-bilgi">Zeytin</a>
+    <a class="box" href="#nar-hakkinda-bilgi">Nar Ekşisi</a>
   </div>
-  <a class="box" href="sss.html">Sıkça Sorulan Sorular</a>
+  <a class="box" href="#sss">Sıkça Sorulan Sorular</a>
+  <a class="box" href="#iletisim">İletişim</a>
 </div>
+  
+ 
 <!-- 📦 Warenkorb-Overlay -->
  
 <!-- Fußzeile mit Copyright -->  
@@ -487,10 +1669,18 @@ img {
   }
 
   function toggleSubKacheln(event) {
+  const sub = document.getElementById("subKacheln");
+  const isSubmenuVisible = sub.style.display === "block";
+  
+  if (isSubmenuVisible) {
+    // Zweiter Klick: Navigiere zur Seite statt Untermenü zu schließen
+    window.location.href = "urunlerimizin-uretimi.html";
+  } else {
+    // Erster Klick: Öffne Untermenü
     event.preventDefault();
-    const sub = document.getElementById("subKacheln");
-    sub.style.display = sub.style.display === "block" ? "none" : "block";
+    sub.style.display = "block";
   }
+}
 </script>
 <!-- 📜 Mobil: Menü bei Seitenstart immer ganz links starten -->
 <script>
@@ -506,99 +1696,253 @@ img {
 
 
 
-<!-- 🧠 Kuleyzen Warenkorb-Logik (Phase 1) -->
+<!-- 🛒 Kuleyzen – Warenkorb mit Mengenfunktion (Phase 1) -->
 <script>
-  // 🧺 Warenkorb aus dem Local Storage laden oder mit leerem Korb starten
-  let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
-  
-  // 💾 Warenkorb speichern & Anzeige aktualisieren
-  function saveCart() {
-    localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
-    updateCartDisplay();
-  }
-  
-  // ➕ Produkt hinzufügen
-  function addToCart(name, price, qty = 1) {
-    const existing = cart.find(item => item.name === name);
-    if (existing) {
-      existing.qty += qty;
-    } else {
-      cart.push({ name, price, qty });
+    // 🧺 Warenkorb aus dem Local Storage laden oder mit leerem Korb starten
+    let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
+    
+    // 💾 Warenkorb speichern & Anzeige aktualisieren
+    function saveCart() {
+      localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
+      updateCartDisplay();
     }
-    saveCart();
-  }
-  
-  // ➕/➖ Menge anpassen
-  function adjustQty(id, delta) {
-    const input = document.getElementById(id);
-    const current = parseInt(input.value) || 1;
-    const newQty = Math.max(1, current + delta);
-    input.value = newQty;
-  }
-  
-  // 🔢 Menge abrufen
-  function getQty(id) {
-    const input = document.getElementById(id);
-    return parseInt(input.value) || 1;
-  }
-  
-  // 🔄 Anzeige aktualisieren in allen Overlays
-  function updateCartDisplay() {
-    const cartCount = document.getElementById("cart-count");
-    const cartCountMobile = document.getElementById("cart-count-mobile");
-    const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
-  
-    if (cartCount) cartCount.textContent = totalCount;
-    if (cartCountMobile) cartCountMobile.textContent = totalCount;
-  
-    const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  
-    const totalElement = document.getElementById("cart-total");
-    const totalElementMobile = document.getElementById("cart-total-mobile");
-    const totalElementDesktop = document.querySelector("#cart-overlay-desktop #cart-total");
-  
-    if (totalElement) totalElement.textContent = total;
-    if (totalElementMobile) totalElementMobile.textContent = total;
-    if (totalElementDesktop) totalElementDesktop.textContent = total;
-  
-    const list = document.getElementById("cart-items");
-    const listMobile = document.getElementById("cart-items-mobile");
-    const listDesktop = document.getElementById("cart-items-desktop");
-  
-    const renderItems = (targetList) => {
-      if (!targetList) return;
-      targetList.innerHTML = "";
-      cart.forEach(item => {
-        const li = document.createElement("li");
-        li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
-        targetList.appendChild(li);
-      });
-    };
-  
-    renderItems(list);
-    renderItems(listMobile);
-    renderItems(listDesktop);
-  }
-  
-  // 🧺 Warenkorb-Overlay ein-/ausblenden
-  function toggleCart() {
-    const overlayDesktop = document.getElementById("cart-overlay-desktop");
-    const overlayMobile = document.getElementById("cart-overlay-mobile");
-    const overlayNeutral = document.getElementById("cart-overlay");
-  
-    [overlayDesktop, overlayMobile, overlayNeutral].forEach(overlay => {
-      if (overlay) {
-        if (overlay.style.display === "none" || overlay.style.display === "") {
-          overlay.style.display = "block";
-        } else {
-          overlay.style.display = "none";
+    
+    // ➕ Produkt hinzufügen
+    function addToCart(name, price, qty = 1) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.qty += qty;
+      } else {
+        cart.push({ name, price, qty });
+      }
+      saveCart();
+    }
+    
+    // ➕/➖ Menge anpassen
+    function adjustQty(id, delta) {
+      const input = document.getElementById(id);
+      const current = parseInt(input.value) || 1;
+      const newQty = Math.max(1, current + delta);
+      input.value = newQty;
+    }
+    
+    // 🔢 Menge abrufen
+    function getQty(id) {
+      const input = document.getElementById(id);
+      return parseInt(input.value) || 1;
+    }
+    
+    // 🔄 Anzeige aktualisieren in allen Overlays
+    function updateCartDisplay() {
+      const cartCount = document.getElementById("cart-count");
+      const cartCountMobile = document.getElementById("cart-count-mobile");
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    
+      if (cartCount) cartCount.textContent = totalCount;
+      if (cartCountMobile) cartCountMobile.textContent = totalCount;
+    
+      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    
+      const totalElement = document.getElementById("cart-total");
+      const totalElementMobile = document.getElementById("cart-total-mobile");
+      const totalElementDesktop = document.querySelector("#cart-overlay-desktop #cart-total");
+    
+      if (totalElement) totalElement.textContent = total;
+      if (totalElementMobile) totalElementMobile.textContent = total;
+      if (totalElementDesktop) totalElementDesktop.textContent = total;
+    
+      const list = document.getElementById("cart-items");
+      const listMobile = document.getElementById("cart-items-mobile");
+      const listDesktop = document.getElementById("cart-items-desktop");
+    
+      const renderItems = (targetList) => {
+        if (!targetList) return;
+        targetList.innerHTML = "";
+        cart.forEach(item => {
+          const li = document.createElement("li");
+          li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
+          targetList.appendChild(li);
+        });
+      };
+    
+      renderItems(list);
+      renderItems(listMobile);
+      renderItems(listDesktop);
+    }
+    
+    // 🧺 Warenkorb-Overlay ein-/ausblenden
+    function toggleCart() {
+      const overlayDesktop = document.getElementById("cart-overlay-desktop");
+      const overlayMobile = document.getElementById("cart-overlay-mobile");
+      const overlayNeutral = document.getElementById("cart-overlay");
+    
+      [overlayDesktop, overlayMobile, overlayNeutral].forEach(overlay => {
+        if (overlay) {
+          if (overlay.style.display === "none" || overlay.style.display === "") {
+            overlay.style.display = "block";
+          } else {
+            overlay.style.display = "none";
+          }
         }
+      });
+    }
+    
+    // 📦 Seite geladen → Anzeige aktualisieren
+    document.addEventListener("DOMContentLoaded", updateCartDisplay);
+    </script>>
+  
+  
+  <!-- 🧮 Kuleyzen – Mengensteuerung für Produktanzahl für ürünler(➖➕ Buttons) -->
+<script>
+    // ➕➖ Buttons: Menge anpassen
+    function adjustQty(id, delta) {
+      const input = document.getElementById(id);
+      let value = parseInt(input.value) || 1;
+      value = Math.max(1, value + delta); // Nie unter 1
+      input.value = value;
+    }
+  
+    // 🔢 Aktuelle Menge auslesen (z. B. für Sepete Ekle)
+    function getQty(id) {
+      const input = document.getElementById(id);
+      return Math.max(1, parseInt(input.value) || 1);
+    }
+  </script>
+
+  <!-- JavaScript: Akkordeon-Logik mit Plus/Minus für sss-->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("DOM geladen");
+  const accordionButtons = document.querySelectorAll('.accordion-button');
+  console.log("Anzahl Buttons", accordionButtons.length);
+
+  // Initialisierung: Alle Panels schließen
+  accordionButtons.forEach(button => {
+    const panel = button.nextElementSibling;
+    panel.classList.remove('show');
+    button.classList.remove('active');
+  });
+
+  accordionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      console.log("Button geklickt");
+      const panel = this.nextElementSibling;
+      
+      // Aktuellen Zustand umschalten (nur einmal!)
+      const isOpening = !this.classList.contains('active');
+      
+      // Alle anderen schließen
+      accordionButtons.forEach(btn => {
+        if (btn !== this) {
+          btn.classList.remove('active');
+          btn.nextElementSibling.classList.remove('show');
+        }
+      });
+      
+      // Aktuelles Element umschalten
+      this.classList.toggle('active', isOpening);
+      panel.classList.toggle('show', isOpening);
+      
+      // Suchfunktion zurücksetzen
+      if (document.getElementById('faq-search')) {
+        document.getElementById('faq-search').value = '';
+        filterFAQs();
       }
     });
+  });
+
+  // Suchfunktion
+  const faqSearch = document.getElementById('faq-search');
+  if (faqSearch) {
+    faqSearch.addEventListener('input', filterFAQs);
   }
+});
+
+function filterFAQs() {
+  const searchTerm = document.getElementById('faq-search').value.toLowerCase();
+  const questions = document.querySelectorAll('.accordion-button');
   
-  // 📦 Seite geladen → Anzeige aktualisieren
-  document.addEventListener("DOMContentLoaded", updateCartDisplay);
+  questions.forEach(q => {
+    const questionText = q.textContent.toLowerCase();
+    const panel = q.nextElementSibling;
+    const shouldShow = questionText.includes(searchTerm);
+    
+    // Nur verstecken, wenn Suchbegriff vorhanden
+    if (searchTerm.length > 0) {
+      q.style.display = shouldShow ? 'block' : 'none';
+      panel.style.display = shouldShow ? 'block' : 'none';
+    } else {
+      // Zurücksetzen bei leerer Suche
+      q.style.display = 'block';
+      panel.style.display = q.classList.contains('active') ? 'block' : 'none';
+    }
+    
+    // Automatisch öffnen bei Treffern
+    if (shouldShow && searchTerm.length > 2) {
+      q.classList.add('active');
+      panel.classList.add('show');
+    }
+  });
+}
   </script>
+
+<script>
+     function renderCheckoutOverlay() {
+  const tbody = document.getElementById("checkout-items");
+  const totalEl = document.getElementById("checkout-total");
+  const cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
+
+  if (!tbody || !totalEl) return;
+
+  tbody.innerHTML = "";
+  let total = 0;
+
+  cart.forEach(item => {
+    const row = document.createElement("tr");
+
+    const nameTd = document.createElement("td");
+    nameTd.textContent = item.name;
+
+    const qtyTd = document.createElement("td");
+    qtyTd.textContent = item.qty;
+
+    const priceTd = document.createElement("td");
+    priceTd.textContent = `${item.price} TL`;
+
+    const totalTd = document.createElement("td");
+    totalTd.textContent = `${item.qty * item.price} TL`;
+
+    row.appendChild(nameTd);
+    row.appendChild(qtyTd);
+    row.appendChild(priceTd);
+    row.appendChild(totalTd);
+
+    tbody.appendChild(row);
+    total += item.qty * item.price;
+  });
+
+  totalEl.textContent = total;
+}
+</script>
+
+  <!-- 📋 Overlays für Checkout & Teşekkürler -->
+<script>
+   
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.style.display = "flex";
+    }
+  
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+      el.style.display = "flex";
+      if (id === "checkout-overlay") renderCheckoutOverlay();
+    }
+}
+
+
+  </script>
+
 </body>
 </html>
