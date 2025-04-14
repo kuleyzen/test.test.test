@@ -68,7 +68,50 @@ main {
   scroll-margin-top: 120px;
 }
 
+/* ===================== */
+/* 🖼️ SEKTIONS-TRENNLINIEN */
+/* ===================== */
+section {
+  position: relative;
+  padding: 60px 20px;
+}
 
+section:not(:last-child)::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  width: 80%;
+  margin: 40px auto 0;
+}
+
+
+/* ===================== */
+/* 🎞️ SCROLL-ANIMATIONEN */
+/* ===================== */
+section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================== */
+/* 📏 ABSTÄNDE OPTIMIEREN */
+/* ===================== */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 80px; /* Großzügiger Abstand zwischen Sektionen */
+}
+
+.section {
+  margin-bottom: 0; /* Überschreibt vorhandene Margins */
+}
 
 /* ===================== */
 /* 🧭 NAVIGATION */
@@ -969,6 +1012,24 @@ button[onclick*="removeItem"] {
   color: #d33;
 }
 
+/* Stile für Checkout-Tabellen-Buttons */
+#checkout-items button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1em;
+  padding: 0 8px;
+  transition: all 0.2s;
+}
+
+#checkout-items button:hover {
+  color: var(--primary-dark);
+  transform: scale(1.2);
+}
+
+.remove-btn:hover {
+  color: #d33 !important;
+}
 </style>  
 </head>
 
@@ -990,6 +1051,7 @@ button[onclick*="removeItem"] {
           <th>Adet</th>
           <th>Birim Fiyat</th>
           <th>Toplam</th>
+          <th></th>
         </tr>
       </thead>
       <tbody id="checkout-items"></tbody>
@@ -1056,7 +1118,7 @@ button[onclick*="removeItem"] {
       </ul>
     </li>
     <li><a href="#sss">Sıkça Sorulan Sorular</a></li>
-    <li><a href="iletisim.html">İletişim</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
   </ul>
 </nav>
 
@@ -1316,7 +1378,7 @@ button[onclick*="removeItem"] {
         <p>Yumuşak içimli, düşük yakıcılı ve hafif meyvemsi bir profil sunar.</p>
         </section>
         </section>
-          zeytin-hakkinda-bilgi.html
+          
     </section>
 
     <!-- Hier kommt der Inhalt von sss.html -->
@@ -1510,54 +1572,46 @@ button[onclick*="removeItem"] {
    <h2>Bizimle İletişime Geçin</h2>
    <!-- 🔒 Kontaktformular mit Netlify und Google reCAPTCHA -->
    <!-- 📝 Kontaktformular (sichtbar) -->
-   <form name="contact"
-         method="POST"
-         data-netlify="true"
-         data-netlify-recaptcha="true"
-         netlify-honeypot="bot-field"
-         onsubmit="event.preventDefault(); openModal('tesekkurler-overlay')"
-         style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
-   
-     <!-- 🕵️ Unsichtbares Honeypot-Feld für Spam-Schutz -->
-     <input type="hidden" name="form-name" value="contact" />
-     <p style="display:none">
-       <label>Bot: <input name="bot-field" /></label>
-     </p>
-   
-     <!-- Name und E-Mail Eingabe -->
-     <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-       <div style="flex: 1;">
-         <label for="name" style="font-weight: bold;">Adınız:</label>
-         <input id="name" name="name" required type="text"
-                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;" />
-       </div>
-       <div style="flex: 1;">
-         <label for="email" style="font-weight: bold;">E-posta:</label>
-         <input id="email" name="email" required type="email"
-                style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;" />
-       </div>
-     </div>
-   
-     <!-- Nachricht -->
-     <label for="message" style="font-weight: bold;">Mesajınız:</label>
-     <textarea id="message" name="message" required rows="4"
-               style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 15px; box-sizing: border-box;"></textarea>
-   
-     <!-- 🔲 Google reCAPTCHA -->
-     <div class="g-recaptcha" data-sitekey="6LcC_BErAAAAACuDjMDloHffF8J6KBdMTvodvF94" style="margin: 20px 0;"></div>
-   
-     <!-- Absenden -->
-     <button type="submit"
-             style="width: 100%; padding: 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
-       Gönder
-     </button>
-   
-     <!-- WhatsApp -->
-     <a href="https://wa.me/905362419158"
-        style="padding: 12px 30px; background-color: #25D366; color: white; text-decoration: none; font-size: 1.2em; border-radius: 4px; margin-top: 20px; display: inline-block;">
-       Bizimle WhatsApp üzerinden sohbet edin
-     </a>
-   </form>
+ 
+<form name="contact" 
+      method="POST"
+      netlify
+      data-netlify-recaptcha="true"
+      netlify-honeypot="bot-field"
+      style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+  
+  <!-- Netlify-Formularfelder -->
+  <input type="hidden" name="form-name" value="contact">
+  <p style="display:none">
+    <label>Bot: <input name="bot-field"></label>
+  </p>
+
+  <!-- Felder -->
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+    <div style="flex: 1;">
+      <label for="name" style="font-weight: bold; display: block; margin-bottom: 5px;">Adınız:</label>
+      <input id="name" name="name" required type="text" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+    </div>
+    <div style="flex: 1;">
+      <label for="email" style="font-weight: bold; display: block; margin-bottom: 5px;">E-posta:</label>
+      <input id="email" name="email" required type="email" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+    </div>
+  </div>
+
+  <label for="message" style="font-weight: bold; display: block; margin: 15px 0 5px;">Mesajınız:</label>
+  <textarea id="message" name="message" required rows="4" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+
+  <!-- reCAPTCHA v2 -->
+  <div class="g-recaptcha" data-sitekey="6LcC_BErAAAAACuDjMDloHffF8J6KBdMTvodvF94" style="margin: 20px 0;"></div>
+
+  <button type="submit" style="width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+    Gönder
+  </button>
+
+  <a href="https://wa.me/905362419158" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: #25D366; color: white; text-decoration: none; border-radius: 5px;">
+    WhatsApp ile Yazın
+  </a>
+</form>
    
    <!-- 🛡️ Unsichtbares statisches Backup-Formular für Netlify-Erkennung -->
    <form name="contact" netlify hidden>
@@ -1623,91 +1677,25 @@ button[onclick*="removeItem"] {
   <p>Son güncelleme: <span id="last-updated">yükleniyor...</span></p>
 </footer>
 
-
-
-<!-- GoatCounter Analytics -->
-<!-- GoatCounter Analytics Tracking -->
+<!-- GoatCounter & reCAPTCHA -->
 <script data-goatcounter="https://kuleyzen.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 
 
-<!-- JavaScript letztes update github -->
 <script>
-  fetch("https://api.github.com/repos/kuleyzen/test.test.test/commits/main")
-    .then(res => {
-      if (!res.ok) throw new Error("Veri alınamadı");
-      return res.json();
-    })
-    .then(data => {
-      const date = new Date(data.commit.author.date);
-      const formatted = date.toLocaleString("tr-TR", {
-        dateStyle: "short",
-        timeStyle: "short"
-      });
-      document.getElementById("last-updated").textContent = formatted;
-    })
-    .catch(err => {
-      console.error("Son güncelleme alınamadı:", err);
-      document.getElementById("last-updated").textContent = "bilgi alınamadı";
-    });
-</script>
-<!-- 📜 Bottom-Navigation Logik -->
-<script>
-  function goTo(url) {
-    window.location.href = url;
-  }
-
-  function toggleMenu() {
-    const menu = document.getElementById("mobileKacheln");
-    const submenu = document.getElementById("subKacheln");
-    if (menu.style.display === "block") {
-      menu.style.display = "none";
-      submenu.style.display = "none";
-    } else {
-      menu.style.display = "block";
-    }
-  }
-
-  function toggleSubKacheln(event) {
-  const sub = document.getElementById("subKacheln");
-  const isSubmenuVisible = sub.style.display === "block";
-  
-  if (isSubmenuVisible) {
-    // Zweiter Klick: Navigiere zur Seite statt Untermenü zu schließen
-    window.location.href = "urunlerimizin-uretimi.html";
-  } else {
-    // Erster Klick: Öffne Untermenü
-    event.preventDefault();
-    sub.style.display = "block";
-  }
-}
-</script>
-<!-- 📜 Mobil: Menü bei Seitenstart immer ganz links starten -->
-<script>
-  window.addEventListener("load", () => {
-    requestAnimationFrame(() => {
-      const nav = document.querySelector(".main-nav");
-      if (nav && window.innerWidth <= 768) {
-        nav.scrollLeft = 0;
-      }
-    });
-  });
-</script>
-
-
-
-<!-- 🛒 Kuleyzen – Warenkorb mit Mengenfunktion (Phase 1) -->
-<script>
-    // 🧺 Warenkorb aus dem Local Storage laden oder mit leerem Korb starten
+    /* ===================== */
+    /* 🛒 WARENKORB-LOGIK */
+    /* ===================== */
     let cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
     
-    // 💾 Warenkorb speichern & Anzeige aktualisieren
+    // Warenkorb speichern
     function saveCart() {
       localStorage.setItem("kuleyzen_cart", JSON.stringify(cart));
       updateCartDisplay();
     }
     
-    // ➕ Produkt hinzufügen
+    // Produkt hinzufügen
     function addToCart(name, price, qty = 1) {
       const existing = cart.find(item => item.name === name);
       if (existing) {
@@ -1718,231 +1706,232 @@ button[onclick*="removeItem"] {
       saveCart();
     }
     
-    // ➕/➖ Menge anpassen
+    // Menge im Warenkorb ändern (für Checkout-Tabelle)
+    function changeQty(index, delta) {
+      const newQty = cart[index].qty + delta;
+      if (newQty < 1) return;
+      cart[index].qty = newQty;
+      saveCart();
+      renderCheckoutOverlay();
+    }
+    
+    // Artikel entfernen (für Checkout-Tabelle)
+    function removeItem(index) {
+      cart.splice(index, 1);
+      saveCart();
+      renderCheckoutOverlay();
+    }
+    
+    // Menge in Produktauswahl anpassen (➖➕ Buttons)
     function adjustQty(id, delta) {
       const input = document.getElementById(id);
       const current = parseInt(input.value) || 1;
-      const newQty = Math.max(1, current + delta);
-      input.value = newQty;
+      input.value = Math.max(1, current + delta);
     }
     
-    // 🔢 Menge abrufen
+    // Menge aus Input-Feld auslesen
     function getQty(id) {
-      const input = document.getElementById(id);
-      return parseInt(input.value) || 1;
+      return parseInt(document.getElementById(id).value) || 1;
     }
     
-    // 🔄 Anzeige aktualisieren in allen Overlays
+    // Warenkorb-Anzeige aktualisieren
     function updateCartDisplay() {
-      const cartCount = document.getElementById("cart-count");
-      const cartCountMobile = document.getElementById("cart-count-mobile");
+      // Zähler in Nav/Buttons
       const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.querySelectorAll("#cart-count, #cart-count-mobile").forEach(el => {
+        el.textContent = totalCount;
+      });
     
-      if (cartCount) cartCount.textContent = totalCount;
-      if (cartCountMobile) cartCountMobile.textContent = totalCount;
-    
+      // Gesamtsumme
       const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      document.querySelectorAll("#cart-total, #cart-total-mobile").forEach(el => {
+        el.textContent = total;
+      });
     
-      const totalElement = document.getElementById("cart-total");
-      const totalElementMobile = document.getElementById("cart-total-mobile");
-      const totalElementDesktop = document.querySelector("#cart-overlay-desktop #cart-total");
-    
-      if (totalElement) totalElement.textContent = total;
-      if (totalElementMobile) totalElementMobile.textContent = total;
-      if (totalElementDesktop) totalElementDesktop.textContent = total;
-    
-      const list = document.getElementById("cart-items");
-      const listMobile = document.getElementById("cart-items-mobile");
-      const listDesktop = document.getElementById("cart-items-desktop");
-    
-      const renderItems = (targetList) => {
-        if (!targetList) return;
-        targetList.innerHTML = "";
-        cart.forEach(item => {
-          const li = document.createElement("li");
-          li.textContent = `${item.name} x${item.qty} – ${item.price * item.qty} TL`;
-          targetList.appendChild(li);
-        });
-      };
-    
-      renderItems(list);
-      renderItems(listMobile);
-      renderItems(listDesktop);
+      // Artikel in Mini-Warenkorb-Overlays
+      document.querySelectorAll("#cart-items-desktop, #cart-items-mobile").forEach(list => {
+        list.innerHTML = cart.map(item => 
+          `<li>${item.name} x${item.qty} – ${item.price * item.qty} TL</li>`
+        ).join("");
+      });
     }
     
-    // 🧺 Warenkorb-Overlay ein-/ausblenden
+    // Checkout-Tabelle rendern (mit Bearbeitungsfunktionen)
+    function renderCheckoutOverlay() {
+      const tbody = document.getElementById("checkout-items");
+      const totalEl = document.getElementById("checkout-total");
+      
+      tbody.innerHTML = cart.map((item, index) => `
+        <tr>
+          <td>${item.name}</td>
+          <td>
+            <button onclick="changeQty(${index}, -1)">➖</button>
+            ${item.qty}
+            <button onclick="changeQty(${index}, 1)">➕</button>
+          </td>
+          <td>${item.price} TL</td>
+          <td>${item.qty * item.price} TL</td>
+          <td><button onclick="removeItem(${index})" class="remove-btn">🗑️</button></td>
+        </tr>
+      `).join("");
+    
+      totalEl.textContent = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+    }
+    
+    /* ===================== */
+    /* 🖼️ OVERLAY-STEUERUNG */
+    /* ===================== */
     function toggleCart() {
-      const overlayDesktop = document.getElementById("cart-overlay-desktop");
-      const overlayMobile = document.getElementById("cart-overlay-mobile");
-      const overlayNeutral = document.getElementById("cart-overlay");
-    
-      [overlayDesktop, overlayMobile, overlayNeutral].forEach(overlay => {
-        if (overlay) {
-          if (overlay.style.display === "none" || overlay.style.display === "") {
-            overlay.style.display = "block";
-          } else {
-            overlay.style.display = "none";
-          }
-        }
-      });
+      const isMobile = window.innerWidth <= 768;
+      const overlay = document.getElementById(isMobile ? "cart-overlay-mobile" : "cart-overlay-desktop");
+      overlay.style.display = overlay.style.display === "block" ? "none" : "block";
     }
     
-    // 📦 Seite geladen → Anzeige aktualisieren
-    document.addEventListener("DOMContentLoaded", updateCartDisplay);
-    </script>>
-  
-  
-  <!-- 🧮 Kuleyzen – Mengensteuerung für Produktanzahl für ürünler(➖➕ Buttons) -->
-<script>
-    // ➕➖ Buttons: Menge anpassen
-    function adjustQty(id, delta) {
-      const input = document.getElementById(id);
-      let value = parseInt(input.value) || 1;
-      value = Math.max(1, value + delta); // Nie unter 1
-      input.value = value;
+    function openModal(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.style.display = "flex";
+        if (id === "checkout-overlay") renderCheckoutOverlay();
+      }
     }
-  
-    // 🔢 Aktuelle Menge auslesen (z. B. für Sepete Ekle)
-    function getQty(id) {
-      const input = document.getElementById(id);
-      return Math.max(1, parseInt(input.value) || 1);
+    
+    function closeModal(id) {
+      document.getElementById(id).style.display = "none";
     }
-  </script>
-
-  <!-- JavaScript: Akkordeon-Logik mit Plus/Minus für sss-->
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  console.log("DOM geladen");
-  const accordionButtons = document.querySelectorAll('.accordion-button');
-  console.log("Anzahl Buttons", accordionButtons.length);
-
-  // Initialisierung: Alle Panels schließen
-  accordionButtons.forEach(button => {
-    const panel = button.nextElementSibling;
-    panel.classList.remove('show');
-    button.classList.remove('active');
-  });
-
-  accordionButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      console.log("Button geklickt");
-      const panel = this.nextElementSibling;
-      
-      // Aktuellen Zustand umschalten (nur einmal!)
-      const isOpening = !this.classList.contains('active');
-      
-      // Alle anderen schließen
-      accordionButtons.forEach(btn => {
-        if (btn !== this) {
-          btn.classList.remove('active');
-          btn.nextElementSibling.classList.remove('show');
-        }
+    
+    /* ===================== */
+    /* 📱 MOBILE NAVIGATION */
+    /* ===================== */
+    function toggleMenu() {
+      const menu = document.getElementById("mobileKacheln");
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+      document.getElementById("subKacheln").style.display = "none";
+    }
+    
+    function toggleSubKacheln(event) {
+      event.preventDefault();
+      const sub = document.getElementById("subKacheln");
+      sub.style.display = sub.style.display === "block" ? "none" : "block";
+    }
+    
+    /* ===================== */
+    /* ❓ FAQ AKKORDEON */
+    /* ===================== */
+    function initFAQ() {
+      document.querySelectorAll('.accordion-button').forEach(button => {
+        button.addEventListener('click', function() {
+          const panel = this.nextElementSibling;
+          const isOpening = !this.classList.contains('active');
+          
+          // Alle anderen schließen
+          document.querySelectorAll('.accordion-button').forEach(btn => {
+            if (btn !== this) {
+              btn.classList.remove('active');
+              btn.nextElementSibling.classList.remove('show');
+            }
+          });
+          
+          // Aktuelles umschalten
+          this.classList.toggle('active', isOpening);
+          panel.classList.toggle('show', isOpening);
+        });
       });
+    
+      // FAQ-Suche
+      const faqSearch = document.getElementById('faq-search');
+      if (faqSearch) {
+        faqSearch.addEventListener('input', function() {
+          const term = this.value.toLowerCase();
+          document.querySelectorAll('.accordion-button').forEach(btn => {
+            const matches = btn.textContent.toLowerCase().includes(term);
+            btn.style.display = term ? (matches ? 'block' : 'none') : 'block';
+            if (matches && term) btn.click();
+          });
+        });
+      }
+    }
+    
+    /* ===================== */
+    /* 🚀 INITIALISIERUNG */
+    /* ===================== */
+    document.addEventListener("DOMContentLoaded", function() {
+      // Warenkorb laden
+      updateCartDisplay();
       
-      // Aktuelles Element umschalten
-      this.classList.toggle('active', isOpening);
-      panel.classList.toggle('show', isOpening);
+      // Mobile Nav zurücksetzen
+      if (window.innerWidth <= 768) {
+        document.querySelector(".main-nav").scrollLeft = 0;
+      }
       
-      // Suchfunktion zurücksetzen
-      if (document.getElementById('faq-search')) {
-        document.getElementById('faq-search').value = '';
-        filterFAQs();
+      // FAQ initialisieren
+      initFAQ();
+      
+      // Letztes Update anzeigen (GitHub)
+      fetch("https://api.github.com/repos/kuleyzen/test.test.test/commits/main")
+        .then(res => res.ok ? res.json() : Promise.reject())
+        .then(data => {
+          const date = new Date(data.commit.author.date);
+          document.getElementById("last-updated").textContent = 
+            date.toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" });
+        })
+        .catch(() => {
+          document.getElementById("last-updated").textContent = "bilgi alınamadı";
+        });
+    });
+
+  /* ===================== */
+  /* 🎞️ SCROLL-ANIMATIONEN INITIALISIEREN */
+  /* ===================== */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        // Optional: Observer nach Auslösung entfernen (nur 1x Animation)
+        // observer.unobserve(entry.target);
       }
     });
+  }, { 
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px" // Animation 50px vor Sektion starten
   });
 
-  // Suchfunktion
-  const faqSearch = document.getElementById('faq-search');
-  if (faqSearch) {
-    faqSearch.addEventListener('input', filterFAQs);
+  document.querySelectorAll("section").forEach(section => {
+    observer.observe(section);
+  });
+
+/* ===================== */
+/* 📋 KONTAKTFORMULAR MIT reCAPTCHA */
+/* ===================== */
+function handleContactFormSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  
+  // reCAPTCHA-Validierung
+  const recaptchaResponse = grecaptcha.getResponse();
+  if (!recaptchaResponse) {
+    alert("Lütfen reCAPTCHA'yı doğrulayın!");
+    return;
+  }
+
+  // Formular absenden (Netlify)
+  fetch("/", {
+    method: "POST",
+    body: new FormData(form),
+  })
+  .then(() => openModal("tesekkurler-overlay"))
+  .catch(error => console.error("Form error:", error));
+}
+
+// Formular-Event hinzufügen
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.querySelector('form[name="contact"]');
+  if (contactForm) {
+    contactForm.addEventListener("submit", handleContactFormSubmit);
   }
 });
 
-function filterFAQs() {
-  const searchTerm = document.getElementById('faq-search').value.toLowerCase();
-  const questions = document.querySelectorAll('.accordion-button');
+    </script>
   
-  questions.forEach(q => {
-    const questionText = q.textContent.toLowerCase();
-    const panel = q.nextElementSibling;
-    const shouldShow = questionText.includes(searchTerm);
-    
-    // Nur verstecken, wenn Suchbegriff vorhanden
-    if (searchTerm.length > 0) {
-      q.style.display = shouldShow ? 'block' : 'none';
-      panel.style.display = shouldShow ? 'block' : 'none';
-    } else {
-      // Zurücksetzen bei leerer Suche
-      q.style.display = 'block';
-      panel.style.display = q.classList.contains('active') ? 'block' : 'none';
-    }
-    
-    // Automatisch öffnen bei Treffern
-    if (shouldShow && searchTerm.length > 2) {
-      q.classList.add('active');
-      panel.classList.add('show');
-    }
-  });
-}
-  </script>
-
-<script>
-     function renderCheckoutOverlay() {
-  const tbody = document.getElementById("checkout-items");
-  const totalEl = document.getElementById("checkout-total");
-  const cart = JSON.parse(localStorage.getItem("kuleyzen_cart")) || [];
-
-  if (!tbody || !totalEl) return;
-
-  tbody.innerHTML = "";
-  let total = 0;
-
-  cart.forEach(item => {
-    const row = document.createElement("tr");
-
-    const nameTd = document.createElement("td");
-    nameTd.textContent = item.name;
-
-    const qtyTd = document.createElement("td");
-    qtyTd.textContent = item.qty;
-
-    const priceTd = document.createElement("td");
-    priceTd.textContent = `${item.price} TL`;
-
-    const totalTd = document.createElement("td");
-    totalTd.textContent = `${item.qty * item.price} TL`;
-
-    row.appendChild(nameTd);
-    row.appendChild(qtyTd);
-    row.appendChild(priceTd);
-    row.appendChild(totalTd);
-
-    tbody.appendChild(row);
-    total += item.qty * item.price;
-  });
-
-  totalEl.textContent = total;
-}
-</script>
-
-  <!-- 📋 Overlays für Checkout & Teşekkürler -->
-<script>
-   
-    function openModal(id) {
-      const el = document.getElementById(id);
-      if (el) el.style.display = "flex";
-    }
-  
-    function closeModal(id) {
-      const el = document.getElementById(id);
-      if (el) {
-      el.style.display = "flex";
-      if (id === "checkout-overlay") renderCheckoutOverlay();
-    }
-}
-
-
-  </script>
 
 </body>
 </html>
