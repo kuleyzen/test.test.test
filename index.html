@@ -924,6 +924,7 @@ img {
   max-width: 600px;
   width: 90%;
   text-align: center;
+  position: relative;
 }
 
 /* ===================== */
@@ -1051,6 +1052,35 @@ button[onclick*="removeItem"] {
 .remove-btn:hover {
   color: #d33 !important;
 }
+.close-checkout-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #f0f0f0;
+  color: var(--text);
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  width: auto;
+}
+
+.close-checkout-btn:hover {
+  background-color: #e0e0e0;
+  border-color: #ccc;
+  transform: translateY(-2px);
+}
+
+/* Mobile Optimierung */
+@media (max-width: 768px) {
+  .close-checkout-btn {
+    padding: 10px 20px;
+    width: 100%;
+    margin-top: 15px;
+  }
+}
 </style>  
 </head>
 
@@ -1095,7 +1125,7 @@ button[onclick*="removeItem"] {
       <button type="submit">WhatsApp ile Siparişi Gönder</button>
     </form>
       
-      <button onclick="closeModal('checkout-overlay')">Kapat</button>
+    <button onclick="closeModal('checkout-overlay')" class="close-checkout-btn">Kapat</button>
     </div>
   </div>
   
@@ -1821,39 +1851,106 @@ button[onclick*="removeItem"] {
     }
     
 /* ===================== */
-/* 🎮 BOTTOM-NAV MOBILE INTERAKTIONEN */
+/* 📱 MOBILE NAVIGATION MIT SUBMENÜ-SUPPORT */
 /* ===================== */
-function setupBottomNav() {
-  if (window.innerWidth > 768) return; // Nur für Mobile
+function toggleMenu() {
+  const menu = document.getElementById("mobileKacheln");
+  const isOpening = menu.style.display !== "block";
   
-  document.querySelectorAll('.bottom-nav a, .bottom-nav button').forEach(item => {
-    item.addEventListener('touchend', function() {
-      this.blur(); // Fokus entfernen
-      // Visuellen Reset nach 300ms
-      setTimeout(() => {
-        this.style.backgroundColor = '';
-        this.style.transform = '';
-      }, 300);
-    });
+  menu.style.display = isOpening ? "block" : "none";
+  document.getElementById("subKacheln").style.display = "none";
+  
+  // Fokus nach dem Schließen entfernen
+  if (!isOpening) {
+    document.querySelector('.bottom-nav button[onclick="toggleMenu()"]').blur();
+  }
+}
+
+function toggleSubKacheln(event) {
+  event.preventDefault();
+  const sub = document.getElementById("subKacheln");
+  sub.style.display = sub.style.display === "block" ? "none" : "block";
+  
+  // Scrollen zur sichtbaren Position (für lange Menüs)
+  setTimeout(() => {
+    sub.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
+}
+
+// Fokus-Management für alle Menülinks (Haupt- und Submenü)
+function setupMenuLinks() {
+  const menuLinks = document.querySelectorAll('.mobile-kacheln .box');
+  
+  menuLinks.forEach(link => {
+    // Für Hauptmenü-Punkte mit Submenü
+    if (link.getAttribute('onclick')?.includes('toggleSubKacheln')) {
+      link.addEventListener('click', function(e) {
+        toggleSubKacheln(e);
+        resetMenuButtonState();
+      });
+    } 
+    // Für normale Links
+    else {
+      link.addEventListener('click', function() {
+        toggleMenu(); // Menü schließen
+        resetMenuButtonState();
+        // Glätten des Übergangs zur neuen Position
+        setTimeout(() => {
+          window.scrollBy(0, -10); // Kleiner Offset für bessere Sichtbarkeit
+        }, 100);
+      });
+    }
   });
 }
-    /* ===================== */
-    /* 📱 MOBILE NAVIGATION */
-    /* ===================== */
-    function toggleMenu() {
-      const menu = document.getElementById("mobileKacheln");
-      menu.style.display = menu.style.display === "block" ? "none" : "block";
-      document.getElementById("subKacheln").style.display = "none";
-    }
-    
-    function toggleSubKacheln(event) {
-      event.preventDefault();
-      const sub = document.getElementById("subKacheln");
-      sub.style.display = sub.style.display === "block" ? "none" : "block";
-    }
-    
 
+// Setzt den Menü-Button zurück
+function resetMenuButtonState() {
+  const menuButton = document.querySelector('.bottom-nav button[onclick="toggleMenu()"]');
+  if (menuButton) {
+    menuButton.blur();
+    menuButton.style.backgroundColor = '';
+    menuButton.style.transform = '';
+  }
+}
 
+/* ===================== */
+/* 🎮 TOUCH-OPTIMIERUNG */
+/* ===================== */
+function setupBottomNav() {
+  if (window.innerWidth > 768) return;
+
+  document.querySelectorAll('.bottom-nav a, .bottom-nav button').forEach(item => {
+    // Touch- und Click-Events
+    item.addEventListener('touchend', handleMobileInteraction);
+    item.addEventListener('click', handleMobileInteraction);
+  });
+}
+
+function handleMobileInteraction() {
+  this.blur();
+  setTimeout(() => {
+    this.style.backgroundColor = '';
+    this.style.transform = '';
+  }, 300);
+}
+
+// Initialisierung
+document.addEventListener("DOMContentLoaded", function() {
+  setupBottomNav();
+  setupMenuLinks();
+  
+  // Schließt Menü bei Klick außerhalb
+  document.addEventListener('click', function(e) {
+    const mobileMenu = document.getElementById("mobileKacheln");
+    const menuButton = document.querySelector('.bottom-nav button[onclick="toggleMenu()"]');
+    
+    if (mobileMenu.style.display === "block" && 
+        !mobileMenu.contains(e.target) && 
+        e.target !== menuButton) {
+      toggleMenu();
+    }
+  });
+});
     /* ===================== */
     /* ❓ FAQ AKKORDEON */
     /* ===================== */
