@@ -238,6 +238,9 @@ main {
   border: none;
   text-decoration: none;
   transition: all 0.3s;
+  padding: 18px !important;
+  min-width: 44px;
+  touch-action: manipulation;
 }
 
 .bottom-nav a:hover,
@@ -246,6 +249,24 @@ main {
   color: var(--text);
   transform: scale(1.1);
 }
+
+/* Hover-Reset für Touch-Geräte */
+@media (pointer: coarse) {
+    .bottom-nav a:hover,
+    .bottom-nav button:hover {
+      background-color: inherit !important;
+      transform: none !important;
+    }
+  }
+
+  /* Aktiver Tap-Effekt */
+  .bottom-nav a:active,
+  .bottom-nav button:active {
+    background-color: var(--primary-dark) !important;
+    transform: scale(1.1) !important;
+    transition: all 0.1s;
+  }
+
 
 /* ===================== */
 /* 📱 MOBILE KACHELMENÜ (Bottom-Nav) */
@@ -1799,6 +1820,23 @@ button[onclick*="removeItem"] {
       document.getElementById(id).style.display = "none";
     }
     
+/* ===================== */
+/* 🎮 BOTTOM-NAV MOBILE INTERAKTIONEN */
+/* ===================== */
+function setupBottomNav() {
+  if (window.innerWidth > 768) return; // Nur für Mobile
+  
+  document.querySelectorAll('.bottom-nav a, .bottom-nav button').forEach(item => {
+    item.addEventListener('touchend', function() {
+      this.blur(); // Fokus entfernen
+      // Visuellen Reset nach 300ms
+      setTimeout(() => {
+        this.style.backgroundColor = '';
+        this.style.transform = '';
+      }, 300);
+    });
+  });
+}
     /* ===================== */
     /* 📱 MOBILE NAVIGATION */
     /* ===================== */
@@ -1814,6 +1852,8 @@ button[onclick*="removeItem"] {
       sub.style.display = sub.style.display === "block" ? "none" : "block";
     }
     
+
+
     /* ===================== */
     /* ❓ FAQ AKKORDEON */
     /* ===================== */
